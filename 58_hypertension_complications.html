@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>58 – Hypertension: End-Organ Complications</title>
+<style>
+  :root {
+    --accent: #22d3ee;
+    --accent-glow: #0891b255;
+    --bg: #001a20;
+    --surface: #002830;
+    --surface2: #003845;
+    --text: #ecfeff;
+    --muted: #4ab5c8;
+    --correct: #34d399;
+    --wrong: #f87171;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; min-height: 100vh; padding: 20px; }
+  header { text-align: center; margin-bottom: 28px; }
+  header h1 { font-size: 1.7rem; color: var(--accent); text-shadow: 0 0 18px var(--accent-glow); }
+  header p { color: var(--muted); font-size: .9rem; margin-top: 6px; }
+  .scoreboard { display: flex; justify-content: center; gap: 28px; margin-bottom: 20px; font-size: .9rem; color: var(--muted); }
+  .scoreboard span { color: var(--accent); font-weight: 700; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .tab-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; font-size: .82rem; transition: background .2s; }
+  .tab-btn.active, .tab-btn:hover { background: var(--accent-glow); }
+  .word-bank { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 14px; min-height: 70px; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip { background: var(--surface2); border: 1px solid var(--accent); color: var(--text); padding: 5px 12px; border-radius: 20px; font-size: .82rem; cursor: grab; user-select: none; transition: box-shadow .15s, opacity .15s; }
+  .chip:hover { box-shadow: 0 0 10px var(--accent-glow); }
+  .chip.dragging { opacity: .4; }
+  .entities { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-bottom: 22px; }
+  .entity-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 14px; }
+  .entity-name { font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--surface2); padding-bottom: 8px; }
+  .drop-rows { display: flex; flex-direction: column; gap: 8px; }
+  .drop-row { display: flex; align-items: center; gap: 8px; }
+  .drop-label { font-size: .75rem; color: var(--muted); width: 120px; flex-shrink: 0; }
+  .drop-zone { flex: 1; min-height: 34px; border: 1px dashed var(--muted); border-radius: 6px; display: flex; align-items: center; padding: 4px 8px; font-size: .8rem; transition: border-color .2s, background .2s; }
+  .drop-zone.over { border-color: var(--accent); background: var(--accent-glow); }
+  .drop-zone.correct { border-color: var(--correct); background: #34d39920; }
+  .drop-zone.wrong { border-color: var(--wrong); background: #f8717120; }
+  .drop-zone .chip { margin: 0; border: none; padding: 3px 8px; }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+  .btn { padding: 8px 20px; border-radius: 20px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; font-size: .85rem; transition: background .2s; }
+  .btn:hover { background: var(--accent-glow); }
+  .btn.primary { background: var(--accent); color: #000; font-weight: 700; }
+  .btn.primary:hover { opacity: .85; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: #000a; z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--accent); border-radius: 14px; padding: 28px; max-width: 480px; width: 90%; text-align: center; }
+  .modal h2 { color: var(--accent); margin-bottom: 12px; }
+  .modal p { color: var(--muted); margin-bottom: 20px; font-size: .95rem; }
+  .modal .score-big { font-size: 2.8rem; font-weight: 900; color: var(--accent); display: block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Hypertension: End-Organ Complications</h1>
+  <p>Drag each value to the correct property for each organ system affected by HTN.</p>
+</header>
+<div class="scoreboard">Correct: <span id="correctCount">0</span> &nbsp;|&nbsp; Attempts: <span id="attemptCount">0</span></div>
+<div class="tabs" id="tabBar"></div>
+<div class="word-bank" id="wordBank"></div>
+<div class="entities" id="entityGrid"></div>
+<div class="controls">
+  <button class="btn" onclick="showHint()">Hint</button>
+  <button class="btn" onclick="showAllAnswers()">Show All Answers</button>
+  <button class="btn" onclick="resetGame()">Reset</button>
+  <button class="btn primary" onclick="checkAll()">Check All</button>
+</div>
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Session Complete</h2>
+    <span class="score-big" id="modalScore"></span>
+    <p id="modalMsg"></p>
+    <button class="btn primary" onclick="resetGame(); document.getElementById('modal').classList.remove('open')">Play Again</button>
+  </div>
+</div>
+<script>
+const gameData = {
+  "Cardiac Complications": {
+    mechanism: "Chronically elevated afterload → LV pressure overload → compensatory LV wall hypertrophy (concentric LVH)",
+    pathology: "LVH → diastolic dysfunction (impaired LV relaxation) → reduced filling → ↓ stroke volume → HFpEF; also increased arrhythmia risk",
+    clinicalFinding: "S4 gallop on auscultation; ECG shows high-voltage QRS (LVH criteria); echocardiography confirms increased wall thickness with normal EF",
+    complication: "Heart failure (HFpEF), atrial fibrillation, coronary artery disease, myocardial infarction; S4 always indicates stiff noncompliant ventricle"
+  },
+  "Vascular Complications": {
+    mechanism: "High BP → endothelial injury → smooth muscle hypertrophy and remodeling → lumen narrowing → accelerated atherosclerosis",
+    pathology: "Hyaline arteriolosclerosis (chronic HTN): homogeneous eosinophilic thickening of small vessel walls; more severe in diabetes",
+    clinicalFinding: "Reduced ABI (<0.9) in peripheral arteries; abdominal bruit may indicate renal artery stenosis; atherosclerotic plaques on vascular imaging",
+    complication: "Coronary artery disease, peripheral arterial disease (PAD), aortic aneurysm, aortic dissection, renal artery stenosis"
+  },
+  "Brain Complications": {
+    mechanism: "Small artery lipohyalinosis → vessel weakening → microaneurysms (Charcot-Bouchard) → lacunar infarcts or hemorrhagic stroke; oxidative stress → endothelial damage",
+    pathology: "Lipohyalinosis of penetrating CNS arteries → microaneurysm formation; chronic HTN also associated with beta-amyloid accumulation and dementia",
+    clinicalFinding: "Focal neurologic deficits; MRI shows lacunar infarcts (small subcortical) or periventricular white matter changes; altered mental status in hypertensive encephalopathy",
+    complication: "Lacunar stroke, hemorrhagic stroke (microaneurysm rupture), hypertensive encephalopathy, cognitive decline and dementia"
+  },
+  "Renal Complications": {
+    mechanism: "Chronic HTN → hyaline arteriolosclerosis of afferent arterioles → reduced glomerular perfusion → glomerulosclerosis → progressive nephron loss",
+    pathology: "Nephrosclerosis: focal glomerulosclerosis + arteriolar thickening → GFR decline → CKD; HTN and CKD form a vicious cycle worsening each other",
+    clinicalFinding: "Elevated serum creatinine; proteinuria on urinalysis; reduced eGFR; blood pressure is difficult to control once CKD develops",
+    complication: "Chronic kidney disease (CKD); renal artery stenosis (secondary HTN); HTN is both a cause and consequence of CKD"
+  },
+  "Ocular Complications": {
+    mechanism: "Arteriolar narrowing → reduced retinal perfusion → ischemia; excess pressure → rupture of fragile retinal capillaries → hemorrhages; ↑ ICP in emergency → papilledema",
+    pathology: "Hypertensive retinopathy graded I–IV: arteriolar narrowing (I) → AV nicking (II) → flame hemorrhages + cotton-wool spots (III) → papilledema (IV = emergency)",
+    clinicalFinding: "Fundoscopy: flame hemorrhages, silver/copper wire arterioles, AV nicking; papilledema indicates hypertensive emergency with elevated ICP",
+    complication: "Progressive vision loss; papilledema in hypertensive emergency is a sign of severely elevated ICP requiring immediate IV antihypertensive treatment"
+  },
+  "Diagnosis / Workup": {
+    mechanism: "Average of ≥2 elevated BP readings taken ≥2 weeks apart; rule out secondary causes; look for end-organ damage in all patients",
+    pathology: "Primary HTN (95%): no identifiable cause; Secondary HTN (5%): CKD, renal artery stenosis, primary hyperaldosteronism, OSA, pheochromocytoma, thyroid disease",
+    clinicalFinding: "ECG (LVH), urinalysis (proteinuria, RBCs), BMP (creatinine, K+), CBC, chest X-ray; secondary workup: renal ultrasound, 24-hr urine metanephrines, polysomnogram",
+    complication: "White coat hypertension: BP elevated only in clinic — use ambulatory home monitoring to confirm true HTN; does not require treatment if home BPs normal"
+  }
+};
+const categoryKeys   = ["mechanism","pathology","clinicalFinding","complication"];
+const categoryLabels = { mechanism:"Mechanism", pathology:"Pathology", clinicalFinding:"Clinical Finding", complication:"Complication / Key Fact" };
+let correct=0,attempts=0,activeTab=categoryKeys[0];
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a;}
+function buildTabs(){const bar=document.getElementById('tabBar');bar.innerHTML='';categoryKeys.forEach(k=>{const b=document.createElement('button');b.className='tab-btn'+(k===activeTab?' active':'');b.textContent=categoryLabels[k];b.onclick=()=>{activeTab=k;buildTabs();renderWordBank();};bar.appendChild(b);});}
+function allAnswers(){const l=[];Object.values(gameData).forEach(o=>l.push(o[activeTab]));return l;}
+function renderWordBank(){const wb=document.getElementById('wordBank');const placed=new Set();document.querySelectorAll('.drop-zone[data-cat="'+activeTab+'"]').forEach(dz=>{if(dz.querySelector('.chip'))placed.add(dz.querySelector('.chip').dataset.value);});const av=shuffleArray(allAnswers().filter(v=>!placed.has(v)));wb.innerHTML='';av.forEach(val=>wb.appendChild(makeChip(val)));}
+function makeChip(val){const chip=document.createElement('div');chip.className='chip';chip.textContent=val;chip.dataset.value=val;chip.draggable=true;chip.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',val);chip.classList.add('dragging');});chip.addEventListener('dragend',()=>chip.classList.remove('dragging'));chip.addEventListener('touchstart',touchStart,{passive:true});chip.addEventListener('touchmove',touchMove,{passive:false});chip.addEventListener('touchend',touchEnd);return chip;}
+function buildGrid(){const grid=document.getElementById('entityGrid');grid.innerHTML='';Object.keys(gameData).forEach(entity=>{const card=document.createElement('div');card.className='entity-card';const nameEl=document.createElement('div');nameEl.className='entity-name';nameEl.textContent=entity;const rows=document.createElement('div');rows.className='drop-rows';categoryKeys.forEach(cat=>{const row=document.createElement('div');row.className='drop-row';const lbl=document.createElement('div');lbl.className='drop-label';lbl.textContent=categoryLabels[cat];const dz=document.createElement('div');dz.className='drop-zone';dz.dataset.entity=entity;dz.dataset.cat=cat;dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});dz.addEventListener('dragleave',()=>dz.classList.remove('over'));dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');handleDrop(dz,e.dataTransfer.getData('text/plain'));});row.appendChild(lbl);row.appendChild(dz);rows.appendChild(row);});card.appendChild(nameEl);card.appendChild(rows);grid.appendChild(card);});}
+function handleDrop(dz,val){if(dz.querySelector('.chip'))returnChipToBank(dz.querySelector('.chip'));const chip=makeChip(val);dz.appendChild(chip);removeFromBank(val);attempts++;document.getElementById('attemptCount').textContent=attempts;const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===val;dz.classList.toggle('correct',isCorrect);dz.classList.toggle('wrong',!isCorrect);if(isCorrect){correct++;document.getElementById('correctCount').textContent=correct;}const total=Object.keys(gameData).length*categoryKeys.length;if(correct===total)setTimeout(()=>showSummary(),400);}
+function removeFromBank(val){document.querySelectorAll('#wordBank .chip').forEach(c=>{if(c.dataset.value===val)c.remove();});}
+function returnChipToBank(chip){const dz=chip.parentElement;dz.classList.remove('correct','wrong');document.getElementById('wordBank').appendChild(makeChip(chip.dataset.value));chip.remove();}
+function checkAll(){document.querySelectorAll('.drop-zone').forEach(dz=>{const chip=dz.querySelector('.chip');if(!chip)return;const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===chip.dataset.value;dz.classList.toggle('correct',isCorrect);dz.classList.toggle('wrong',!isCorrect);});}
+function showHint(){const empty=[...document.querySelectorAll('.drop-zone[data-cat="'+activeTab+'"]')].filter(dz=>!dz.querySelector('.chip'));if(!empty.length)return;const dz=empty[Math.floor(Math.random()*empty.length)];handleDrop(dz,gameData[dz.dataset.entity][dz.dataset.cat]);}
+function showAllAnswers(){document.querySelectorAll('.drop-zone').forEach(dz=>{if(dz.querySelector('.chip'))return;const chip=makeChip(gameData[dz.dataset.entity][dz.dataset.cat]);dz.appendChild(chip);dz.classList.add('correct');});document.getElementById('wordBank').innerHTML='';}
+function showSummary(){const total=Object.keys(gameData).length*categoryKeys.length;document.getElementById('modalScore').textContent=correct+' / '+total;document.getElementById('modalMsg').textContent=attempts>0?'Accuracy: '+Math.round(correct/attempts*100)+'%':'';document.getElementById('modal').classList.add('open');}
+function resetGame(){correct=0;attempts=0;document.getElementById('correctCount').textContent=0;document.getElementById('attemptCount').textContent=0;buildGrid();renderWordBank();}
+let _dragVal=null,_ghost=null;
+function touchStart(e){_dragVal=e.currentTarget.dataset.value;const r=e.currentTarget.getBoundingClientRect();_ghost=e.currentTarget.cloneNode(true);_ghost.style.cssText='position:fixed;opacity:.7;pointer-events:none;z-index:999;top:'+r.top+'px;left:'+r.left+'px;';document.body.appendChild(_ghost);}
+function touchMove(e){e.preventDefault();if(!_ghost)return;const t=e.touches[0];_ghost.style.top=(t.clientY-20)+'px';_ghost.style.left=(t.clientX-40)+'px';}
+function touchEnd(e){if(_ghost){_ghost.remove();_ghost=null;}const t=e.changedTouches[0];const el=document.elementFromPoint(t.clientX,t.clientY);const dz=el?.closest('.drop-zone');if(dz&&_dragVal)handleDrop(dz,_dragVal);_dragVal=null;}
+buildTabs();buildGrid();renderWordBank();
+</script>
+</body>
+</html>
