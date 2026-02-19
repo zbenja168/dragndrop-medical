@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atherosclerosis - Steps of Atheroma Formation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0500 0%, #2d0a00 50%, #3d1400 100%);
+            color: #e4e4e4; padding: 20px; min-height: 100vh;
+        }
+        .container { max-width: 1600px; margin: 0 auto; }
+        h1 { text-align: center; color: #f87171; margin-bottom: 10px; font-size: 2.2em; text-shadow: 0 0 20px rgba(248,113,113,0.5); }
+        .subtitle { text-align: center; color: #a0a0a0; margin-bottom: 25px; font-size: 1.1em; }
+        .stats-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
+        .stats { display: flex; gap: 25px; flex-wrap: wrap; }
+        .stat-item { background: rgba(248,113,113,0.1); padding: 12px 20px; border-radius: 8px; border: 1px solid rgba(248,113,113,0.3); }
+        .stat-label { color: #f87171; font-weight: bold; margin-right: 8px; }
+        .controls { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95em; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .btn-primary { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220,38,38,0.4); }
+        .btn-secondary { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; }
+        .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.4); }
+        .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: white; }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(239,68,68,0.4); }
+        .main-content { display: grid; grid-template-columns: 350px 1fr; gap: 25px; align-items: start; }
+        .word-bank-container { position: sticky; top: 20px; background: rgba(26,5,0,0.95); border-radius: 12px; padding: 20px; border: 2px solid rgba(248,113,113,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+        .word-bank-title { color: #f87171; font-size: 1.3em; margin-bottom: 15px; text-align: center; font-weight: bold; }
+        .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid rgba(248,113,113,0.3); }
+        .tab { flex: 1; padding: 10px; background: rgba(255,255,255,0.05); border: none; color: #a0a0a0; cursor: pointer; transition: all 0.3s ease; font-size: 0.9em; font-weight: 600; border-radius: 8px 8px 0 0; }
+        .tab.active { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: white; }
+        .tab:hover:not(.active) { background: rgba(255,255,255,0.1); color: #e4e4e4; }
+        .word-bank { min-height: 400px; max-height: 70vh; overflow-y: auto; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; display: none; }
+        .word-bank.active { display: block; }
+        .word-bank::-webkit-scrollbar { width: 8px; }
+        .word-bank::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+        .word-bank::-webkit-scrollbar-thumb { background: rgba(248,113,113,0.5); border-radius: 4px; }
+        .draggable-item { background: linear-gradient(135deg, #3d1400 0%, #2d0a00 100%); padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; cursor: move; border: 2px solid rgba(248,113,113,0.4); transition: all 0.3s ease; font-size: 0.95em; line-height: 1.4; }
+        .draggable-item:hover { background: linear-gradient(135deg, #4d1a00 0%, #3d1400 100%); border-color: #f87171; transform: translateX(5px); box-shadow: 0 4px 15px rgba(248,113,113,0.3); }
+        .draggable-item.dragging { opacity: 0.5; transform: rotate(2deg); }
+        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 20px; }
+        .drug-card { background: rgba(45,10,0,0.95); border-radius: 12px; padding: 20px; border: 2px solid rgba(248,113,113,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+        .drug-card-title { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: white; padding: 12px; border-radius: 8px; font-size: 1.2em; font-weight: bold; margin-bottom: 15px; text-align: center; box-shadow: 0 4px 15px rgba(220,38,38,0.3); }
+        .drop-zones { display: grid; gap: 12px; }
+        .drop-row { display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: start; }
+        .drop-label { background: rgba(248,113,113,0.1); padding: 10px; border-radius: 6px; font-weight: 600; color: #f87171; font-size: 0.9em; display: flex; align-items: center; border: 1px solid rgba(248,113,113,0.3); }
+        .drop-zone { min-height: 60px; background: rgba(0,0,0,0.3); border: 2px dashed rgba(248,113,113,0.3); border-radius: 8px; padding: 10px; transition: all 0.3s ease; display: flex; flex-direction: column; gap: 8px; }
+        .drop-zone.drag-over { background: rgba(248,113,113,0.2); border-color: #f87171; border-style: solid; box-shadow: 0 0 20px rgba(248,113,113,0.3); }
+        .dropped-item { background: linear-gradient(135deg, #3d1400 0%, #2d0a00 100%); padding: 10px 12px; border-radius: 6px; cursor: move; border: 2px solid rgba(248,113,113,0.4); transition: all 0.3s ease; font-size: 0.9em; line-height: 1.4; }
+        .dropped-item:hover { background: linear-gradient(135deg, #4d1a00 0%, #3d1400 100%); border-color: #f87171; }
+        .dropped-item.correct { background: linear-gradient(135deg, #0f9b0f 0%, #0a7c0a 100%); border-color: #00ff00; animation: correctPulse 0.5s ease; }
+        .dropped-item.incorrect { background: linear-gradient(135deg, #c41e3a 0%, #9a1829 100%); border-color: #ff4444; animation: incorrectShake 0.5s ease; }
+        @keyframes correctPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05);box-shadow:0 0 20px rgba(0,255,0,0.5)} }
+        @keyframes incorrectShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+        .summary-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .summary-modal.active { display: flex; }
+        .summary-content { background: linear-gradient(135deg, #1a0500 0%, #2d0a00 100%); border-radius: 12px; padding: 30px; max-width: 900px; max-height: 90vh; overflow-y: auto; border: 2px solid rgba(248,113,113,0.5); box-shadow: 0 10px 50px rgba(0,0,0,0.8); }
+        .summary-content::-webkit-scrollbar { width: 10px; }
+        .summary-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 5px; }
+        .summary-content::-webkit-scrollbar-thumb { background: rgba(248,113,113,0.5); border-radius: 5px; }
+        .summary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid rgba(248,113,113,0.3); }
+        .summary-title { color: #f87171; font-size: 1.8em; font-weight: bold; }
+        .close-btn { background: rgba(255,68,68,0.2); border: 2px solid #ff4444; color: #ff4444; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .close-btn:hover { background: #ff4444; color: white; }
+        .summary-drug { margin-bottom: 25px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; border-left: 4px solid #f87171; }
+        .summary-drug-title { color: #f87171; font-size: 1.3em; margin-bottom: 15px; font-weight: bold; }
+        .summary-category { margin-bottom: 12px; }
+        .summary-category-title { color: #f59e0b; font-weight: 600; margin-bottom: 5px; font-size: 1.05em; }
+        .summary-category-content { color: #e4e4e4; padding-left: 15px; line-height: 1.6; }
+        @media (max-width: 1200px) { .main-content { grid-template-columns: 1fr; } .word-bank-container { position: relative; top: 0; } .cards-container { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 1.6em; } .stats-controls { flex-direction: column; } .stats, .controls { width: 100%; justify-content: center; } .btn { flex: 1; min-width: 120px; } .drop-row { grid-template-columns: 1fr; } .drop-label { text-align: center; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>&#129516; Atherosclerosis &#8212; Atheroma Formation Steps</h1>
+        <p class="subtitle">Drag and drop facts to match each stage of atherosclerotic plaque development</p>
+        <div class="stats-controls">
+            <div class="stats">
+                <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
+                <div class="stat-item"><span class="stat-label">Remaining:</span><span id="remaining">0</span></div>
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="showSummary()">&#128203; Show Summary</button>
+                <button class="btn btn-secondary" onclick="showHint()">&#128161; Hint</button>
+                <button class="btn btn-success" onclick="showAllAnswers()">&#10003; Show All Answers</button>
+                <button class="btn btn-danger" onclick="resetGame()">&#128260; Reset</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="word-bank-container">
+                <div class="word-bank-title">&#128218; Word Bank</div>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('stage', this)">Stage</button>
+                    <button class="tab" onclick="switchTab('cells', this)">Cells</button>
+                    <button class="tab" onclick="switchTab('event', this)">Event</button>
+                    <button class="tab" onclick="switchTab('trigger', this)">Trigger</button>
+                </div>
+                <div id="stage-bank" class="word-bank active"></div>
+                <div id="cells-bank" class="word-bank"></div>
+                <div id="event-bank" class="word-bank"></div>
+                <div id="trigger-bank" class="word-bank"></div>
+            </div>
+            <div class="cards-container" id="cards-container"></div>
+        </div>
+    </div>
+    <div class="summary-modal" id="summaryModal">
+        <div class="summary-content">
+            <div class="summary-header">
+                <div class="summary-title">&#128214; Complete Summary</div>
+                <button class="close-btn" onclick="closeSummary()">Close</button>
+            </div>
+            <div id="summaryContent"></div>
+        </div>
+    </div>
+    <script>
+        const categoryKeys = ['stage', 'cells', 'event', 'trigger'];
+        const categoryLabels = {
+            stage: 'Stage in Sequence',
+            cells: 'Cells Involved',
+            event: 'Key Event',
+            trigger: 'Trigger / Cause'
+        };
+
+        const gameData = {
+            "Endothelial Damage": {
+                stage: "Step 1 — Initiating event",
+                cells: "Endothelial cells",
+                event: "Wall permeability increases; endothelial dysfunction",
+                trigger: "Hypertension, turbulent blood flow, smoking / ROS"
+            },
+            "Monocyte Recruitment": {
+                stage: "Step 2 — Inflammatory response",
+                cells: "Monocytes → activated macrophages",
+                event: "VCAM adhesion molecules expressed; monocytes infiltrate intima",
+                trigger: "Cytokine release from injured endothelium"
+            },
+            "Foam Cell Formation": {
+                stage: "Step 3 — Early cellular lesion",
+                cells: "Macrophages (lipid-laden)",
+                event: "Oxidized LDL engulfed; bubbly appearance on histology",
+                trigger: "Lipid accumulation beneath damaged endothelium"
+            },
+            "Fatty Streak": {
+                stage: "Step 4 — First visible lesion on microscopy",
+                cells: "Foam cells + T cells + platelets + SMCs",
+                event: "Lipid deposits cluster forming visible fatty bands in intima",
+                trigger: "Foam cell apoptosis leaving lipid deposits behind"
+            },
+            "Fibrous Cap Formation": {
+                stage: "Step 5 — Stabilization attempt",
+                cells: "Smooth muscle cells + collagen fibers",
+                event: "Thin fibrous cap forms over growing lipid core",
+                trigger: "Growth factors recruit smooth muscle cells to cap lesion"
+            },
+            "Atherosclerotic Plaque": {
+                stage: "Step 6 — Mature calcified lesion",
+                cells: "Calcified mixed (foam cells, SMC, collagen, calcium)",
+                event: "Calcification and permanent hardening of the lesion",
+                trigger: "Lipid-calcium reaction; ongoing chronic inflammation"
+            }
+        };
+
+        let score = 0, totalItems = 0, draggedElement = null, allItems = {};
+
+        function initGame() {
+            const cardsContainer = document.getElementById('cards-container');
+            cardsContainer.innerHTML = '';
+            allItems = {};
+            categoryKeys.forEach(cat => { allItems[cat] = []; });
+            Object.keys(gameData).forEach(entity => {
+                categoryKeys.forEach(cat => {
+                    allItems[cat].push({ text: gameData[entity][cat], entity, category: cat });
+                });
+            });
+            categoryKeys.forEach(cat => { allItems[cat] = shuffleArray(allItems[cat]); });
+            totalItems = Object.keys(gameData).length * categoryKeys.length;
+            score = 0;
+            Object.keys(gameData).forEach(entity => {
+                const card = document.createElement('div');
+                card.className = 'drug-card';
+                const zonesHtml = categoryKeys.map(cat => `
+                    <div class="drop-row">
+                        <div class="drop-label">${categoryLabels[cat]}</div>
+                        <div class="drop-zone" data-entity="${entity}" data-category="${cat}"></div>
+                    </div>`).join('');
+                card.innerHTML = `<div class="drug-card-title">${entity}</div><div class="drop-zones">${zonesHtml}</div>`;
+                cardsContainer.appendChild(card);
+            });
+            populateWordBanks();
+            setupDragAndDrop();
+            updateStats();
+        }
+
+        function shuffleArray(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function populateWordBanks() {
+            categoryKeys.forEach(cat => {
+                const bank = document.getElementById(cat + '-bank');
+                bank.innerHTML = '';
+                allItems[cat].forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'draggable-item';
+                    div.draggable = true;
+                    div.textContent = item.text;
+                    div.dataset.entity = item.entity;
+                    div.dataset.category = item.category;
+                    bank.appendChild(div);
+                });
+            });
+        }
+
+        function switchTab(cat, btn) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.word-bank').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(cat + '-bank').classList.add('active');
+        }
+
+        function setupDragAndDrop() {
+            document.addEventListener('dragstart', e => {
+                if (e.target.classList.contains('draggable-item') || e.target.classList.contains('dropped-item')) {
+                    draggedElement = e.target;
+                    e.target.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                }
+            });
+            document.addEventListener('dragend', e => {
+                if (e.target.classList.contains('dragging')) e.target.classList.remove('dragging');
+            });
+            document.addEventListener('dragover', e => {
+                const zone = e.target.closest('.drop-zone');
+                if (zone) { e.preventDefault(); zone.classList.add('drag-over'); }
+            });
+            document.addEventListener('dragleave', e => {
+                const zone = e.target.closest('.drop-zone');
+                if (zone) zone.classList.remove('drag-over');
+            });
+            document.addEventListener('drop', e => {
+                const zone = e.target.closest('.drop-zone');
+                if (zone && draggedElement) {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    handleDrop(zone, draggedElement);
+                }
+            });
+            let touchItem = null, touchClone = null;
+            document.addEventListener('touchstart', e => {
+                const item = e.target.closest('.draggable-item, .dropped-item');
+                if (!item) return;
+                touchItem = item;
+                touchClone = item.cloneNode(true);
+                touchClone.style.cssText = 'position:fixed;opacity:0.8;pointer-events:none;z-index:9999;width:' + item.offsetWidth + 'px;';
+                document.body.appendChild(touchClone);
+            }, { passive: true });
+            document.addEventListener('touchmove', e => {
+                if (!touchClone) return;
+                const t = e.touches[0];
+                touchClone.style.left = (t.clientX - touchClone.offsetWidth / 2) + 'px';
+                touchClone.style.top = (t.clientY - 30) + 'px';
+            }, { passive: true });
+            document.addEventListener('touchend', e => {
+                if (!touchItem || !touchClone) return;
+                const t = e.changedTouches[0];
+                const el = document.elementFromPoint(t.clientX, t.clientY);
+                const zone = el ? el.closest('.drop-zone') : null;
+                if (zone) handleDrop(zone, touchItem);
+                touchClone.remove();
+                touchItem = null; touchClone = null;
+            });
+        }
+
+        function handleDrop(zone, item) {
+            const targetEntity = zone.dataset.entity;
+            const targetCategory = zone.dataset.category;
+            const itemEntity = item.dataset.entity;
+            const itemCategory = item.dataset.category;
+            if (itemCategory !== targetCategory) return;
+            if (item.parentElement === zone) return;
+            if (zone.children.length > 0) {
+                const existing = zone.children[0];
+                const originalBank = document.getElementById(existing.dataset.category + '-bank');
+                const restored = document.createElement('div');
+                restored.className = 'draggable-item';
+                restored.draggable = true;
+                restored.textContent = existing.textContent;
+                restored.dataset.entity = existing.dataset.entity;
+                restored.dataset.category = existing.dataset.category;
+                if (existing.classList.contains('correct')) { score--; updateStats(); }
+                existing.remove();
+                originalBank.appendChild(restored);
+            }
+            const dropped = document.createElement('div');
+            dropped.className = 'dropped-item';
+            dropped.draggable = true;
+            dropped.textContent = item.textContent;
+            dropped.dataset.entity = itemEntity;
+            dropped.dataset.category = itemCategory;
+            const isCorrect = itemEntity === targetEntity;
+            dropped.classList.add(isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) { score++; updateStats(); }
+            zone.appendChild(dropped);
+            if (item.classList.contains('draggable-item')) item.remove();
+            else if (item.classList.contains('dropped-item')) item.remove();
+            if (!isCorrect) {
+                setTimeout(() => {
+                    if (dropped.parentElement === zone) {
+                        const bank = document.getElementById(itemCategory + '-bank');
+                        const restored = document.createElement('div');
+                        restored.className = 'draggable-item';
+                        restored.draggable = true;
+                        restored.textContent = dropped.textContent;
+                        restored.dataset.entity = itemEntity;
+                        restored.dataset.category = itemCategory;
+                        dropped.remove();
+                        bank.appendChild(restored);
+                    }
+                }, 1000);
+            }
+            checkCompletion();
+        }
+
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = totalItems;
+            const filled = document.querySelectorAll('.drop-zone .dropped-item').length;
+            document.getElementById('remaining').textContent = totalItems - filled;
+        }
+
+        function checkCompletion() {
+            const allDropped = document.querySelectorAll('.drop-zone .dropped-item').length;
+            if (allDropped === totalItems && score === totalItems) {
+                setTimeout(() => alert('Congratulations! All answers correct! '), 300);
+            }
+        }
+
+        function showHint() {
+            const emptyZones = document.querySelectorAll('.drop-zone:empty');
+            if (emptyZones.length === 0) { alert('All zones are filled!'); return; }
+            const zone = emptyZones[Math.floor(Math.random() * emptyZones.length)];
+            const entity = zone.dataset.entity;
+            const cat = zone.dataset.category;
+            alert(`Hint for "${entity}" - ${categoryLabels[cat]}:\n\n${gameData[entity][cat]}`);
+        }
+
+        function showAllAnswers() {
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.innerHTML = '';
+                const entity = zone.dataset.entity;
+                const cat = zone.dataset.category;
+                const div = document.createElement('div');
+                div.className = 'dropped-item correct';
+                div.draggable = false;
+                div.textContent = gameData[entity][cat];
+                div.dataset.entity = entity;
+                div.dataset.category = cat;
+                zone.appendChild(div);
+            });
+            categoryKeys.forEach(cat => { document.getElementById(cat + '-bank').innerHTML = ''; });
+            score = totalItems;
+            updateStats();
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        function showSummary() {
+            const content = document.getElementById('summaryContent');
+            content.innerHTML = Object.keys(gameData).map(entity => `
+                <div class="summary-drug">
+                    <div class="summary-drug-title">${entity}</div>
+                    ${categoryKeys.map(cat => `
+                        <div class="summary-category">
+                            <div class="summary-category-title">${categoryLabels[cat]}</div>
+                            <div class="summary-category-content">${gameData[entity][cat]}</div>
+                        </div>`).join('')}
+                </div>`).join('');
+            document.getElementById('summaryModal').classList.add('active');
+        }
+
+        function closeSummary() {
+            document.getElementById('summaryModal').classList.remove('active');
+        }
+
+        initGame();
+    </script>
+</body>
+</html>
