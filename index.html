@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardioStudy – Drag &amp; Drop Games</title>
+<style>
+  :root{--bg:#080810;--surface:#101018;--surface2:#181824;--text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,0.07);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
+
+  /* ── Header ── */
+  header{background:linear-gradient(160deg,#0d0010 0%,#130020 50%,#080810 100%);border-bottom:1px solid var(--border);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+  header::after{content:'♥';position:absolute;font-size:360px;opacity:.025;top:50%;left:50%;transform:translate(-50%,-50%);color:#e11d48;pointer-events:none;}
+  header h1{font-size:2.4rem;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#f8fafc 30%,#f43f5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;position:relative;}
+  header p{color:var(--muted);font-size:.9rem;position:relative;}
+  .pills{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;position:relative;}
+  .pill{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.78rem;color:var(--muted);}
+  .pill b{color:#f43f5e;}
+
+  /* ── Search ── */
+  .search-wrap{max-width:460px;margin:22px auto 0;position:relative;}
+  .search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:10px 44px 10px 18px;color:var(--text);font-size:.85rem;outline:none;transition:.2s;}
+  .search-wrap input:focus{border-color:#e11d48;box-shadow:0 0 0 3px rgba(225,29,72,.18);}
+  .search-wrap input::placeholder{color:var(--muted);}
+  .search-ico{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem;pointer-events:none;}
+
+  /* ── Layout ── */
+  main{max-width:1380px;margin:0 auto;padding:32px 16px 56px;}
+  .no-results{text-align:center;color:var(--muted);padding:60px 20px;font-size:.9rem;display:none;}
+
+  /* ── Section ── */
+  .section{margin-bottom:32px;}
+  .section-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:1.2rem;line-height:1;}
+  .section-title{font-size:.95rem;font-weight:700;color:var(--text);}
+  .section-badge{margin-left:auto;background:var(--surface2);border-radius:10px;padding:2px 8px;font-size:.68rem;color:var(--muted);}
+
+  /* ── Cards ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:7px;}
+  a.card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:11px 12px;text-decoration:none;color:var(--text);display:flex;align-items:flex-start;gap:9px;transition:.15s;}
+  a.card:hover{border-color:var(--c,#e11d48);background:var(--surface2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.5);}
+  .num{flex-shrink:0;background:var(--c,#e11d48);color:#fff;border-radius:5px;padding:2px 5px;font-size:.6rem;font-weight:800;margin-top:1px;opacity:.9;letter-spacing:.3px;}
+  .ctitle{font-size:.75rem;line-height:1.45;color:var(--text);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CardioStudy</h1>
+  <p>Drag &amp; Drop Study Games &nbsp;·&nbsp; Cardiovascular Medicine</p>
+  <div class="pills">
+    <span class="pill"><b>102</b> games</span>
+    <span class="pill"><b>49</b> source topics</span>
+    <span class="pill"><b>12</b> sections</span>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search by topic or number…" autocomplete="off">
+    <span class="search-ico">&#x2315;</span>
+  </div>
+</header>
+
+<main>
+<div class="no-results" id="noResults">No games match your search.</div>
+
+<!-- 1. CARDIOVASCULAR ANATOMY -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x2764;</span>
+    <span class="section-title">Cardiovascular Anatomy</span>
+    <span class="section-badge">8 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="01_heart_chambers.html" style="--c:#e11d48"><span class="num">01</span><span class="ctitle">Heart Chambers</span></a>
+    <a class="card" href="02_heart_valves.html" style="--c:#e11d48"><span class="num">02</span><span class="ctitle">Heart Valves</span></a>
+    <a class="card" href="69_mediastinum1_anatomy.html" style="--c:#be123c"><span class="num">69</span><span class="ctitle">Mediastinum Part 1 – Anatomy</span></a>
+    <a class="card" href="70_mediastinum1_clinical.html" style="--c:#be123c"><span class="num">70</span><span class="ctitle">Mediastinum Part 1 – Clinical</span></a>
+    <a class="card" href="71_mediastinum2_anatomy.html" style="--c:#9f1239"><span class="num">71</span><span class="ctitle">Mediastinum Part 2 – Anatomy</span></a>
+    <a class="card" href="72_mediastinum2_clinical.html" style="--c:#9f1239"><span class="num">72</span><span class="ctitle">Mediastinum Part 2 – Clinical</span></a>
+    <a class="card" href="97_vasculature_coronary_arteries.html" style="--c:#047857"><span class="num">97</span><span class="ctitle">Coronary Arteries</span></a>
+    <a class="card" href="98_vasculature_veins_lymphatics.html" style="--c:#b91c1c"><span class="num">98</span><span class="ctitle">Cardiac Veins &amp; Lymphatics</span></a>
+  </div>
+</section>
+
+<!-- 2. HISTOLOGY -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F52C;</span>
+    <span class="section-title">Histology</span>
+    <span class="section-badge">4 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="49_histology_heart_layers.html" style="--c:#7e22ce"><span class="num">49</span><span class="ctitle">Heart – Layers &amp; Pericardium</span></a>
+    <a class="card" href="50_histology_heart_cardiomyocytes.html" style="--c:#7e22ce"><span class="num">50</span><span class="ctitle">Heart – Cardiomyocytes</span></a>
+    <a class="card" href="51_histology_vessels_tunica.html" style="--c:#b45309"><span class="num">51</span><span class="ctitle">Blood Vessels – Tunica Layers</span></a>
+    <a class="card" href="52_histology_vessels_capillaries.html" style="--c:#b45309"><span class="num">52</span><span class="ctitle">Blood Vessels – Capillary Types</span></a>
+  </div>
+</section>
+
+<!-- 3. CARDIAC PHYSIOLOGY -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F4C8;</span>
+    <span class="section-title">Cardiac Physiology</span>
+    <span class="section-badge">16 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="21_cardiac_compliance.html" style="--c:#0369a1"><span class="num">21</span><span class="ctitle">Cardiac Compliance</span></a>
+    <a class="card" href="22_cardiac_preload_afterload.html" style="--c:#0369a1"><span class="num">22</span><span class="ctitle">Preload &amp; Afterload</span></a>
+    <a class="card" href="23_cardiac_function_curves.html" style="--c:#0284c7"><span class="num">23</span><span class="ctitle">Cardiac Function Curves</span></a>
+    <a class="card" href="24_vascular_function_curves.html" style="--c:#0284c7"><span class="num">24</span><span class="ctitle">Vascular Function Curves</span></a>
+    <a class="card" href="25_cardiac_cycle_phases.html" style="--c:#0ea5e9"><span class="num">25</span><span class="ctitle">Cardiac Cycle – Phases</span></a>
+    <a class="card" href="26_cardiac_cycle_events.html" style="--c:#0ea5e9"><span class="num">26</span><span class="ctitle">Cardiac Cycle – Events</span></a>
+    <a class="card" href="53_heart_sounds_s1_s2.html" style="--c:#0891b2"><span class="num">53</span><span class="ctitle">Heart Sounds: S1 &amp; S2</span></a>
+    <a class="card" href="54_heart_sounds_s3_s4.html" style="--c:#0891b2"><span class="num">54</span><span class="ctitle">Heart Sounds: S3 &amp; S4</span></a>
+    <a class="card" href="67_measuring_cardiac_function_volumes.html" style="--c:#0e7490"><span class="num">67</span><span class="ctitle">Measuring Cardiac Function – Volumes</span></a>
+    <a class="card" href="68_measuring_cardiac_function_methods.html" style="--c:#0e7490"><span class="num">68</span><span class="ctitle">Measuring Cardiac Function – Methods</span></a>
+    <a class="card" href="79_pv_loops_fundamentals.html" style="--c:#155e75"><span class="num">79</span><span class="ctitle">PV Loops – Fundamentals</span></a>
+    <a class="card" href="80_pv_loops_modifiers.html" style="--c:#155e75"><span class="num">80</span><span class="ctitle">PV Loops – Preload, Afterload &amp; Inotropy</span></a>
+    <a class="card" href="99_pv_loops.html" style="--c:#0891b2"><span class="num">99</span><span class="ctitle">PV Loops – Overview</span></a>
+    <a class="card" href="89_starling_forces_pressures.html" style="--c:#2563eb"><span class="num">89</span><span class="ctitle">Starling Forces – Pressures</span></a>
+    <a class="card" href="90_starling_forces_edema.html" style="--c:#9333ea"><span class="num">90</span><span class="ctitle">Starling Forces – Edema</span></a>
+    <a class="card" href="29_coronary_blood_flow.html" style="--c:#1d4ed8"><span class="num">29</span><span class="ctitle">Coronary Blood Flow</span></a>
+  </div>
+</section>
+
+<!-- 4. ECG -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x26A1;</span>
+    <span class="section-title">Electrocardiography (ECG)</span>
+    <span class="section-badge">8 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="43_ecg_fundamentals_leads.html" style="--c:#7c3aed"><span class="num">43</span><span class="ctitle">ECG Fundamentals &amp; Leads</span></a>
+    <a class="card" href="44_ecg_axis_placement.html" style="--c:#7c3aed"><span class="num">44</span><span class="ctitle">ECG Axis &amp; Lead Placement</span></a>
+    <a class="card" href="45_ecg_waves_intervals.html" style="--c:#6d28d9"><span class="num">45</span><span class="ctitle">ECG Waves &amp; Intervals</span></a>
+    <a class="card" href="46_ecg_segments.html" style="--c:#6d28d9"><span class="num">46</span><span class="ctitle">ECG Segments</span></a>
+    <a class="card" href="41_ecg_sinus_rhythms.html" style="--c:#4f46e5"><span class="num">41</span><span class="ctitle">ECG Sinus Rhythms</span></a>
+    <a class="card" href="42_ecg_rate_calculation.html" style="--c:#4f46e5"><span class="num">42</span><span class="ctitle">ECG Rate Calculation</span></a>
+    <a class="card" href="87_st_segment_changes_recognition.html" style="--c:#dc2626"><span class="num">87</span><span class="ctitle">ST Changes – Recognition</span></a>
+    <a class="card" href="88_st_segment_changes_localization.html" style="--c:#d97706"><span class="num">88</span><span class="ctitle">ST Changes – Localization</span></a>
+  </div>
+</section>
+
+<!-- 5. BLOOD PRESSURE REGULATION -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1FA78;</span>
+    <span class="section-title">Blood Pressure Regulation</span>
+    <span class="section-badge">10 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="17_baroreceptor_anatomy.html" style="--c:#0369a1"><span class="num">17</span><span class="ctitle">Baroreceptor Anatomy</span></a>
+    <a class="card" href="18_baroreceptor_reflex.html" style="--c:#0369a1"><span class="num">18</span><span class="ctitle">Baroreceptor Reflex</span></a>
+    <a class="card" href="19_bp_control_factors.html" style="--c:#0891b2"><span class="num">19</span><span class="ctitle">BP Control – Factors</span></a>
+    <a class="card" href="20_bp_control_systems.html" style="--c:#0891b2"><span class="num">20</span><span class="ctitle">BP Control – Systems (RAAS, ANS)</span></a>
+    <a class="card" href="47_hemodynamics_bp_components.html" style="--c:#0284c7"><span class="num">47</span><span class="ctitle">Hemodynamics – BP Components</span></a>
+    <a class="card" href="48_hemodynamics_vessel_wall.html" style="--c:#0284c7"><span class="num">48</span><span class="ctitle">Hemodynamics – Vessel Wall</span></a>
+    <a class="card" href="55_humoral_vasodilators.html" style="--c:#0e7490"><span class="num">55</span><span class="ctitle">Humoral Regulation – Vasodilators</span></a>
+    <a class="card" href="56_humoral_clinical.html" style="--c:#0e7490"><span class="num">56</span><span class="ctitle">Humoral Regulation – Clinical</span></a>
+    <a class="card" href="65_local_microcirculation_mechanisms.html" style="--c:#0f766e"><span class="num">65</span><span class="ctitle">Local Microcirculation – Mechanisms</span></a>
+    <a class="card" href="66_local_microcirculation_neural.html" style="--c:#0f766e"><span class="num">66</span><span class="ctitle">Local Microcirculation – Neural Control</span></a>
+  </div>
+</section>
+
+<!-- 6. HYPERTENSION -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F4A5;</span>
+    <span class="section-title">Hypertension</span>
+    <span class="section-badge">12 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="57_hypertension_stages.html" style="--c:#dc2626"><span class="num">57</span><span class="ctitle">Hypertension – Stages &amp; Classification</span></a>
+    <a class="card" href="58_hypertension_complications.html" style="--c:#dc2626"><span class="num">58</span><span class="ctitle">Hypertension – Complications</span></a>
+    <a class="card" href="59_hypertensive_emergency_pathophysiology.html" style="--c:#b91c1c"><span class="num">59</span><span class="ctitle">Hypertensive Emergency – Pathophysiology</span></a>
+    <a class="card" href="60_hypertensive_emergency_management.html" style="--c:#b91c1c"><span class="num">60</span><span class="ctitle">Hypertensive Emergency – Management</span></a>
+    <a class="card" href="61_hypotension_types.html" style="--c:#7c3aed"><span class="num">61</span><span class="ctitle">Hypotension – Types &amp; Causes</span></a>
+    <a class="card" href="62_hypotension_management.html" style="--c:#7c3aed"><span class="num">62</span><span class="ctitle">Hypotension – Management</span></a>
+    <a class="card" href="81_primary_hypertension_pathophysiology.html" style="--c:#c2410c"><span class="num">81</span><span class="ctitle">Primary HTN – Pathophysiology</span></a>
+    <a class="card" href="82_primary_hypertension_treatment.html" style="--c:#c2410c"><span class="num">82</span><span class="ctitle">Primary HTN – Treatment</span></a>
+    <a class="card" href="100_primary_hypertension.html" style="--c:#c2410c"><span class="num">100</span><span class="ctitle">Primary HTN – Drug Classes Overview</span></a>
+    <a class="card" href="83_secondary_hypertension_causes.html" style="--c:#0f766e"><span class="num">83</span><span class="ctitle">Secondary HTN – Causes</span></a>
+    <a class="card" href="84_secondary_hypertension_thyroid_adrenal.html" style="--c:#0f766e"><span class="num">84</span><span class="ctitle">Secondary HTN – Thyroid &amp; Adrenal</span></a>
+    <a class="card" href="101_secondary_hypertension.html" style="--c:#0f766e"><span class="num">101</span><span class="ctitle">Secondary HTN – Overview</span></a>
+  </div>
+</section>
+
+<!-- 7. DYSLIPIDEMIA & ASCVD -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F9EA;</span>
+    <span class="section-title">Dyslipidemia &amp; ASCVD</span>
+    <span class="section-badge">10 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="13_ascvd_components.html" style="--c:#d97706"><span class="num">13</span><span class="ctitle">ASCVD – Risk Components</span></a>
+    <a class="card" href="14_ascvd_risk_categories.html" style="--c:#d97706"><span class="num">14</span><span class="ctitle">ASCVD – Risk Categories</span></a>
+    <a class="card" href="15_atherosclerosis_pathology.html" style="--c:#b45309"><span class="num">15</span><span class="ctitle">Atherosclerosis – Pathology</span></a>
+    <a class="card" href="16_atherosclerosis_management.html" style="--c:#b45309"><span class="num">16</span><span class="ctitle">Atherosclerosis – Management</span></a>
+    <a class="card" href="37_dyslipidemia_types.html" style="--c:#92400e"><span class="num">37</span><span class="ctitle">Dyslipidemia – Types</span></a>
+    <a class="card" href="38_dyslipidemia_labs.html" style="--c:#92400e"><span class="num">38</span><span class="ctitle">Dyslipidemia – Labs &amp; Screening</span></a>
+    <a class="card" href="39_dyslipidemia_drugs.html" style="--c:#1d4ed8"><span class="num">39</span><span class="ctitle">Dyslipidemia – Drug Classes</span></a>
+    <a class="card" href="40_dyslipidemia_pharmacology.html" style="--c:#1d4ed8"><span class="num">40</span><span class="ctitle">Dyslipidemia – Pharmacology</span></a>
+    <a class="card" href="95_treatment_dyslipidemia_agents.html" style="--c:#1d4ed8"><span class="num">95</span><span class="ctitle">Treatment of Dyslipidemia – Agents</span></a>
+    <a class="card" href="96_treatment_dyslipidemia_guidelines.html" style="--c:#6d28d9"><span class="num">96</span><span class="ctitle">Treatment of Dyslipidemia – Guidelines</span></a>
+  </div>
+</section>
+
+<!-- 8. CORONARY ARTERY DISEASE & ACS -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F6A8;</span>
+    <span class="section-title">Coronary Artery Disease &amp; ACS</span>
+    <span class="section-badge">8 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="03_angina_types.html" style="--c:#dc2626"><span class="num">03</span><span class="ctitle">Angina – Types</span></a>
+    <a class="card" href="04_angina_medications.html" style="--c:#dc2626"><span class="num">04</span><span class="ctitle">Angina – Medications</span></a>
+    <a class="card" href="30_coronary_physiology.html" style="--c:#1d4ed8"><span class="num">30</span><span class="ctitle">Coronary Physiology</span></a>
+    <a class="card" href="75_myocardial_infarction_clinical.html" style="--c:#b91c1c"><span class="num">75</span><span class="ctitle">Myocardial Infarction – Clinical</span></a>
+    <a class="card" href="76_myocardial_infarction_histology.html" style="--c:#b91c1c"><span class="num">76</span><span class="ctitle">Myocardial Infarction – Histology</span></a>
+    <a class="card" href="87_st_segment_changes_recognition.html" style="--c:#dc2626"><span class="num">87</span><span class="ctitle">ST Changes – Recognition</span></a>
+    <a class="card" href="93_treatment_acs_pharmacology.html" style="--c:#b45309"><span class="num">93</span><span class="ctitle">ACS Treatment – Pharmacology</span></a>
+    <a class="card" href="94_treatment_acs_interventions.html" style="--c:#65a30d"><span class="num">94</span><span class="ctitle">ACS Treatment – Interventions &amp; PCI</span></a>
+  </div>
+</section>
+
+<!-- 9. PERIPHERAL VASCULAR DISEASE -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F9B5;</span>
+    <span class="section-title">Peripheral Vascular Disease</span>
+    <span class="section-badge">12 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="07_aortic_aneurysm_types.html" style="--c:#0284c7"><span class="num">07</span><span class="ctitle">Aortic Aneurysm – Types</span></a>
+    <a class="card" href="08_aortic_aneurysm_management.html" style="--c:#0284c7"><span class="num">08</span><span class="ctitle">Aortic Aneurysm – Management</span></a>
+    <a class="card" href="09_aortic_dissection_types.html" style="--c:#0369a1"><span class="num">09</span><span class="ctitle">Aortic Dissection – Types</span></a>
+    <a class="card" href="10_aortic_dissection_management.html" style="--c:#0369a1"><span class="num">10</span><span class="ctitle">Aortic Dissection – Management</span></a>
+    <a class="card" href="11_arterial_emboli_pathology.html" style="--c:#7c3aed"><span class="num">11</span><span class="ctitle">Arterial Emboli – Pathology</span></a>
+    <a class="card" href="12_arterial_emboli_management.html" style="--c:#7c3aed"><span class="num">12</span><span class="ctitle">Arterial Emboli – Management</span></a>
+    <a class="card" href="27_carotid_stenosis_pathology.html" style="--c:#0e7490"><span class="num">27</span><span class="ctitle">Carotid Stenosis – Pathology</span></a>
+    <a class="card" href="28_carotid_stenosis_management.html" style="--c:#0e7490"><span class="num">28</span><span class="ctitle">Carotid Stenosis – Management</span></a>
+    <a class="card" href="77_peripheral_arterial_disease_clinical.html" style="--c:#dc2626"><span class="num">77</span><span class="ctitle">PAD – Clinical Presentation</span></a>
+    <a class="card" href="78_peripheral_arterial_disease_management.html" style="--c:#dc2626"><span class="num">78</span><span class="ctitle">PAD – Management</span></a>
+    <a class="card" href="05_antiplatelet_classes.html" style="--c:#059669"><span class="num">05</span><span class="ctitle">Antiplatelet Drugs – Classes</span></a>
+    <a class="card" href="06_antiplatelet_adverse.html" style="--c:#059669"><span class="num">06</span><span class="ctitle">Antiplatelet Drugs – Adverse Effects</span></a>
+  </div>
+</section>
+
+<!-- 10. VENOUS & LYMPHATIC DISEASE -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F49C;</span>
+    <span class="section-title">Venous &amp; Lymphatic Disease</span>
+    <span class="section-badge">6 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="31_dvt_pathophysiology.html" style="--c:#be123c"><span class="num">31</span><span class="ctitle">DVT – Pathophysiology</span></a>
+    <a class="card" href="32_dvt_management.html" style="--c:#be123c"><span class="num">32</span><span class="ctitle">DVT – Management</span></a>
+    <a class="card" href="35_doacs_mechanism.html" style="--c:#0369a1"><span class="num">35</span><span class="ctitle">DOACs – Mechanism</span></a>
+    <a class="card" href="36_doacs_clinical.html" style="--c:#0369a1"><span class="num">36</span><span class="ctitle">DOACs – Clinical Use</span></a>
+    <a class="card" href="91_superficial_venous_insufficiency.html" style="--c:#059669"><span class="num">91</span><span class="ctitle">Superficial Venous Insufficiency</span></a>
+    <a class="card" href="92_superficial_thrombophlebitis.html" style="--c:#db2777"><span class="num">92</span><span class="ctitle">Superficial Thrombophlebitis</span></a>
+  </div>
+</section>
+
+<!-- 11. VASCULITIS -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F9AC;</span>
+    <span class="section-title">Vasculitis</span>
+    <span class="section-badge">7 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="63_large_vessel_vasculitis_features.html" style="--c:#b45309"><span class="num">63</span><span class="ctitle">Large-Vessel Vasculitis – Features</span></a>
+    <a class="card" href="64_large_vessel_vasculitis_management.html" style="--c:#b45309"><span class="num">64</span><span class="ctitle">Large-Vessel Vasculitis – Management</span></a>
+    <a class="card" href="73_medium_vessel_vasculitis_features.html" style="--c:#0e7490"><span class="num">73</span><span class="ctitle">Medium-Vessel Vasculitis – Features</span></a>
+    <a class="card" href="74_medium_vessel_vasculitis_management.html" style="--c:#0e7490"><span class="num">74</span><span class="ctitle">Medium-Vessel Vasculitis – Management</span></a>
+    <a class="card" href="85_small_vessel_vasculitis_anca.html" style="--c:#7c3aed"><span class="num">85</span><span class="ctitle">Small-Vessel Vasculitis – ANCA</span></a>
+    <a class="card" href="86_small_vessel_vasculitis_immune_complex.html" style="--c:#7c3aed"><span class="num">86</span><span class="ctitle">Small-Vessel Vasculitis – Immune Complex</span></a>
+    <a class="card" href="102_small_vessel_vasculitis.html" style="--c:#7c3aed"><span class="num">102</span><span class="ctitle">Small-Vessel Vasculitis – Overview</span></a>
+  </div>
+</section>
+
+<!-- 12. CARDIOVASCULAR IMAGING -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F4F7;</span>
+    <span class="section-title">Cardiovascular Imaging</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="33_cardiovascular_imaging_xray.html" style="--c:#475569"><span class="num">33</span><span class="ctitle">Imaging – X-Ray &amp; Echocardiography</span></a>
+    <a class="card" href="34_cardiovascular_imaging_advanced.html" style="--c:#475569"><span class="num">34</span><span class="ctitle">Imaging – CT, MRI &amp; Nuclear</span></a>
+  </div>
+</section>
+
+</main>
+
+<script>
+const search = document.getElementById('search');
+const noResults = document.getElementById('noResults');
+
+search.addEventListener('input', () => {
+  const q = search.value.trim().toLowerCase();
+  let anyVisible = false;
+
+  document.querySelectorAll('a.card').forEach(card => {
+    const match = !q || card.textContent.toLowerCase().includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) anyVisible = true;
+  });
+
+  document.querySelectorAll('section[data-section]').forEach(sec => {
+    const hasVisible = [...sec.querySelectorAll('a.card')].some(c => c.style.display !== 'none');
+    sec.style.display = hasVisible ? '' : 'none';
+  });
+
+  noResults.style.display = (!anyVisible && q) ? 'block' : 'none';
+});
+</script>
+</body>
+</html>
