@@ -243,7 +243,7 @@ function showHint(){
   document.querySelectorAll(".tab").forEach(t=>{if(t.textContent===categoryLabels[cat])t.click();});
   setTimeout(()=>{
     const item=[...document.querySelectorAll(".draggable-item")].find(i=>i.dataset.entity===dz.dataset.entity&&i.dataset.cat===cat);
-    if(item){item.style.outline="2px solid #6366f1;item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
+    if(item){item.style.outline="2px solid #6366f1";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
   },100);
 }
 function showAllAnswers(){
