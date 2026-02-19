@@ -172,6 +172,7 @@
         };
 
         let score = 0, totalItems = 0, draggedElement = null, allItems = {};
+        function escapeAttr(s) { return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
         function initGame() {
             const cardsContainer = document.getElementById('cards-container');
@@ -182,7 +183,7 @@
             totalItems = Object.keys(gameData).length * categoryKeys.length; score = 0;
             Object.keys(gameData).forEach(entity => {
                 const card = document.createElement('div'); card.className = 'drug-card';
-                const zonesHtml = categoryKeys.map(cat => `<div class="drop-row"><div class="drop-label">${categoryLabels[cat]}</div><div class="drop-zone" data-entity="${entity}" data-category="${cat}"></div></div>`).join('');
+                const zonesHtml = categoryKeys.map(cat => `<div class="drop-row"><div class="drop-label">${categoryLabels[cat]}</div><div class="drop-zone" data-entity="${escapeAttr(entity)}" data-category="${cat}"></div></div>`).join('');
                 card.innerHTML = `<div class="drug-card-title">${entity}</div><div class="drop-zones">${zonesHtml}</div>`;
                 cardsContainer.appendChild(card);
             });
