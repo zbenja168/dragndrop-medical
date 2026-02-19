@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>87 – ST Segment Changes: Recognition</title>
+<style>
+  :root{--accent:#dc2626;--accent-glow:rgba(220,38,38,0.35);--bg:#150000;--surface:#200000;--surface2:#2e0000;--text:#f1f5f9;--muted:#94a3b8;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',sans-serif;min-height:100vh;padding:16px;}
+  h1{text-align:center;font-size:1.2rem;color:var(--accent);text-shadow:0 0 10px var(--accent-glow);margin-bottom:4px;}
+  .subtitle{text-align:center;font-size:.8rem;color:var(--muted);margin-bottom:12px;}
+  .scorebar{display:flex;justify-content:center;gap:16px;font-size:.85rem;margin-bottom:10px;}
+  .scorebar span{background:var(--surface);padding:4px 12px;border-radius:20px;border:1px solid var(--surface2);}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:10px;}
+  .tab{padding:5px 12px;border-radius:16px;border:1px solid var(--surface2);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.8rem;transition:.2s;}
+  .tab.active{background:var(--accent);color:#fff;font-weight:700;border-color:var(--accent);}
+  .wordbank{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;min-height:58px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;justify-content:center;}
+  .chip{background:var(--surface2);color:var(--text);border:1px solid var(--accent);border-radius:16px;padding:5px 11px;font-size:.78rem;cursor:grab;user-select:none;transition:.15s;touch-action:none;}
+  .chip:hover{background:var(--accent);color:#fff;box-shadow:0 0 8px var(--accent-glow);}
+  .chip.dragging{opacity:.4;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:14px;}
+  .card{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;}
+  .card-title{font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:7px;text-align:center;}
+  .slots{display:flex;flex-direction:column;gap:5px;}
+  .slot{min-height:34px;border:1px dashed var(--surface2);border-radius:7px;padding:4px 7px;font-size:.75rem;display:flex;align-items:center;gap:6px;transition:.2s;}
+  .slot .slot-label{color:var(--muted);font-size:.68rem;white-space:nowrap;}
+  .slot.drag-over{border-color:var(--accent);background:rgba(220,38,38,.1);}
+  .slot.correct{border-color:#22c55e;background:rgba(34,197,94,.1);}
+  .slot.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);}
+  .slot .chip{cursor:default;font-size:.73rem;padding:3px 8px;}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px;}
+  button{padding:7px 16px;border-radius:20px;border:none;cursor:pointer;font-size:.82rem;font-weight:600;transition:.2s;}
+  .btn-check{background:var(--accent);color:#fff;}
+  .btn-hint{background:var(--surface2);color:var(--text);border:1px solid var(--accent);}
+  .btn-show{background:var(--surface2);color:var(--text);border:1px solid var(--muted);}
+  .btn-reset{background:var(--surface2);color:var(--muted);border:1px solid var(--surface2);}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;}
+  .modal.open{display:flex;}
+  .modal-box{background:var(--surface);border:1px solid var(--accent);border-radius:14px;padding:24px;max-width:480px;width:90%;max-height:80vh;overflow-y:auto;}
+  .modal-box h2{color:var(--accent);margin-bottom:12px;}
+  .modal-box p{font-size:.85rem;color:var(--muted);line-height:1.6;}
+  .modal-box button{margin-top:14px;background:var(--accent);color:#fff;padding:8px 22px;border-radius:20px;border:none;cursor:pointer;font-weight:700;}
+  #ghost{position:fixed;pointer-events:none;z-index:999;opacity:.85;display:none;}
+</style>
+</head>
+<body>
+<h1>87 – ST Segment Changes: Recognition</h1>
+<p class="subtitle">Match each ECG finding to its definition, mechanism, ischemia type, and clinical note</p>
+<div class="scorebar"><span>Score: <b id="scoreVal">0</b></span><span>Attempts: <b id="attVal">0</b></span></div>
+<div class="tabs" id="tabs"></div>
+<div class="wordbank" id="wordbank"></div>
+<div class="grid" id="grid"></div>
+<div class="btns">
+  <button class="btn-check" onclick="checkAll()">Check Answers</button>
+  <button class="btn-hint" onclick="showHint()">Hint</button>
+  <button class="btn-show" onclick="showAllAnswers()">Show Answers</button>
+  <button class="btn-reset" onclick="resetGame()">Reset</button>
+</div>
+<div class="modal" id="modal"><div class="modal-box"><h2 id="modal-title"></h2><p id="modal-body"></p><button onclick="document.getElementById('modal').classList.remove('open')">Close</button></div></div>
+<div class="chip" id="ghost"></div>
+<script>
+const gameData = {
+  "ST Segment": {
+    definition: "ECG portion from J point (end of QRS) to start of T wave; normally isoelectric; corresponds to plateau phase (phase 2) of ventricular action potential",
+    mechanism: "Represents complete ventricular depolarization plateau; deviation from isoelectric baseline indicates abnormal injury current from ischemic myocardium",
+    ischemiaType: "Baseline/normal — isoelectric ST indicates no ischemia; deviation above or below baseline indicates pathological process requiring evaluation",
+    clinicalNote: "First ECG portion to change in acute MI (within minutes); changes appear before T wave inversions or Q waves; guides immediacy of reperfusion therapy"
+  },
+  "ST Elevation": {
+    definition: "ST segment displaced ≥1 mm above baseline in limb leads or ≥2 mm in precordial leads; must be present in ≥2 contiguous leads for STEMI criteria",
+    mechanism: "Transmural (full-thickness) ischemia → injury current from epicardial surface → displaces ST segment upward on surface ECG recording",
+    ischemiaType: "Transmural ischemia — extends through full myocardial thickness to epicardium; surrogate for acute major coronary artery occlusion",
+    clinicalNote: "STEMI requires immediate reperfusion: PCI within 90 min (door-to-balloon) or tPA within 30 min if PCI unavailable; 'time is myocardium'"
+  },
+  "ST Depression": {
+    definition: "ST segment displaced below isoelectric baseline ≥1 mm; horizontal or downsloping depression is most significant; must be in ≥2 contiguous leads",
+    mechanism: "Subendocardial ischemia → injury current from inner endocardial layer → displaces ST segment downward; also occurs as reciprocal change opposite a STEMI",
+    ischemiaType: "Subendocardial ischemia — affects innermost/most vulnerable layer; indicates NSTEMI or unstable angina (non-ST elevation acute coronary syndrome)",
+    clinicalNote: "Risk-stratify NSTE-ACS with troponin (rises = NSTEMI; flat = unstable angina); PCI within 48h for high-risk; antiplatelet + anticoagulant therapy immediately"
+  },
+  "J-Point": {
+    definition: "Junction between the end of the QRS complex and the beginning of the ST segment; reference point for measuring ST deviation (60-80 ms after J-point)",
+    mechanism: "Marks transition from ventricular depolarization to plateau phase (phase 2); used to measure ST deviation above or below isoelectric baseline",
+    ischemiaType: "Not specific to one ischemia type; elevated in early repolarization (benign) or STEMI (pathological); depressed in subendocardial ischemia",
+    clinicalNote: "Early repolarization shows concave (upward smiley) ST elevation with notched J-point — typically benign; ischemic STE is often convex (tombstone pattern)"
+  },
+  "Contiguous Leads": {
+    definition: "Two or more ECG leads that view anatomically adjacent areas of myocardium; required criterion for STEMI diagnosis to avoid false-positive from isolated artifact",
+    mechanism: "Adjacent myocardial regions are captured by anatomically contiguous leads; concordant ST changes across multiple leads increase diagnostic specificity",
+    ischemiaType: "Required for both STEMI (elevation) and NSTE-ACS (depression) criteria; chest leads V1-V6 are adjacent; inferior limb leads II/III/aVF are anatomically contiguous",
+    clinicalNote: "Inferior leads II/III/aVF are anatomically contiguous but NOT adjacent on ECG paper — historical convention; must recognize to properly identify inferior STEMI"
+  },
+  "Reciprocal Changes": {
+    definition: "ST depressions in ECG leads viewing the myocardial wall directly opposite to the infarct zone; mirror-image electrical change from transmural injury current",
+    mechanism: "Transmural injury current of infarct zone appears inverted (opposite direction) when recorded by leads viewing the electrically opposite myocardial wall",
+    ischemiaType: "Seen in STEMI only; supports transmural injury diagnosis; increases diagnostic specificity; absence does not exclude STEMI in early or small infarcts",
+    clinicalNote: "Inferior STEMI: reciprocal ST depression in I and aVL; anterior STEMI: reciprocal ST depression in II, III, aVF; confirms diagnosis and identifies culprit artery"
+  }
+};
+const categoryKeys=["definition","mechanism","ischemiaType","clinicalNote"];
+const categoryLabels={definition:"Definition",mechanism:"Mechanism",ischemiaType:"Ischemia Type",clinicalNote:"Clinical Note"};
+let correct=0,attempts=0,activeTab=categoryKeys[0];
+const placed={};
+Object.keys(gameData).forEach(e=>{placed[e]={};});
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildTabs(){const t=document.getElementById('tabs');t.innerHTML='';categoryKeys.forEach(k=>{const b=document.createElement('button');b.className='tab'+(k===activeTab?' active':'');b.textContent=categoryLabels[k];b.onclick=()=>{activeTab=k;buildTabs();renderWordBank();};t.appendChild(b);});}
+function renderWordBank(){const wb=document.getElementById('wordbank');wb.innerHTML='';const used=new Set();Object.values(placed).forEach(p=>{if(p[activeTab])used.add(p[activeTab]);});const answers=Object.values(gameData).map(e=>e[activeTab]);shuffleArray(answers).forEach(ans=>{if(!used.has(ans)){wb.appendChild(makeChip(ans));}});}
+function makeChip(text,forSlot=false){const c=document.createElement('div');c.className='chip';c.textContent=text;c.draggable=true;c.dataset.text=text;if(!forSlot){c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text',text);c.classList.add('dragging');});c.addEventListener('dragend',()=>c.classList.remove('dragging'));c.addEventListener('touchstart',touchStart,{passive:false});c.addEventListener('touchmove',touchMove,{passive:false});c.addEventListener('touchend',touchEnd);}return c;}
+function buildGrid(){const g=document.getElementById('grid');g.innerHTML='';Object.keys(gameData).forEach(entity=>{const card=document.createElement('div');card.className='card';const title=document.createElement('div');title.className='card-title';title.textContent=entity;card.appendChild(title);const slots=document.createElement('div');slots.className='slots';categoryKeys.forEach(k=>{const slot=document.createElement('div');slot.className='slot';slot.dataset.entity=entity;slot.dataset.cat=k;const label=document.createElement('span');label.className='slot-label';label.textContent=categoryLabels[k]+':';slot.appendChild(label);slot.addEventListener('dragover',e=>{e.preventDefault();slot.classList.add('drag-over');});slot.addEventListener('dragleave',()=>slot.classList.remove('drag-over'));slot.addEventListener('drop',e=>{e.preventDefault();slot.classList.remove('drag-over');handleDrop(slot,e.dataTransfer.getData('text'));});if(placed[entity][k]){const ch=makeChip(placed[entity][k],true);slot.appendChild(ch);}slots.appendChild(slot);});card.appendChild(slots);g.appendChild(card);});}
+function handleDrop(slot,text){const entity=slot.dataset.entity,cat=slot.dataset.cat;if(slot.querySelector('.chip')){const old=slot.querySelector('.chip').dataset.text;delete placed[entity][cat];returnChipToBank(old,cat);}placed[entity][cat]=text;removeFromBank(text);const ch=makeChip(text,true);slot.appendChild(ch);slot.classList.remove('correct','wrong');}
+function removeFromBank(text){const wb=document.getElementById('wordbank');[...wb.querySelectorAll('.chip')].forEach(c=>{if(c.dataset.text===text)c.remove();});}
+function returnChipToBank(text,cat){if(cat===activeTab){const wb=document.getElementById('wordbank');wb.appendChild(makeChip(text));}}
+function checkAll(){let c=0,a=0;document.querySelectorAll('.slot').forEach(slot=>{const ch=slot.querySelector('.chip');if(ch){a++;const correct=gameData[slot.dataset.entity][slot.dataset.cat]===ch.dataset.text;slot.classList.toggle('correct',correct);slot.classList.toggle('wrong',!correct);if(correct)c++;}});correct=c;attempts=a;document.getElementById('scoreVal').textContent=c;document.getElementById('attVal').textContent=a;if(a===Object.keys(gameData).length*categoryKeys.length&&c===a)showSummary();}
+function showHint(){const empties=[];document.querySelectorAll('.slot').forEach(slot=>{if(!slot.querySelector('.chip'))empties.push(slot);});if(!empties.length)return;const slot=empties[Math.floor(Math.random()*empties.length)];const ans=gameData[slot.dataset.entity][slot.dataset.cat];handleDrop(slot,ans);buildTabs();renderWordBank();}
+function showAllAnswers(){Object.keys(gameData).forEach(entity=>{categoryKeys.forEach(k=>{placed[entity][k]=gameData[entity][k];});});buildGrid();renderWordBank();}
+function showSummary(){const m=document.getElementById('modal');document.getElementById('modal-title').textContent='Game Complete!';document.getElementById('modal-body').textContent=`You scored ${correct} out of ${Object.keys(gameData).length*categoryKeys.length}. Attempts: ${attempts}.`;m.classList.add('open');}
+function resetGame(){Object.keys(placed).forEach(e=>{placed[e]={};});correct=0;attempts=0;document.getElementById('scoreVal').textContent=0;document.getElementById('attVal').textContent=0;buildGrid();buildTabs();renderWordBank();}
+let dragText='',ghostEl;
+function touchStart(e){const t=e.targetTouches[0];dragText=e.currentTarget.dataset.text;ghostEl=document.getElementById('ghost');ghostEl.textContent=dragText;ghostEl.style.display='block';ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
+function touchMove(e){const t=e.targetTouches[0];ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
+function touchEnd(e){ghostEl.style.display='none';const t=e.changedTouches[0];const target=document.elementFromPoint(t.clientX,t.clientY);const slot=target&&(target.classList.contains('slot')?target:target.closest('.slot'));if(slot&&dragText)handleDrop(slot,dragText);buildTabs();renderWordBank();dragText='';}
+buildTabs();buildGrid();renderWordBank();
+</script>
+</body>
+</html>

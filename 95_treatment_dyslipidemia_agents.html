@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>95 – Treatment of Dyslipidemia: Agents</title>
+<style>
+  :root{--accent:#1d4ed8;--accent-glow:rgba(29,78,216,0.35);--bg:#060018;--surface:#0a0022;--surface2:#10002e;--text:#f1f5f9;--muted:#94a3b8;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',sans-serif;min-height:100vh;padding:16px;}
+  h1{text-align:center;font-size:1.2rem;color:var(--accent);text-shadow:0 0 10px var(--accent-glow);margin-bottom:4px;}
+  .subtitle{text-align:center;font-size:.8rem;color:var(--muted);margin-bottom:12px;}
+  .scorebar{display:flex;justify-content:center;gap:16px;font-size:.85rem;margin-bottom:10px;}
+  .scorebar span{background:var(--surface);padding:4px 12px;border-radius:20px;border:1px solid var(--surface2);}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:10px;}
+  .tab{padding:5px 12px;border-radius:16px;border:1px solid var(--surface2);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.8rem;transition:.2s;}
+  .tab.active{background:var(--accent);color:#fff;font-weight:700;border-color:var(--accent);}
+  .wordbank{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;min-height:58px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;justify-content:center;}
+  .chip{background:var(--surface2);color:var(--text);border:1px solid var(--accent);border-radius:16px;padding:5px 11px;font-size:.78rem;cursor:grab;user-select:none;transition:.15s;touch-action:none;}
+  .chip:hover{background:var(--accent);color:#fff;box-shadow:0 0 8px var(--accent-glow);}
+  .chip.dragging{opacity:.4;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:14px;}
+  .card{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;}
+  .card-title{font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:7px;text-align:center;}
+  .slots{display:flex;flex-direction:column;gap:5px;}
+  .slot{min-height:34px;border:1px dashed var(--surface2);border-radius:7px;padding:4px 7px;font-size:.75rem;display:flex;align-items:center;gap:6px;transition:.2s;}
+  .slot .slot-label{color:var(--muted);font-size:.68rem;white-space:nowrap;}
+  .slot.drag-over{border-color:var(--accent);background:rgba(29,78,216,.1);}
+  .slot.correct{border-color:#22c55e;background:rgba(34,197,94,.1);}
+  .slot.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);}
+  .slot .chip{cursor:default;font-size:.73rem;padding:3px 8px;}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px;}
+  button{padding:7px 16px;border-radius:20px;border:none;cursor:pointer;font-size:.82rem;font-weight:600;transition:.2s;}
+  .btn-check{background:var(--accent);color:#fff;}
+  .btn-hint{background:var(--surface2);color:var(--text);border:1px solid var(--accent);}
+  .btn-show{background:var(--surface2);color:var(--text);border:1px solid var(--muted);}
+  .btn-reset{background:var(--surface2);color:var(--muted);border:1px solid var(--surface2);}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;}
+  .modal.open{display:flex;}
+  .modal-box{background:var(--surface);border:1px solid var(--accent);border-radius:14px;padding:24px;max-width:480px;width:90%;max-height:80vh;overflow-y:auto;}
+  .modal-box h2{color:var(--accent);margin-bottom:12px;}
+  .modal-box p{font-size:.85rem;color:var(--muted);line-height:1.6;}
+  .modal-box button{margin-top:14px;background:var(--accent);color:#fff;padding:8px 22px;border-radius:20px;border:none;cursor:pointer;font-weight:700;}
+  #ghost{position:fixed;pointer-events:none;z-index:999;opacity:.85;display:none;}
+</style>
+</head>
+<body>
+<h1>95 – Treatment of Dyslipidemia: Agents</h1>
+<p class="subtitle">Match each dyslipidemia drug to its mechanism, lipid effect, adverse effects, and clinical use</p>
+<div class="scorebar"><span>Score: <b id="scoreVal">0</b></span><span>Attempts: <b id="attVal">0</b></span></div>
+<div class="tabs" id="tabs"></div>
+<div class="wordbank" id="wordbank"></div>
+<div class="grid" id="grid"></div>
+<div class="btns">
+  <button class="btn-check" onclick="checkAll()">Check Answers</button>
+  <button class="btn-hint" onclick="showHint()">Hint</button>
+  <button class="btn-show" onclick="showAllAnswers()">Show Answers</button>
+  <button class="btn-reset" onclick="resetGame()">Reset</button>
+</div>
+<div class="modal" id="modal"><div class="modal-box"><h2 id="modal-title"></h2><p id="modal-body"></p><button onclick="document.getElementById('modal').classList.remove('open')">Close</button></div></div>
+<div class="chip" id="ghost"></div>
+<script>
+const gameData = {
+  "Statins": {
+    mechanism: "Competitively inhibit HMG-CoA reductase (rate-limiting step of cholesterol synthesis in liver) → ↓intracellular cholesterol → upregulate LDL receptors → ↑LDL clearance from plasma",
+    lipidEffect: "↓LDL 30-55% (dose-dependent); mild ↑HDL (5-15%); mild ↓TG (10-30%); high-intensity: atorvastatin 40-80 mg, rosuvastatin 20-40 mg — ↓LDL ≥50%",
+    adverseEffect: "Myopathy/rhabdomyolysis (↑CK, myalgia — rare but serious); hepatotoxicity (transaminase elevation); teratogenic (contraindicated in pregnancy); ↑blood glucose (mild T2DM risk)",
+    clinicalUse: "First-line for all patients requiring LDL lowering; high-intensity for ASCVD, LDL ≥190, DM; moderate-intensity for primary prevention intermediate risk; proven mortality benefit in secondary prevention"
+  },
+  "Ezetimibe": {
+    mechanism: "Inhibits NPC1L1 (Niemann-Pick C1-Like 1) transporter in intestinal brush border → blocks intestinal cholesterol absorption → ↓cholesterol delivery to liver → upregulates LDL receptors",
+    lipidEffect: "↓LDL 15-20% as monotherapy; additive 15-20% additional LDL reduction when added to statin; minimal effect on HDL and TG; does not affect fat-soluble vitamin absorption",
+    adverseEffect: "Generally well-tolerated; diarrhea, abdominal pain (mild); can cause myopathy when combined with statins; rarely elevated liver enzymes; safe in pregnancy unlike statins",
+    clinicalUse: "Add-on to statin when LDL goal not achieved (2nd line after maximizing statin); statin-intolerant patients as monotherapy; IMPROVE-IT trial showed added CV benefit with ezetimibe + simvastatin post-ACS"
+  },
+  "PCSK9 Inhibitors": {
+    mechanism: "Monoclonal antibodies (evolocumab, alirocumab) inhibit PCSK9 protein → PCSK9 normally tags LDL receptors for degradation → inhibition allows LDL receptors to recycle → dramatically ↑LDL clearance",
+    lipidEffect: "↓LDL 50-60% on top of maximum statin + ezetimibe; can reduce LDL to <25 mg/dL; ↑HDL 5-8%; ↓TG 15-20%; also reduces Lp(a) by ~20-30%",
+    adverseEffect: "Injection site reactions; nasopharyngitis; flu-like symptoms; very expensive ($5,000-14,000/year); subcutaneous injection every 2-4 weeks; generally very well tolerated",
+    clinicalUse: "Familial hypercholesterolemia (LDL ≥190 despite max statin + ezetimibe); established ASCVD with LDL ≥70 on maximally tolerated therapy; statin-intolerant patients with high CV risk"
+  },
+  "Fibrates": {
+    mechanism: "Activate peroxisome proliferator-activated receptor alpha (PPAR-α) in liver → ↑lipoprotein lipase activity → ↑TG clearance; ↑apoA-I synthesis → ↑HDL; ↓hepatic VLDL synthesis",
+    lipidEffect: "↓TG 30-50% (most potent TG-lowering); ↑HDL 10-20%; variable LDL effect (may ↑LDL in severe hypertriglyceridemia); drugs: fenofibrate, gemfibrozil (gemfibrozil increases statin myopathy risk)",
+    adverseEffect: "Myopathy (increased risk when combined with statins — especially gemfibrozil, which inhibits statin metabolism via CYP2C8); cholelithiasis (gallstones — ↑biliary cholesterol); renal dysfunction",
+    clinicalUse: "Severe hypertriglyceridemia (TG ≥500 mg/dL) to reduce pancreatitis risk; combined hyperlipidemia with predominant TG elevation; use fenofibrate over gemfibrozil with statins (lower drug interaction)"
+  },
+  "Omega-3 Fatty Acids": {
+    mechanism: "Icosapent ethyl (EPA) and omega-3-acid ethyl esters reduce hepatic VLDL synthesis → ↓TG production and secretion; EPA (icosapent ethyl) also has anti-inflammatory and anti-thrombotic pleiotropic effects",
+    lipidEffect: "↓TG 30-45% (prescription-dose 4 g/day); icosapent ethyl (VASCEPA) does NOT raise LDL; mixed omega-3 preparations may raise LDL; minimal HDL effect; ↓remnant cholesterol",
+    adverseEffect: "Fish burping/fishy odor (enteric coating reduces); GI upset; ↑bleeding risk (especially with anticoagulants); atrial fibrillation risk (especially high-dose EPA+DHA formulations)",
+    clinicalUse: "Severe hypertriglyceridemia (TG ≥500); icosapent ethyl (EPA only) at 4 g/day: REDUCE-IT trial showed 25% CV event reduction in statin-treated patients with TG 150-499 and established ASCVD or DM"
+  },
+  "Niacin": {
+    mechanism: "Inhibits adipocyte hormone-sensitive lipase → ↓free fatty acid release to liver → ↓hepatic VLDL synthesis and secretion; ↑HDL by reducing ApoA-I catabolism; inhibits LDL oxidation",
+    lipidEffect: "↓TG 20-50%; ↑HDL 15-35% (most potent HDL-raising agent); ↓LDL 10-25%; ↓Lp(a) 20-30%; most comprehensive lipid effects but abandoned due to clinical trial data",
+    adverseEffect: "Flushing (prostaglandin-mediated — take aspirin 30 min before; extended-release reduces flushing); hyperglycemia (worsens diabetes); hyperuricemia (gout); hepatotoxicity (especially extended-release)",
+    clinicalUse: "Largely abandoned — AIM-HIGH and HPS2-THRIVE trials showed NO additional CV benefit when added to statin despite HDL ↑; no longer recommended for CV risk reduction; occasionally used for severe isolated hypertriglyceridemia"
+  }
+};
+const categoryKeys=["mechanism","lipidEffect","adverseEffect","clinicalUse"];
+const categoryLabels={mechanism:"Mechanism",lipidEffect:"Lipid Effect",adverseEffect:"Adverse Effect",clinicalUse:"Clinical Use"};
+let correct=0,attempts=0,activeTab=categoryKeys[0];
+const placed={};
+Object.keys(gameData).forEach(e=>{placed[e]={};});
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildTabs(){const t=document.getElementById('tabs');t.innerHTML='';categoryKeys.forEach(k=>{const b=document.createElement('button');b.className='tab'+(k===activeTab?' active':'');b.textContent=categoryLabels[k];b.onclick=()=>{activeTab=k;buildTabs();renderWordBank();};t.appendChild(b);});}
+function renderWordBank(){const wb=document.getElementById('wordbank');wb.innerHTML='';const used=new Set();Object.values(placed).forEach(p=>{if(p[activeTab])used.add(p[activeTab]);});const answers=Object.values(gameData).map(e=>e[activeTab]);shuffleArray(answers).forEach(ans=>{if(!used.has(ans)){wb.appendChild(makeChip(ans));}});}
+function makeChip(text,forSlot=false){const c=document.createElement('div');c.className='chip';c.textContent=text;c.draggable=true;c.dataset.text=text;if(!forSlot){c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text',text);c.classList.add('dragging');});c.addEventListener('dragend',()=>c.classList.remove('dragging'));c.addEventListener('touchstart',touchStart,{passive:false});c.addEventListener('touchmove',touchMove,{passive:false});c.addEventListener('touchend',touchEnd);}return c;}
+function buildGrid(){const g=document.getElementById('grid');g.innerHTML='';Object.keys(gameData).forEach(entity=>{const card=document.createElement('div');card.className='card';const title=document.createElement('div');title.className='card-title';title.textContent=entity;card.appendChild(title);const slots=document.createElement('div');slots.className='slots';categoryKeys.forEach(k=>{const slot=document.createElement('div');slot.className='slot';slot.dataset.entity=entity;slot.dataset.cat=k;const label=document.createElement('span');label.className='slot-label';label.textContent=categoryLabels[k]+':';slot.appendChild(label);slot.addEventListener('dragover',e=>{e.preventDefault();slot.classList.add('drag-over');});slot.addEventListener('dragleave',()=>slot.classList.remove('drag-over'));slot.addEventListener('drop',e=>{e.preventDefault();slot.classList.remove('drag-over');handleDrop(slot,e.dataTransfer.getData('text'));});if(placed[entity][k]){const ch=makeChip(placed[entity][k],true);slot.appendChild(ch);}slots.appendChild(slot);});card.appendChild(slots);g.appendChild(card);});}
+function handleDrop(slot,text){const entity=slot.dataset.entity,cat=slot.dataset.cat;if(slot.querySelector('.chip')){const old=slot.querySelector('.chip').dataset.text;delete placed[entity][cat];returnChipToBank(old,cat);}placed[entity][cat]=text;removeFromBank(text);const ch=makeChip(text,true);slot.appendChild(ch);slot.classList.remove('correct','wrong');}
+function removeFromBank(text){const wb=document.getElementById('wordbank');[...wb.querySelectorAll('.chip')].forEach(c=>{if(c.dataset.text===text)c.remove();});}
+function returnChipToBank(text,cat){if(cat===activeTab){const wb=document.getElementById('wordbank');wb.appendChild(makeChip(text));}}
+function checkAll(){let c=0,a=0;document.querySelectorAll('.slot').forEach(slot=>{const ch=slot.querySelector('.chip');if(ch){a++;const correct=gameData[slot.dataset.entity][slot.dataset.cat]===ch.dataset.text;slot.classList.toggle('correct',correct);slot.classList.toggle('wrong',!correct);if(correct)c++;}});correct=c;attempts=a;document.getElementById('scoreVal').textContent=c;document.getElementById('attVal').textContent=a;if(a===Object.keys(gameData).length*categoryKeys.length&&c===a)showSummary();}
+function showHint(){const empties=[];document.querySelectorAll('.slot').forEach(slot=>{if(!slot.querySelector('.chip'))empties.push(slot);});if(!empties.length)return;const slot=empties[Math.floor(Math.random()*empties.length)];const ans=gameData[slot.dataset.entity][slot.dataset.cat];handleDrop(slot,ans);buildTabs();renderWordBank();}
+function showAllAnswers(){Object.keys(gameData).forEach(entity=>{categoryKeys.forEach(k=>{placed[entity][k]=gameData[entity][k];});});buildGrid();renderWordBank();}
+function showSummary(){const m=document.getElementById('modal');document.getElementById('modal-title').textContent='Game Complete!';document.getElementById('modal-body').textContent=`You scored ${correct} out of ${Object.keys(gameData).length*categoryKeys.length}. Attempts: ${attempts}.`;m.classList.add('open');}
+function resetGame(){Object.keys(placed).forEach(e=>{placed[e]={};});correct=0;attempts=0;document.getElementById('scoreVal').textContent=0;document.getElementById('attVal').textContent=0;buildGrid();buildTabs();renderWordBank();}
+let dragText='',ghostEl;
+function touchStart(e){const t=e.targetTouches[0];dragText=e.currentTarget.dataset.text;ghostEl=document.getElementById('ghost');ghostEl.textContent=dragText;ghostEl.style.display='block';ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
+function touchMove(e){const t=e.targetTouches[0];ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
+function touchEnd(e){ghostEl.style.display='none';const t=e.changedTouches[0];const target=document.elementFromPoint(t.clientX,t.clientY);const slot=target&&(target.classList.contains('slot')?target:target.closest('.slot'));if(slot&&dragText)handleDrop(slot,dragText);buildTabs();renderWordBank();dragText='';}
+buildTabs();buildGrid();renderWordBank();
+</script>
+</body>
+</html>
