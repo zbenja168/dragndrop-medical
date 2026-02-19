@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>72 – Mediastinum Part 2: Clinical Pathology</title>
+<style>
+  :root {
+    --accent: #a78bfa;
+    --accent-glow: #6d28d955;
+    --bg: #080015;
+    --surface: #110022;
+    --surface2: #1c0038;
+    --text: #f5f3ff;
+    --muted: #7c3aed;
+    --correct: #34d399;
+    --wrong: #f87171;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; min-height: 100vh; padding: 20px; }
+  header { text-align: center; margin-bottom: 28px; }
+  header h1 { font-size: 1.7rem; color: var(--accent); text-shadow: 0 0 18px var(--accent-glow); }
+  header p { color: var(--muted); font-size: .9rem; margin-top: 6px; }
+  .scoreboard { display: flex; justify-content: center; gap: 28px; margin-bottom: 20px; font-size: .9rem; color: var(--muted); }
+  .scoreboard span { color: var(--accent); font-weight: 700; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .tab-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; font-size: .82rem; transition: background .2s; }
+  .tab-btn.active, .tab-btn:hover { background: var(--accent-glow); }
+  .word-bank { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 14px; min-height: 70px; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip { background: var(--surface2); border: 1px solid var(--accent); color: var(--text); padding: 5px 12px; border-radius: 20px; font-size: .82rem; cursor: grab; user-select: none; transition: box-shadow .15s, opacity .15s; }
+  .chip:hover { box-shadow: 0 0 10px var(--accent-glow); }
+  .chip.dragging { opacity: .4; }
+  .entities { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-bottom: 22px; }
+  .entity-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 14px; }
+  .entity-name { font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--surface2); padding-bottom: 8px; }
+  .drop-rows { display: flex; flex-direction: column; gap: 8px; }
+  .drop-row { display: flex; align-items: center; gap: 8px; }
+  .drop-label { font-size: .75rem; color: var(--muted); width: 120px; flex-shrink: 0; }
+  .drop-zone { flex: 1; min-height: 34px; border: 1px dashed var(--muted); border-radius: 6px; display: flex; align-items: center; padding: 4px 8px; font-size: .8rem; transition: border-color .2s, background .2s; }
+  .drop-zone.over { border-color: var(--accent); background: var(--accent-glow); }
+  .drop-zone.correct { border-color: var(--correct); background: #34d39920; }
+  .drop-zone.wrong { border-color: var(--wrong); background: #f8717120; }
+  .drop-zone .chip { margin: 0; border: none; padding: 3px 8px; }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+  .btn { padding: 8px 20px; border-radius: 20px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; font-size: .85rem; transition: background .2s; }
+  .btn:hover { background: var(--accent-glow); }
+  .btn.primary { background: var(--accent); color: #000; font-weight: 700; }
+  .btn.primary:hover { opacity: .85; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: #000a; z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--accent); border-radius: 14px; padding: 28px; max-width: 480px; width: 90%; text-align: center; }
+  .modal h2 { color: var(--accent); margin-bottom: 12px; }
+  .modal p { color: var(--muted); margin-bottom: 20px; font-size: .95rem; }
+  .modal .score-big { font-size: 2.8rem; font-weight: 900; color: var(--accent); display: block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mediastinum Part 2: Clinical Pathology</h1>
+  <p>Drag each value to the correct property for each condition.</p>
+</header>
+<div class="scoreboard">Correct: <span id="correctCount">0</span> &nbsp;|&nbsp; Attempts: <span id="attemptCount">0</span></div>
+<div class="tabs" id="tabBar"></div>
+<div class="word-bank" id="wordBank"></div>
+<div class="entities" id="entityGrid"></div>
+<div class="controls">
+  <button class="btn" onclick="showHint()">Hint</button>
+  <button class="btn" onclick="showAllAnswers()">Show All Answers</button>
+  <button class="btn" onclick="resetGame()">Reset</button>
+  <button class="btn primary" onclick="checkAll()">Check All</button>
+</div>
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Session Complete</h2>
+    <span class="score-big" id="modalScore"></span>
+    <p id="modalMsg"></p>
+    <button class="btn primary" onclick="resetGame(); document.getElementById('modal').classList.remove('open')">Play Again</button>
+  </div>
+</div>
+<script>
+const gameData = {
+  "Chylothorax": {
+    cause: "Thoracic duct injury from trauma, surgical resection (esophagectomy, cardiac surgery), or tumor ingrowth (lymphoma, lung cancer spreading to mediastinal lymph nodes)",
+    mechanism: "Thoracic duct disruption → lymph leaks into pleural space → chylothorax; since duct crosses from right to left at T4-T5, injury can cause right or left sided effusion",
+    presentation: "Milky pleural effusion on thoracentesis; triglycerides >110 mg/dL; chylomicrons abundant; 96% lymphocytes; patient must have recently eaten (fasting = less milky)",
+    management: "Reduce enteral nutrition (less chyle production); chest tube drainage; surgical or interventional thoracic duct ligation between azygos vein and esophagus if persistent; radiation for malignant cause"
+  },
+  "Esophageal Constrictions (Three Natural Sites)": {
+    cause: "Normal anatomical narrowings visible on barium swallow; created by compression of adjacent structures; clinically relevant as sites of food impaction and increased esophageal cancer risk",
+    mechanism: "Three compressions: 1) Cricopharyngeus muscle (upper esophageal 'sphincter') — most narrow site, most common impaction; 2) Aortic arch; 3) Left main bronchus; all visible in posterior mediastinum",
+    presentation: "Dysphagia and food impaction risk at these sites; barium swallow shows aortic arch impression on PA view; bronchial impression on lateral view; thoracic aortic aneurysm worsens compression",
+    management: "Food bolus impaction: endoscopic retrieval; Schatzki ring at GEJ treated with esophageal dilation; thoracic aortic aneurysm causing dysphagia ('dysphagia aortica') treated with aneurysm repair"
+  },
+  "Right Lymphatic Duct": {
+    cause: "Smaller lymphatic trunk draining the remaining quarter of the body not drained by the thoracic duct; found in the posterior mediastinum on the right side; less clinically prominent than thoracic duct",
+    mechanism: "Drains lymph from: right side of thorax and upper body above diaphragm (right head, neck, arm, right lung, right heart); does NOT drain any abdominal structures",
+    presentation: "Injury causes right-sided chylothorax (less common than left-sided); right lymphatic duct empties at right venous angle (junction of right internal jugular and right subclavian veins)",
+    management: "Right-sided chylothorax managed identically to left-sided; ligation of right lymphatic duct if persistent; smaller size makes identification and ligation more challenging than thoracic duct"
+  },
+  "Anterior Mediastinum": {
+    cause: "Smallest mediastinal subdivision; directly posterior to sternum; bounded by sternal angle superiorly, pericardial sac posteriorly, and diaphragm inferiorly; contains thymus and lymph nodes primarily",
+    mechanism: "Thymus involutes after puberty → mostly adipose tissue in adults; parasternal lymph nodes drain anterior thorax and internal mammary region; no great vessels pass through anterior mediastinum",
+    presentation: "Anterior mediastinal masses: '4 T's' — Thymoma, Teratoma (germ cell tumor), Thyroid mass (substernal), Terrible lymphoma (Hodgkin's); anterior masses on lateral CXR lose retrosternal airspace",
+    management: "CT for characterization; PET-CT for lymphoma staging; surgical resection via median sternotomy for thymoma/teratoma; mediastinoscopy or VATS for biopsy; radiation/chemo for lymphoma"
+  },
+  "Middle Mediastinum": {
+    cause: "Between anterior and posterior compartments; contains heart, pericardium, ascending aorta, pulmonary trunk, and main bronchi; most clinically significant compartment for cardiac pathology",
+    mechanism: "Heart positioned with base (great vessels) at top right and apex at lower left; surrounded by fibrous pericardium; phrenic nerves run along lateral surfaces; azygos vein enters SVC here",
+    presentation: "Middle mediastinal masses: bronchogenic cysts (foregut developmental), pericardial cysts (smooth round right cardiophrenic angle), lymphadenopathy from sarcoidosis or metastatic cancer",
+    management: "Cardiac conditions managed medically/surgically based on type; bronchogenic cysts resected if symptomatic; pericardial cysts often observed; biopsy via mediastinoscopy or endobronchial ultrasound (EBUS)"
+  },
+  "Thoracic Duct Ligation Anatomy": {
+    cause: "Surgical reference for thoracic duct identification when operative ligation is required for persistent chylothorax not responding to conservative management",
+    mechanism: "Thoracic duct located between azygous vein (right) and esophagus (left), with aorta posteriorly — mnemonic: 'duck between two gooses (azygoose and esophagoose)'; easy to identify in lower chest",
+    presentation: "Surgical approach: right thoracotomy at lower thorax allows identification of thoracic duct at level of diaphragm; duct can appear as small white vessel; fluorescein ingestion pre-op aids identification",
+    management: "Mass ligation of tissues between azygos and aorta at diaphragmatic level captures thoracic duct; thoracoscopic (VATS) approach now preferred; failure rate <10% with proper technique"
+  }
+};
+const categoryKeys   = ["cause","mechanism","presentation","management"];
+const categoryLabels = { cause:"Cause / Anatomy", mechanism:"Mechanism / Pathophysiology", presentation:"Clinical Presentation / Finding", management:"Management" };
+let correct=0,attempts=0,activeTab=categoryKeys[0];
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a;}
+function buildTabs(){const bar=document.getElementById('tabBar');bar.innerHTML='';categoryKeys.forEach(k=>{const b=document.createElement('button');b.className='tab-btn'+(k===activeTab?' active':'');b.textContent=categoryLabels[k];b.onclick=()=>{activeTab=k;buildTabs();renderWordBank();};bar.appendChild(b);});}
+function allAnswers(){const l=[];Object.values(gameData).forEach(o=>l.push(o[activeTab]));return l;}
+function renderWordBank(){const wb=document.getElementById('wordBank');const placed=new Set();document.querySelectorAll('.drop-zone[data-cat="'+activeTab+'"]').forEach(dz=>{if(dz.querySelector('.chip'))placed.add(dz.querySelector('.chip').dataset.value);});const av=shuffleArray(allAnswers().filter(v=>!placed.has(v)));wb.innerHTML='';av.forEach(val=>wb.appendChild(makeChip(val)));}
+function makeChip(val){const chip=document.createElement('div');chip.className='chip';chip.textContent=val;chip.dataset.value=val;chip.draggable=true;chip.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',val);chip.classList.add('dragging');});chip.addEventListener('dragend',()=>chip.classList.remove('dragging'));chip.addEventListener('touchstart',touchStart,{passive:true});chip.addEventListener('touchmove',touchMove,{passive:false});chip.addEventListener('touchend',touchEnd);return chip;}
+function buildGrid(){const grid=document.getElementById('entityGrid');grid.innerHTML='';Object.keys(gameData).forEach(entity=>{const card=document.createElement('div');card.className='entity-card';const nameEl=document.createElement('div');nameEl.className='entity-name';nameEl.textContent=entity;const rows=document.createElement('div');rows.className='drop-rows';categoryKeys.forEach(cat=>{const row=document.createElement('div');row.className='drop-row';const lbl=document.createElement('div');lbl.className='drop-label';lbl.textContent=categoryLabels[cat];const dz=document.createElement('div');dz.className='drop-zone';dz.dataset.entity=entity;dz.dataset.cat=cat;dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});dz.addEventListener('dragleave',()=>dz.classList.remove('over'));dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');handleDrop(dz,e.dataTransfer.getData('text/plain'));});row.appendChild(lbl);row.appendChild(dz);rows.appendChild(row);});card.appendChild(nameEl);card.appendChild(rows);grid.appendChild(card);});}
+function handleDrop(dz,val){if(dz.querySelector('.chip'))returnChipToBank(dz.querySelector('.chip'));const chip=makeChip(val);dz.appendChild(chip);removeFromBank(val);attempts++;document.getElementById('attemptCount').textContent=attempts;const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===val;dz.classList.toggle('correct',isCorrect);dz.classList.toggle('wrong',!isCorrect);if(isCorrect){correct++;document.getElementById('correctCount').textContent=correct;}const total=Object.keys(gameData).length*categoryKeys.length;if(correct===total)setTimeout(()=>showSummary(),400);}
+function removeFromBank(val){document.querySelectorAll('#wordBank .chip').forEach(c=>{if(c.dataset.value===val)c.remove();});}
+function returnChipToBank(chip){const dz=chip.parentElement;dz.classList.remove('correct','wrong');document.getElementById('wordBank').appendChild(makeChip(chip.dataset.value));chip.remove();}
+function checkAll(){document.querySelectorAll('.drop-zone').forEach(dz=>{const chip=dz.querySelector('.chip');if(!chip)return;const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===chip.dataset.value;dz.classList.toggle('correct',isCorrect);dz.classList.toggle('wrong',!isCorrect);});}
+function showHint(){const empty=[...document.querySelectorAll('.drop-zone[data-cat="'+activeTab+'"]')].filter(dz=>!dz.querySelector('.chip'));if(!empty.length)return;const dz=empty[Math.floor(Math.random()*empty.length)];handleDrop(dz,gameData[dz.dataset.entity][dz.dataset.cat]);}
+function showAllAnswers(){document.querySelectorAll('.drop-zone').forEach(dz=>{if(dz.querySelector('.chip'))return;const chip=makeChip(gameData[dz.dataset.entity][dz.dataset.cat]);dz.appendChild(chip);dz.classList.add('correct');});document.getElementById('wordBank').innerHTML='';}
+function showSummary(){const total=Object.keys(gameData).length*categoryKeys.length;document.getElementById('modalScore').textContent=correct+' / '+total;document.getElementById('modalMsg').textContent=attempts>0?'Accuracy: '+Math.round(correct/attempts*100)+'%':'';document.getElementById('modal').classList.add('open');}
+function resetGame(){correct=0;attempts=0;document.getElementById('correctCount').textContent=0;document.getElementById('attemptCount').textContent=0;buildGrid();renderWordBank();}
+let _dragVal=null,_ghost=null;
+function touchStart(e){_dragVal=e.currentTarget.dataset.value;const r=e.currentTarget.getBoundingClientRect();_ghost=e.currentTarget.cloneNode(true);_ghost.style.cssText='position:fixed;opacity:.7;pointer-events:none;z-index:999;top:'+r.top+'px;left:'+r.left+'px;';document.body.appendChild(_ghost);}
+function touchMove(e){e.preventDefault();if(!_ghost)return;const t=e.touches[0];_ghost.style.top=(t.clientY-20)+'px';_ghost.style.left=(t.clientX-40)+'px';}
+function touchEnd(e){if(_ghost){_ghost.remove();_ghost=null;}const t=e.changedTouches[0];const el=document.elementFromPoint(t.clientX,t.clientY);const dz=el?.closest('.drop-zone');if(dz&&_dragVal)handleDrop(dz,_dragVal);_dragVal=null;}
+buildTabs();buildGrid();renderWordBank();
+</script>
+</body>
+</html>

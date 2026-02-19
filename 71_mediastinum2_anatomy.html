@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>71 – Mediastinum Part 2: Posterior Anatomy</title>
+<style>
+  :root {
+    --accent: #6366f1;
+    --accent-glow: #4338ca55;
+    --bg: #050015;
+    --surface: #0c0025;
+    --surface2: #16003a;
+    --text: #eef2ff;
+    --muted: #4338ca;
+    --correct: #34d399;
+    --wrong: #f87171;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; min-height: 100vh; padding: 20px; }
+  header { text-align: center; margin-bottom: 28px; }
+  header h1 { font-size: 1.7rem; color: var(--accent); text-shadow: 0 0 18px var(--accent-glow); }
+  header p { color: var(--muted); font-size: .9rem; margin-top: 6px; }
+  .scoreboard { display: flex; justify-content: center; gap: 28px; margin-bottom: 20px; font-size: .9rem; color: var(--muted); }
+  .scoreboard span { color: var(--accent); font-weight: 700; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .tab-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; font-size: .82rem; transition: background .2s; }
+  .tab-btn.active, .tab-btn:hover { background: var(--accent-glow); }
+  .word-bank { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 14px; min-height: 70px; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip { background: var(--surface2); border: 1px solid var(--accent); color: var(--text); padding: 5px 12px; border-radius: 20px; font-size: .82rem; cursor: grab; user-select: none; transition: box-shadow .15s, opacity .15s; }
+  .chip:hover { box-shadow: 0 0 10px var(--accent-glow); }
+  .chip.dragging { opacity: .4; }
+  .entities { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-bottom: 22px; }
+  .entity-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 14px; }
+  .entity-name { font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--surface2); padding-bottom: 8px; }
+  .drop-rows { display: flex; flex-direction: column; gap: 8px; }
+  .drop-row { display: flex; align-items: center; gap: 8px; }
+  .drop-label { font-size: .75rem; color: var(--muted); width: 120px; flex-shrink: 0; }
+  .drop-zone { flex: 1; min-height: 34px; border: 1px dashed var(--muted); border-radius: 6px; display: flex; align-items: center; padding: 4px 8px; font-size: .8rem; transition: border-color .2s, background .2s; }
+  .drop-zone.over { border-color: var(--accent); background: var(--accent-glow); }
+  .drop-zone.correct { border-color: var(--correct); background: #34d39920; }
+  .drop-zone.wrong { border-color: var(--wrong); background: #f8717120; }
+  .drop-zone .chip { margin: 0; border: none; padding: 3px 8px; }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+  .btn { padding: 8px 20px; border-radius: 20px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; font-size: .85rem; transition: background .2s; }
+  .btn:hover { background: var(--accent-glow); }
+  .btn.primary { background: var(--accent); color: #000; font-weight: 700; }
+  .btn.primary:hover { opacity: .85; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: #000a; z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--accent); border-radius: 14px; padding: 28px; max-width: 480px; width: 90%; text-align: center; }
+  .modal h2 { color: var(--accent); margin-bottom: 12px; }
+  .modal p { color: var(--muted); margin-bottom: 20px; font-size: .95rem; }
+  .modal .score-big { font-size: 2.8rem; font-weight: 900; color: var(--accent); display: block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mediastinum Part 2: Posterior Anatomy</h1>
+  <p>Drag each value to the correct property for each structure.</p>
+</header>
+<div class="scoreboard">Correct: <span id="correctCount">0</span> &nbsp;|&nbsp; Attempts: <span id="attemptCount">0</span></div>
+<div class="tabs" id="tabBar"></div>
+<div class="word-bank" id="wordBank"></div>
+<div class="entities" id="entityGrid"></div>
+<div class="controls">
+  <button class="btn" onclick="showHint()">Hint</button>
+  <button class="btn" onclick="showAllAnswers()">Show All Answers</button>
+  <button class="btn" onclick="resetGame()">Reset</button>
+  <button class="btn primary" onclick="checkAll()">Check All</button>
+</div>
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Session Complete</h2>
+    <span class="score-big" id="modalScore"></span>
+    <p id="modalMsg"></p>
+    <button class="btn primary" onclick="resetGame(); document.getElementById('modal').classList.remove('open')">Play Again</button>
+  </div>
+</div>
+<script>
+const gameData = {
+  "Posterior Mediastinum": {
+    location: "Posterior to pericardial sac; anterior to vertebral column; extends from T4-T5 (sternal angle) to diaphragm; bounded laterally by mediastinal pleura",
+    contents: "Descending thoracic aorta, azygos vein system (azygos + hemi-azygos + accessory hemi-azygos), esophagus, thoracic duct, sympathetic trunk, greater and lesser splanchnic nerves",
+    function: "Houses descending aorta (supplies posterior thorax via intercostal arteries); azygos system provides alternative venous drainage pathway; pathway for thoracic duct and sympathetic neurons to abdomen",
+    clinicalNote: "Posterior mediastinal masses: neurogenic tumors (schwannoma, neuroblastoma — most common), esophageal tumors, aortic aneurysm; neurofibromas can cause vertebral erosion ('dumbbell tumors')"
+  },
+  "Descending Thoracic Aorta": {
+    location: "Begins at T4-T5 level (where aortic arch ends); lies in posterior mediastinum left of midline initially then moves to midline; passes through diaphragm at T12 to become abdominal aorta",
+    contents: "Gives rise to: posterior intercostal arteries (segments 3-11), bronchial arteries (supply lung parenchyma), esophageal arteries, pericardial branches, and superior phrenic arteries",
+    function: "Supplies oxygenated blood to posterior thoracic wall (intercostal muscles, ribs), lung parenchyma (via bronchial arteries), esophagus, and spinal cord (via intercostal branches)",
+    clinicalNote: "Thoracic aortic aneurysm in posterior mediastinum → dysphagia (esophageal compression), hoarse voice (left RLN), back pain; dissection type B (descending) treated with medical management vs endovascular stent"
+  },
+  "Azygos Vein System": {
+    location: "Azygos: right side, ascends posterior mediastinum → arches over right hilum at T4 → drains into SVC; hemiazygos (left lower thorax) and accessory hemiazygos (left upper thorax) drain into azygos",
+    contents: "Azygos, hemiazygos, accessory hemiazygos veins receive blood from: posterior intercostal veins, bronchial veins, pericardial veins, esophageal veins, and right subcostal vein",
+    function: "Drains blood from thoracic wall and posterior intercostal spaces; serves as collateral bypass route if SVC or IVC is obstructed — can decompress either obstruction via connecting vessels",
+    clinicalNote: "In SVC syndrome, azygos system dilates to form collateral drainage; 'azygos continuation' — rare IVC anomaly where azygos drains abdominal veins; azygos lobe = normal variant on CXR"
+  },
+  "Thoracic Sympathetic Trunk": {
+    location: "Bilateral ganglionated chain on anterior surface of vertebral bodies, lateral to azygos vein on right; descends through posterior mediastinum alongside thoracic vertebrae T1-T12",
+    contents: "Thoracic ganglia (T1-T12) connected by sympathetic nerve fibers; gives off medial branches that form greater thoracic splanchnic (T5-T9), lesser thoracic splanchnic (T10-T11), and least thoracic splanchnic (T12) nerves",
+    function: "Fight-or-flight response: regulates heart rate, blood pressure, digestion, sweating; preganglionic fibers exit spinal cord → synapse in chain ganglia → postganglionic fibers to target organs",
+    clinicalNote: "Horner syndrome (unilateral ptosis, miosis, anhidrosis) from sympathetic chain injury (Pancoast lung tumor at T1, trauma, aortic dissection); surgical sympathectomy used for hyperhidrosis treatment"
+  },
+  "Greater Thoracic Splanchnic Nerve": {
+    location: "Arises from medial branches of T5-T9 sympathetic ganglia; courses along anterior surface of vertebral column; pierces diaphragm to reach celiac ganglion (preaortic/prevertebral ganglion) in abdomen",
+    contents: "Carries preganglionic sympathetic fibers from T5-T9 → pass through sympathetic chain without synapsing → synapse in celiac ganglion → postganglionic fibers to foregut (stomach, liver, pancreas, spleen)",
+    function: "Preganglionic sympathetic pathway to celiac ganglion; provides sympathetic innervation to foregut organs; reduces GI motility and secretion; mediates splanchnic vasoconstriction during stress",
+    clinicalNote: "Celiac plexus block (injection near celiac ganglion) used for chronic abdominal pain from pancreatic cancer; interrupts greater splanchnic nerve signals; can cause temporary orthostatic hypotension"
+  },
+  "Esophagus (Posterior Mediastinum)": {
+    location: "Midline structure courses vertically through posterior mediastinum; posterior to left atrium and anterior to vertebral column; 3 anatomical constrictions: aortic arch, left main bronchus, diaphragm",
+    contents: "Muscular tube connecting pharynx to stomach; posterior mediastinal portion surrounded by esophageal plexus (vagal fibers); receives blood from bronchial/esophageal arteries; drains to azygos and portal veins",
+    function: "Transports food from pharynx to stomach by peristalsis; lower esophageal sphincter prevents reflux; esophageal venous drainage at lower third connects to portal system — clinically significant",
+    clinicalNote: "Portal hypertension → esophageal varices (submucosa at GEJ) → hemorrhage risk; esophageal cancer compresses posterior mediastinum; Mallory-Weiss tear at GEJ from retching; barium swallow shows aortic arch impression"
+  }
+};
+const categoryKeys   = ["location","contents","function","clinicalNote"];
+const categoryLabels = { location:"Location / Borders", contents:"Course / Contents", function:"Function / Role", clinicalNote:"Clinical Note" };
+let correct=0,attempts=0,activeTab=categoryKeys[0];
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a;}
+function buildTabs(){const bar=document.getElementById('tabBar');bar.innerHTML='';categoryKeys.forEach(k=>{const b=document.createElement('button');b.className='tab-btn'+(k===activeTab?' active':'');b.textContent=categoryLabels[k];b.onclick=()=>{activeTab=k;buildTabs();renderWordBank();};bar.appendChild(b);});}
+function allAnswers(){const l=[];Object.values(gameData).forEach(o=>l.push(o[activeTab]));return l;}
+function renderWordBank(){const wb=document.getElementById('wordBank');const placed=new Set();document.querySelectorAll('.drop-zone[data-cat="'+activeTab+'"]').forEach(dz=>{if(dz.querySelector('.chip'))placed.add(dz.querySelector('.chip').dataset.value);});const av=shuffleArray(allAnswers().filter(v=>!placed.has(v)));wb.innerHTML='';av.forEach(val=>wb.appendChild(makeChip(val)));}
+function makeChip(val){const chip=document.createElement('div');chip.className='chip';chip.textContent=val;chip.dataset.value=val;chip.draggable=true;chip.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',val);chip.classList.add('dragging');});chip.addEventListener('dragend',()=>chip.classList.remove('dragging'));chip.addEventListener('touchstart',touchStart,{passive:true});chip.addEventListener('touchmove',touchMove,{passive:false});chip.addEventListener('touchend',touchEnd);return chip;}
+function buildGrid(){const grid=document.getElementById('entityGrid');grid.innerHTML='';Object.keys(gameData).forEach(entity=>{const card=document.createElement('div');card.className='entity-card';const nameEl=document.createElement('div');nameEl.className='entity-name';nameEl.textContent=entity;const rows=document.createElement('div');rows.className='drop-rows';categoryKeys.forEach(cat=>{const row=document.createElement('div');row.className='drop-row';const lbl=document.createElement('div');lbl.className='drop-label';lbl.textContent=categoryLabels[cat];const dz=document.createElement('div');dz.className='drop-zone';dz.dataset.entity=entity;dz.dataset.cat=cat;dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});dz.addEventListener('dragleave',()=>dz.classList.remove('over'));dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');handleDrop(dz,e.dataTransfer.getData('text/plain'));});row.appendChild(lbl);row.appendChild(dz);rows.appendChild(row);});card.appendChild(nameEl);card.appendChild(rows);grid.appendChild(card);});}
+function handleDrop(dz,val){if(dz.querySelector('.chip'))returnChipToBank(dz.querySelector('.chip'));const chip=makeChip(val);dz.appendChild(chip);removeFromBank(val);attempts++;document.getElementById('attemptCount').textContent=attempts;const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===val;dz.classList.toggle('correct',isCorrect);dz.classList.toggle('wrong',!isCorrect);if(isCorrect){correct++;document.getElementById('correctCount').textContent=correct;}const total=Object.keys(gameData).length*categoryKeys.length;if(correct===total)setTimeout(()=>showSummary(),400);}
+function removeFromBank(val){document.querySelectorAll('#wordBank .chip').forEach(c=>{if(c.dataset.value===val)c.remove();});}
+function returnChipToBank(chip){const dz=chip.parentElement;dz.classList.remove('correct','wrong');document.getElementById('wordBank').appendChild(makeChip(chip.dataset.value));chip.remove();}
+function checkAll(){document.querySelectorAll('.drop-zone').forEach(dz=>{const chip=dz.querySelector('.chip');if(!chip)return;const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===chip.dataset.value;dz.classList.toggle('correct',isCorrect);dz.classList.toggle('wrong',!isCorrect);});}
+function showHint(){const empty=[...document.querySelectorAll('.drop-zone[data-cat="'+activeTab+'"]')].filter(dz=>!dz.querySelector('.chip'));if(!empty.length)return;const dz=empty[Math.floor(Math.random()*empty.length)];handleDrop(dz,gameData[dz.dataset.entity][dz.dataset.cat]);}
+function showAllAnswers(){document.querySelectorAll('.drop-zone').forEach(dz=>{if(dz.querySelector('.chip'))return;const chip=makeChip(gameData[dz.dataset.entity][dz.dataset.cat]);dz.appendChild(chip);dz.classList.add('correct');});document.getElementById('wordBank').innerHTML='';}
+function showSummary(){const total=Object.keys(gameData).length*categoryKeys.length;document.getElementById('modalScore').textContent=correct+' / '+total;document.getElementById('modalMsg').textContent=attempts>0?'Accuracy: '+Math.round(correct/attempts*100)+'%':'';document.getElementById('modal').classList.add('open');}
+function resetGame(){correct=0;attempts=0;document.getElementById('correctCount').textContent=0;document.getElementById('attemptCount').textContent=0;buildGrid();renderWordBank();}
+let _dragVal=null,_ghost=null;
+function touchStart(e){_dragVal=e.currentTarget.dataset.value;const r=e.currentTarget.getBoundingClientRect();_ghost=e.currentTarget.cloneNode(true);_ghost.style.cssText='position:fixed;opacity:.7;pointer-events:none;z-index:999;top:'+r.top+'px;left:'+r.left+'px;';document.body.appendChild(_ghost);}
+function touchMove(e){e.preventDefault();if(!_ghost)return;const t=e.touches[0];_ghost.style.top=(t.clientY-20)+'px';_ghost.style.left=(t.clientX-40)+'px';}
+function touchEnd(e){if(_ghost){_ghost.remove();_ghost=null;}const t=e.changedTouches[0];const el=document.elementFromPoint(t.clientX,t.clientY);const dz=el?.closest('.drop-zone');if(dz&&_dragVal)handleDrop(dz,_dragVal);_dragVal=null;}
+buildTabs();buildGrid();renderWordBank();
+</script>
+</body>
+</html>
