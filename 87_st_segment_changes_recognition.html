@@ -5,61 +5,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>87 – ST Segment Changes: Recognition</title>
 <style>
-  :root{--accent:#dc2626;--accent-glow:rgba(220,38,38,0.35);--bg:#150000;--surface:#200000;--surface2:#2e0000;--text:#f1f5f9;--muted:#94a3b8;}
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',sans-serif;min-height:100vh;padding:16px;}
-  h1{text-align:center;font-size:1.2rem;color:var(--accent);text-shadow:0 0 10px var(--accent-glow);margin-bottom:4px;}
-  .subtitle{text-align:center;font-size:.8rem;color:var(--muted);margin-bottom:12px;}
-  .scorebar{display:flex;justify-content:center;gap:16px;font-size:.85rem;margin-bottom:10px;}
-  .scorebar span{background:var(--surface);padding:4px 12px;border-radius:20px;border:1px solid var(--surface2);}
-  .tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:10px;}
-  .tab{padding:5px 12px;border-radius:16px;border:1px solid var(--surface2);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.8rem;transition:.2s;}
-  .tab.active{background:var(--accent);color:#fff;font-weight:700;border-color:var(--accent);}
-  .wordbank{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;min-height:58px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;justify-content:center;}
-  .chip{background:var(--surface2);color:var(--text);border:1px solid var(--accent);border-radius:16px;padding:5px 11px;font-size:.78rem;cursor:grab;user-select:none;transition:.15s;touch-action:none;}
-  .chip:hover{background:var(--accent);color:#fff;box-shadow:0 0 8px var(--accent-glow);}
-  .chip.dragging{opacity:.4;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:14px;}
-  .card{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;}
-  .card-title{font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:7px;text-align:center;}
-  .slots{display:flex;flex-direction:column;gap:5px;}
-  .slot{min-height:34px;border:1px dashed var(--surface2);border-radius:7px;padding:4px 7px;font-size:.75rem;display:flex;align-items:center;gap:6px;transition:.2s;}
-  .slot .slot-label{color:var(--muted);font-size:.68rem;white-space:nowrap;}
-  .slot.drag-over{border-color:var(--accent);background:rgba(220,38,38,.1);}
-  .slot.correct{border-color:#22c55e;background:rgba(34,197,94,.1);}
-  .slot.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);}
-  .slot .chip{cursor:default;font-size:.73rem;padding:3px 8px;}
-  .btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px;}
-  button{padding:7px 16px;border-radius:20px;border:none;cursor:pointer;font-size:.82rem;font-weight:600;transition:.2s;}
-  .btn-check{background:var(--accent);color:#fff;}
-  .btn-hint{background:var(--surface2);color:var(--text);border:1px solid var(--accent);}
-  .btn-show{background:var(--surface2);color:var(--text);border:1px solid var(--muted);}
-  .btn-reset{background:var(--surface2);color:var(--muted);border:1px solid var(--surface2);}
-  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;}
-  .modal.open{display:flex;}
-  .modal-box{background:var(--surface);border:1px solid var(--accent);border-radius:14px;padding:24px;max-width:480px;width:90%;max-height:80vh;overflow-y:auto;}
-  .modal-box h2{color:var(--accent);margin-bottom:12px;}
-  .modal-box p{font-size:.85rem;color:var(--muted);line-height:1.6;}
-  .modal-box button{margin-top:14px;background:var(--accent);color:#fff;padding:8px 22px;border-radius:20px;border:none;cursor:pointer;font-weight:700;}
-  #ghost{position:fixed;pointer-events:none;z-index:999;opacity:.85;display:none;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',sans-serif;background:#150000;color:#f1f5f9;padding:20px;min-height:100vh;}
+  .container{max-width:1600px;margin:0 auto;}
+  h1{text-align:center;color:#dc2626;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(220,38,38,0.4);}
+  .subtitle{text-align:center;color:#94a3b8;margin-bottom:22px;font-size:.9em;}
+  .stats-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+  .stats{display:flex;gap:18px;flex-wrap:wrap;}
+  .stat-item{background:rgba(220,38,38,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(220,38,38,0.35);}
+  .stat-label{color:#dc2626;font-weight:700;margin-right:6px;font-size:.85em;}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-size:.85em;font-weight:600;transition:.2s;}
+  .btn-primary{background:#dc2626;color:#000;}
+  .btn-primary:hover{opacity:.85;transform:translateY(-1px);}
+  .btn-secondary{background:#2e0000;color:#f1f5f9;border:1px solid rgba(220,38,38,0.35);}
+  .btn-secondary:hover{opacity:.85;transform:translateY(-1px);}
+  .btn-danger{background:#2e0000;color:#94a3b8;border:1px solid #2e0000;}
+  .main-content{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start;}
+  .word-bank-container{position:sticky;top:20px;background:#200000;border-radius:12px;padding:14px;border:1px solid #2e0000;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+  .word-bank-title{color:#dc2626;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
+  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #2e0000;padding-bottom:8px;}
+  .tab{flex:1;min-width:55px;padding:6px 4px;background:#2e0000;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
+  .tab.active{background:#dc2626;color:#000;}
+  .tab:hover:not(.active){opacity:.8;}
+  .word-bank{min-height:180px;max-height:62vh;overflow-y:auto;display:none;}
+  .word-bank.active{display:block;}
+  .word-bank::-webkit-scrollbar{width:5px;}
+  .word-bank::-webkit-scrollbar-thumb{background:#dc2626;border-radius:3px;}
+  .draggable-item{background:#2e0000;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(220,38,38,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .draggable-item:hover{border-color:#dc2626;box-shadow:0 0 8px rgba(220,38,38,0.4);}
+  .draggable-item.dragging{opacity:.35;}
+  .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:14px;}
+  .drug-card{background:#200000;border-radius:12px;padding:14px;border:1px solid #2e0000;}
+  .drug-card-title{background:#dc2626;color:#000;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
+  .drop-zones{display:grid;gap:7px;}
+  .drop-row{display:grid;grid-template-columns:110px 1fr;gap:7px;align-items:start;}
+  .drop-label{background:rgba(220,38,38,0.1);padding:7px;border-radius:5px;font-weight:600;color:#dc2626;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(220,38,38,0.35);}
+  .drop-zone{min-height:40px;background:#2e0000;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
+  .drop-zone.drag-over{border-color:#dc2626;border-style:solid;background:rgba(220,38,38,0.1);}
+  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(220,38,38,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .dropped-item:hover{border-color:#dc2626;}
+  .dropped-item.correct{background:rgba(34,197,94,.12);border-color:#22c55e;}
+  .dropped-item.incorrect{background:rgba(239,68,68,.12);border-color:#ef4444;}
+  .summary-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;justify-content:center;align-items:center;padding:20px;}
+  .summary-modal.active{display:flex;}
+  .summary-content{background:#200000;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #dc2626;}
+  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #2e0000;}
+  .summary-title{color:#dc2626;font-size:1.3em;font-weight:700;}
+  .close-btn{background:#2e0000;border:1px solid #dc2626;color:#dc2626;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
+  .summary-entity{margin-bottom:18px;background:#2e0000;padding:14px;border-radius:8px;border-left:3px solid #dc2626;}
+  .summary-entity-title{color:#dc2626;font-size:1em;margin-bottom:8px;font-weight:700;}
+  .summary-cat{margin-bottom:7px;}
+  .summary-cat-label{color:#94a3b8;font-size:.75em;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+  .summary-cat-value{color:#f1f5f9;font-size:.82em;line-height:1.5;padding-left:8px;}
+  @media(max-width:1100px){.main-content{grid-template-columns:1fr;}.word-bank-container{position:relative;top:0;}.cards-container{grid-template-columns:1fr;}}
+  @media(max-width:600px){h1{font-size:1.3em;}.drop-row{grid-template-columns:1fr;}.stats-controls{flex-direction:column;}}
 </style>
 </head>
 <body>
 <a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<h1>87 – ST Segment Changes: Recognition</h1>
-<p class="subtitle">Match each ECG finding to its definition, mechanism, ischemia type, and clinical note</p>
-<div class="scorebar"><span>Score: <b id="scoreVal">0</b></span><span>Attempts: <b id="attVal">0</b></span></div>
-<div class="tabs" id="tabs"></div>
-<div class="wordbank" id="wordbank"></div>
-<div class="grid" id="grid"></div>
-<div class="btns">
-  <button class="btn-check" onclick="checkAll()">Check Answers</button>
-  <button class="btn-hint" onclick="showHint()">Hint</button>
-  <button class="btn-show" onclick="showAllAnswers()">Show Answers</button>
-  <button class="btn-reset" onclick="resetGame()">Reset</button>
+<div class="container">
+  <h1>87 – ST Segment Changes: Recognition</h1>
+  <p class="subtitle">Match each ECG finding to its definition, mechanism, ischemia type, and clinical note</p>
+  <div class="stats-controls">
+    <div class="stats">
+      <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
+      <div class="stat-item"><span class="stat-label">Remaining:</span><span id="remaining">0</span></div>
+    </div>
+    <div class="controls">
+      <button class="btn btn-secondary" onclick="showHint()">Hint</button>
+      <button class="btn btn-secondary" onclick="showAllAnswers()">Show Answers</button>
+      <button class="btn btn-secondary" onclick="showSummary()">Summary</button>
+      <button class="btn btn-danger" onclick="resetGame()">Reset</button>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="word-bank-container">
+      <div class="word-bank-title">&#x1F4DA; Word Bank</div>
+      <div class="tabs" id="tabs"></div>
+      <div id="banks"></div>
+    </div>
+    <div class="cards-container" id="cards-container"></div>
+  </div>
 </div>
-<div class="modal" id="modal"><div class="modal-box"><h2 id="modal-title"></h2><p id="modal-body"></p><button onclick="document.getElementById('modal').classList.remove('open')">Close</button></div></div>
-<div class="chip" id="ghost"></div>
+<div class="summary-modal" id="summaryModal">
+  <div class="summary-content">
+    <div class="summary-header">
+      <div class="summary-title">&#x1F4D6; Summary</div>
+      <button class="close-btn" onclick="closeSummary()">Close</button>
+    </div>
+    <div id="summaryContent"></div>
+  </div>
+</div>
 <script>
 const gameData = {
   "ST Segment": {
@@ -99,29 +136,136 @@ const gameData = {
     clinicalNote: "Inferior STEMI: reciprocal ST depression in I and aVL; anterior STEMI: reciprocal ST depression in II, III, aVF; confirms diagnosis and identifies culprit artery"
   }
 };
-const categoryKeys=["definition","mechanism","ischemiaType","clinicalNote"];
-const categoryLabels={definition:"Definition",mechanism:"Mechanism",ischemiaType:"Ischemia Type",clinicalNote:"Clinical Note"};
-let correct=0,attempts=0,activeTab=categoryKeys[0];
-const placed={};
-Object.keys(gameData).forEach(e=>{placed[e]={};});
-function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function buildTabs(){const t=document.getElementById('tabs');t.innerHTML='';categoryKeys.forEach(k=>{const b=document.createElement('button');b.className='tab'+(k===activeTab?' active':'');b.textContent=categoryLabels[k];b.onclick=()=>{activeTab=k;buildTabs();renderWordBank();};t.appendChild(b);});}
-function renderWordBank(){const wb=document.getElementById('wordbank');wb.innerHTML='';const used=new Set();Object.values(placed).forEach(p=>{if(p[activeTab])used.add(p[activeTab]);});const answers=Object.values(gameData).map(e=>e[activeTab]);shuffleArray(answers).forEach(ans=>{if(!used.has(ans)){wb.appendChild(makeChip(ans));}});}
-function makeChip(text,forSlot=false){const c=document.createElement('div');c.className='chip';c.textContent=text;c.draggable=true;c.dataset.text=text;if(!forSlot){c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text',text);c.classList.add('dragging');});c.addEventListener('dragend',()=>c.classList.remove('dragging'));c.addEventListener('touchstart',touchStart,{passive:false});c.addEventListener('touchmove',touchMove,{passive:false});c.addEventListener('touchend',touchEnd);}return c;}
-function buildGrid(){const g=document.getElementById('grid');g.innerHTML='';Object.keys(gameData).forEach(entity=>{const card=document.createElement('div');card.className='card';const title=document.createElement('div');title.className='card-title';title.textContent=entity;card.appendChild(title);const slots=document.createElement('div');slots.className='slots';categoryKeys.forEach(k=>{const slot=document.createElement('div');slot.className='slot';slot.dataset.entity=entity;slot.dataset.cat=k;const label=document.createElement('span');label.className='slot-label';label.textContent=categoryLabels[k]+':';slot.appendChild(label);slot.addEventListener('dragover',e=>{e.preventDefault();slot.classList.add('drag-over');});slot.addEventListener('dragleave',()=>slot.classList.remove('drag-over'));slot.addEventListener('drop',e=>{e.preventDefault();slot.classList.remove('drag-over');handleDrop(slot,e.dataTransfer.getData('text'));});if(placed[entity][k]){const ch=makeChip(placed[entity][k],true);slot.appendChild(ch);}slots.appendChild(slot);});card.appendChild(slots);g.appendChild(card);});}
-function handleDrop(slot,text){const entity=slot.dataset.entity,cat=slot.dataset.cat;if(slot.querySelector('.chip')){const old=slot.querySelector('.chip').dataset.text;delete placed[entity][cat];returnChipToBank(old,cat);}placed[entity][cat]=text;removeFromBank(text);const ch=makeChip(text,true);slot.appendChild(ch);slot.classList.remove('correct','wrong');}
-function removeFromBank(text){const wb=document.getElementById('wordbank');[...wb.querySelectorAll('.chip')].forEach(c=>{if(c.dataset.text===text)c.remove();});}
-function returnChipToBank(text,cat){if(cat===activeTab){const wb=document.getElementById('wordbank');wb.appendChild(makeChip(text));}}
-function checkAll(){let c=0,a=0;document.querySelectorAll('.slot').forEach(slot=>{const ch=slot.querySelector('.chip');if(ch){a++;const correct=gameData[slot.dataset.entity][slot.dataset.cat]===ch.dataset.text;slot.classList.toggle('correct',correct);slot.classList.toggle('wrong',!correct);if(correct)c++;}});correct=c;attempts=a;document.getElementById('scoreVal').textContent=c;document.getElementById('attVal').textContent=a;if(a===Object.keys(gameData).length*categoryKeys.length&&c===a)showSummary();}
-function showHint(){const empties=[];document.querySelectorAll('.slot').forEach(slot=>{if(!slot.querySelector('.chip'))empties.push(slot);});if(!empties.length)return;const slot=empties[Math.floor(Math.random()*empties.length)];const ans=gameData[slot.dataset.entity][slot.dataset.cat];handleDrop(slot,ans);buildTabs();renderWordBank();}
-function showAllAnswers(){Object.keys(gameData).forEach(entity=>{categoryKeys.forEach(k=>{placed[entity][k]=gameData[entity][k];});});buildGrid();renderWordBank();}
-function showSummary(){const m=document.getElementById('modal');document.getElementById('modal-title').textContent='Game Complete!';document.getElementById('modal-body').textContent=`You scored ${correct} out of ${Object.keys(gameData).length*categoryKeys.length}. Attempts: ${attempts}.`;m.classList.add('open');}
-function resetGame(){Object.keys(placed).forEach(e=>{placed[e]={};});correct=0;attempts=0;document.getElementById('scoreVal').textContent=0;document.getElementById('attVal').textContent=0;buildGrid();buildTabs();renderWordBank();}
-let dragText='',ghostEl;
-function touchStart(e){const t=e.targetTouches[0];dragText=e.currentTarget.dataset.text;ghostEl=document.getElementById('ghost');ghostEl.textContent=dragText;ghostEl.style.display='block';ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
-function touchMove(e){const t=e.targetTouches[0];ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
-function touchEnd(e){ghostEl.style.display='none';const t=e.changedTouches[0];const target=document.elementFromPoint(t.clientX,t.clientY);const slot=target&&(target.classList.contains('slot')?target:target.closest('.slot'));if(slot&&dragText)handleDrop(slot,dragText);buildTabs();renderWordBank();dragText='';}
-buildTabs();buildGrid();renderWordBank();
+const categoryKeys = ["definition","mechanism","ischemiaType","clinicalNote"];
+const categoryLabels = {definition:"Definition",mechanism:"Mechanism",ischemiaType:"Ischemia Type",clinicalNote:"Clinical Note"};
+let score=0,totalItems=0,draggedElement=null,allItems={};
+function initGame(){
+  const cc=document.getElementById("cards-container");cc.innerHTML="";
+  allItems={};
+  categoryKeys.forEach(cat=>{allItems[cat]=[];});
+  Object.keys(gameData).forEach(entity=>{
+    categoryKeys.forEach(cat=>{allItems[cat].push({text:gameData[entity][cat],entity,cat});});
+  });
+  categoryKeys.forEach(cat=>{allItems[cat]=shuffleArray(allItems[cat]);});
+  totalItems=Object.keys(gameData).length*categoryKeys.length;
+  document.getElementById("total").textContent=totalItems;
+  Object.keys(gameData).forEach(entity=>{
+    const card=document.createElement("div");card.className="drug-card";
+    const tt=document.createElement("div");tt.className="drug-card-title";tt.textContent=entity;
+    const zones=document.createElement("div");zones.className="drop-zones";
+    categoryKeys.forEach(cat=>{
+      const row=document.createElement("div");row.className="drop-row";
+      const lbl=document.createElement("div");lbl.className="drop-label";lbl.textContent=categoryLabels[cat];
+      const dz=document.createElement("div");dz.className="drop-zone";dz.dataset.entity=entity;dz.dataset.cat=cat;
+      dz.addEventListener("dragover",e=>{e.preventDefault();dz.classList.add("drag-over");});
+      dz.addEventListener("dragleave",()=>dz.classList.remove("drag-over"));
+      dz.addEventListener("drop",e=>{e.preventDefault();dz.classList.remove("drag-over");if(draggedElement)handleDrop(dz,draggedElement);});
+      row.appendChild(lbl);row.appendChild(dz);zones.appendChild(row);
+    });
+    card.appendChild(tt);card.appendChild(zones);cc.appendChild(card);
+  });
+  buildTabs();populateWordBanks();updateStats();
+}
+function buildTabs(){
+  const tc=document.getElementById("tabs");tc.innerHTML="";
+  const bc=document.getElementById("banks");bc.innerHTML="";
+  categoryKeys.forEach((cat,i)=>{
+    const btn=document.createElement("button");btn.className="tab"+(i===0?" active":"");
+    btn.textContent=categoryLabels[cat];
+    btn.onclick=()=>{
+      document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));btn.classList.add("active");
+      document.querySelectorAll(".word-bank").forEach(b=>b.classList.remove("active"));
+      document.getElementById("bank-"+cat).classList.add("active");
+    };
+    tc.appendChild(btn);
+    const bank=document.createElement("div");bank.className="word-bank"+(i===0?" active":"");bank.id="bank-"+cat;
+    bank.addEventListener("dragover",e=>e.preventDefault());
+    bank.addEventListener("drop",e=>{e.preventDefault();if(draggedElement&&draggedElement.classList.contains("dropped-item"))handleDropToBank();});
+    bc.appendChild(bank);
+  });
+}
+function populateWordBanks(){
+  categoryKeys.forEach(cat=>{
+    const bank=document.getElementById("bank-"+cat);bank.innerHTML="";
+    allItems[cat].forEach((item,idx)=>{bank.appendChild(makeItem(item.text,item.entity,cat,cat+"-"+idx,false));});
+  });
+}
+function makeItem(text,entity,cat,id,isDropped){
+  const div=document.createElement("div");
+  div.className=isDropped?"dropped-item":"draggable-item";
+  div.draggable=true;div.textContent=text;
+  div.dataset.text=text;div.dataset.entity=entity;div.dataset.cat=cat;div.dataset.id=id;
+  div.addEventListener("dragstart",e=>{draggedElement=div;div.classList.add("dragging");e.dataTransfer.effectAllowed="move";});
+  div.addEventListener("dragend",()=>div.classList.remove("dragging"));
+  return div;
+}
+function handleDrop(dz,dragged){
+  const existing=dz.querySelector(".dropped-item");
+  if(existing){
+    if(existing.classList.contains("correct"))score--;
+    const eBank=document.getElementById("bank-"+existing.dataset.cat);
+    if(eBank)eBank.insertBefore(makeItem(existing.dataset.text,existing.dataset.entity,existing.dataset.cat,existing.dataset.id,false),eBank.firstChild);
+    existing.remove();
+  }
+  if(dragged.parentElement)dragged.remove();
+  const dropped=makeItem(dragged.dataset.text,dragged.dataset.entity,dragged.dataset.cat,dragged.dataset.id,true);
+  const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===dragged.dataset.text;
+  dropped.classList.add(isCorrect?"correct":"incorrect");
+  if(isCorrect)score++;
+  dz.appendChild(dropped);
+  updateStats();
+}
+function handleDropToBank(){
+  if(\!draggedElement||\!draggedElement.classList.contains("dropped-item"))return;
+  if(draggedElement.classList.contains("correct"))score--;
+  const bank=document.getElementById("bank-"+draggedElement.dataset.cat);
+  if(bank)bank.insertBefore(makeItem(draggedElement.dataset.text,draggedElement.dataset.entity,draggedElement.dataset.cat,draggedElement.dataset.id,false),bank.firstChild);
+  draggedElement.remove();
+  updateStats();
+}
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function updateStats(){
+  document.getElementById("score").textContent=score;
+  let rem=0;categoryKeys.forEach(cat=>{rem+=document.getElementById("bank-"+cat).querySelectorAll(".draggable-item").length;});
+  document.getElementById("remaining").textContent=rem;
+  const total=Object.keys(gameData).length*categoryKeys.length;
+  if(score===total&&total>0)setTimeout(()=>{if(confirm("Perfect score\! Play again?"))resetGame();},400);
+}
+function showHint(){
+  const empties=[...document.querySelectorAll(".drop-zone")].filter(dz=>!dz.querySelector(".dropped-item"));
+  if(!empties.length)return;
+  const dz=empties[Math.floor(Math.random()*empties.length)];
+  const cat=dz.dataset.cat;
+  document.querySelectorAll(".tab").forEach(t=>{if(t.textContent===categoryLabels[cat])t.click();});
+  setTimeout(()=>{
+    const item=[...document.querySelectorAll(".draggable-item")].find(i=>i.dataset.entity===dz.dataset.entity&&i.dataset.cat===cat);
+    if(item){item.style.outline="2px solid #dc2626;item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
+  },100);
+}
+function showAllAnswers(){
+  if(!confirm("Show all correct answers?"))return;
+  document.querySelectorAll(".drop-zone").forEach(dz=>{
+    if(dz.querySelector(".dropped-item"))return;
+    const dropped=makeItem(gameData[dz.dataset.entity][dz.dataset.cat],dz.dataset.entity,dz.dataset.cat,"ans-"+dz.dataset.entity+dz.dataset.cat,true);
+    dropped.classList.add("correct");dz.appendChild(dropped);
+  });
+  categoryKeys.forEach(cat=>{document.getElementById("bank-"+cat).innerHTML="";}); 
+  score=Object.keys(gameData).length*categoryKeys.length;updateStats();
+}
+function showSummary(){
+  const sc=document.getElementById("summaryContent");sc.innerHTML="";
+  Object.keys(gameData).forEach(entity=>{
+    const div=document.createElement("div");div.className="summary-entity";
+    div.innerHTML="<div class=\"summary-entity-title\">"+entity+"</div>"+
+      categoryKeys.map(cat=>"<div class=\"summary-cat\"><div class=\"summary-cat-label\">"+categoryLabels[cat]+"</div><div class=\"summary-cat-value\">"+gameData[entity][cat]+"</div></div>").join("");
+    sc.appendChild(div);
+  });
+  document.getElementById("summaryModal").classList.add("active");
+}
+function closeSummary(){document.getElementById("summaryModal").classList.remove("active");}
+function resetGame(){if(!confirm("Reset game?"))return;score=0;initGame();}
+document.getElementById("summaryModal").addEventListener("click",function(e){if(e.target===this)closeSummary();});
+window.onload=initGame;
 </script>
 </body>
 </html>
