@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 – Primary (Essential) Hypertension</title>
+<style>
+  :root{--accent:#c2410c;--accent-glow:rgba(194,65,12,0.35);--bg:#180600;--surface:#220a00;--surface2:#2e1000;--text:#f1f5f9;--muted:#94a3b8;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',sans-serif;min-height:100vh;padding:16px;}
+  h1{text-align:center;font-size:1.2rem;color:var(--accent);text-shadow:0 0 10px var(--accent-glow);margin-bottom:4px;}
+  .subtitle{text-align:center;font-size:.8rem;color:var(--muted);margin-bottom:12px;}
+  .scorebar{display:flex;justify-content:center;gap:16px;font-size:.85rem;margin-bottom:10px;}
+  .scorebar span{background:var(--surface);padding:4px 12px;border-radius:20px;border:1px solid var(--surface2);}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:10px;}
+  .tab{padding:5px 12px;border-radius:16px;border:1px solid var(--surface2);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.8rem;transition:.2s;}
+  .tab.active{background:var(--accent);color:#fff;font-weight:700;border-color:var(--accent);}
+  .wordbank{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;min-height:58px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;justify-content:center;}
+  .chip{background:var(--surface2);color:var(--text);border:1px solid var(--accent);border-radius:16px;padding:5px 11px;font-size:.78rem;cursor:grab;user-select:none;transition:.15s;touch-action:none;}
+  .chip:hover{background:var(--accent);color:#fff;box-shadow:0 0 8px var(--accent-glow);}
+  .chip.dragging{opacity:.4;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:14px;}
+  .card{background:var(--surface);border:1px solid var(--surface2);border-radius:10px;padding:10px;}
+  .card-title{font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:7px;text-align:center;}
+  .slots{display:flex;flex-direction:column;gap:5px;}
+  .slot{min-height:34px;border:1px dashed var(--surface2);border-radius:7px;padding:4px 7px;font-size:.75rem;display:flex;align-items:center;gap:6px;transition:.2s;}
+  .slot .slot-label{color:var(--muted);font-size:.68rem;white-space:nowrap;}
+  .slot.drag-over{border-color:var(--accent);background:rgba(194,65,12,.1);}
+  .slot.correct{border-color:#22c55e;background:rgba(34,197,94,.1);}
+  .slot.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);}
+  .slot .chip{cursor:default;font-size:.73rem;padding:3px 8px;}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px;}
+  button{padding:7px 16px;border-radius:20px;border:none;cursor:pointer;font-size:.82rem;font-weight:600;transition:.2s;}
+  .btn-check{background:var(--accent);color:#fff;}
+  .btn-hint{background:var(--surface2);color:var(--text);border:1px solid var(--accent);}
+  .btn-show{background:var(--surface2);color:var(--text);border:1px solid var(--muted);}
+  .btn-reset{background:var(--surface2);color:var(--muted);border:1px solid var(--surface2);}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;}
+  .modal.open{display:flex;}
+  .modal-box{background:var(--surface);border:1px solid var(--accent);border-radius:14px;padding:24px;max-width:480px;width:90%;max-height:80vh;overflow-y:auto;}
+  .modal-box h2{color:var(--accent);margin-bottom:12px;}
+  .modal-box p{font-size:.85rem;color:var(--muted);line-height:1.6;}
+  .modal-box button{margin-top:14px;background:var(--accent);color:#fff;padding:8px 22px;border-radius:20px;border:none;cursor:pointer;font-weight:700;}
+  #ghost{position:fixed;pointer-events:none;z-index:999;opacity:.85;display:none;}
+</style>
+</head>
+<body>
+<h1>100 – Primary (Essential) Hypertension</h1>
+<p class="subtitle">Match each HTN concept to its definition, mechanism, adverse effects, and key pearl</p>
+<div class="scorebar"><span>Score: <b id="scoreVal">0</b></span><span>Attempts: <b id="attVal">0</b></span></div>
+<div class="tabs" id="tabs"></div>
+<div class="wordbank" id="wordbank"></div>
+<div class="grid" id="grid"></div>
+<div class="btns">
+  <button class="btn-check" onclick="checkAll()">Check Answers</button>
+  <button class="btn-hint" onclick="showHint()">Hint</button>
+  <button class="btn-show" onclick="showAllAnswers()">Show Answers</button>
+  <button class="btn-reset" onclick="resetGame()">Reset</button>
+</div>
+<div class="modal" id="modal"><div class="modal-box"><h2 id="modal-title"></h2><p id="modal-body"></p><button onclick="document.getElementById('modal').classList.remove('open')">Close</button></div></div>
+<div class="chip" id="ghost"></div>
+<script>
+const gameData = {
+  "Primary (Essential) Hypertension": {
+    definition: "Hypertension without an identifiable cause; 90-95% of all HTN cases; defined as repeated BP measurements ≥130/80 mmHg; 'silent killer' — typically asymptomatic until target organ damage occurs",
+    mechanism: "Multifactorial: (1) ↑SVR most common — vascular remodeling/sympathetic tone/catecholamine sensitivity; (2) ↑CO — salt-sensitive patients with volume expansion; RAAS activation contributes to both mechanisms",
+    adverseEffect: "Long-term uncontrolled HTN → coronary artery disease, stroke, chronic kidney disease (hypertensive nephrosclerosis), LVH, hypertensive retinopathy, heart failure with preserved EF (HFpEF)",
+    keyPearl: "Diagnosis requires ≥2 elevated readings at least 2 weeks apart; white-coat HTN = elevated in office only; 2025 AHA guidelines combine ASCVD-PREVENT risk score + BP level to guide pharmacotherapy decisions"
+  },
+  "Calcium Channel Blockers (HTN)": {
+    definition: "Block L-type Ca2+ channels in vascular smooth muscle → ↓contraction → arterial vasodilation → ↓SVR → ↓BP; dihydropyridines (DHPs: amlodipine, nifedipine) vs. non-DHPs (verapamil, diltiazem)",
+    mechanism: "DHPs most potent at reducing SVR (vascular selectivity); non-DHPs also slow AV node (negative chronotropy) and reduce contractility; amlodipine (long-acting DHP) — once daily, minimal reflex tachycardia",
+    adverseEffect: "Peripheral edema (fluid extravasation from dilated capillaries — most common, especially amlodipine/felodipine); reflex tachycardia (short-acting DHPs only); constipation (verapamil); flushing, headache",
+    keyPearl: "DHPs first-line for HTN; non-DHPs (verapamil, diltiazem) contraindicated in HFrEF (negative inotropy); short-acting nifedipine → reflex tachycardia — dangerous in ischemic heart disease; amlodipine safe in HFpEF"
+  },
+  "ACE Inhibitors and ARBs (HTN)": {
+    definition: "ACEi (lisinopril, enalapril, ramipril — '-pril'): inhibit ACE → ↓angiotensin II; ARBs (losartan, valsartan — '-sartan'): block AT1-receptor; both ↓SVR + ↓aldosterone → ↓Na/water retention",
+    mechanism: "Block Ang-II effects: arterial dilation (↓afterload), venodilation (↓preload), ↓aldosterone-mediated Na/water retention; dilate efferent arteriole → ↓intraglomerular pressure (nephroprotective in proteinuric CKD)",
+    adverseEffect: "ACEi: dry cough (bradykinin accumulation — 10-15%, class effect); angioedema (rare, life-threatening — more with ACEi than ARBs); both: hyperkalemia (↓aldosterone), teratogenic (Category D — avoid in pregnancy)",
+    keyPearl: "Preferred in HTN + DM + proteinuria (nephroprotective); bilateral renal artery stenosis = absolute contraindication (dilate efferent arteriole → ↓GFR → AKI); NEVER combine ACEi + ARB (↑hyperkalemia + AKI risk)"
+  },
+  "Thiazide Diuretics (HTN)": {
+    definition: "Inhibit Na-Cl symporter in distal convoluted tubule → ↑Na, K, Cl, H2O excretion → ↓blood volume → ↓CO → ↓BP; examples: chlorthalidone (preferred), hydrochlorothiazide (HCTZ), indapamide, metolazone",
+    mechanism: "Acute: ↓plasma volume → ↓CO; chronic: vascular smooth muscle Ca2+ depletion → vasodilation → ↓SVR; chlorthalidone has 35-40h half-life vs. HCTZ 8-15h — better 24h BP control and CV outcomes evidence",
+    adverseEffect: "Hypokalemia (most common — monitor K+); hyponatremia; hyperuricemia (precipitate gout); hyperglycemia (↓insulin secretion, worsen T2DM); hypercalcemia; metabolic alkalosis; photosensitivity",
+    keyPearl: "Preferred first-line in Black patients (lower-renin HTN phenotype — better response than ACEi/ARBs); chlorthalidone preferred over HCTZ (longer-acting, better CV outcomes data); avoid in gout unless necessary"
+  },
+  "Beta-Blockers (HTN)": {
+    definition: "Reduce HR (negative chronotropy) + contractility (negative inotropy) via β1 blockade → ↓CO; also ↓renin release from JGA → ↓RAAS; β1-selective: metoprolol, atenolol; non-selective: propranolol; mixed α+β: labetalol",
+    mechanism: "NOT recommended as first-line for uncomplicated primary HTN per 2025 AHA guidelines; preferred when HTN + comorbidity: coronary artery disease, post-MI, HFrEF, tachyarrhythmias, or hyperthyroidism-associated HTN",
+    adverseEffect: "Bradycardia, fatigue, cold extremities, dizziness; bronchospasm (non-selective — avoid in asthma/COPD; use β1-selective if needed); masking of hypoglycemia symptoms in DM; rebound HTN if abruptly stopped",
+    keyPearl: "Labetalol (combined α1+β blocker): drug of choice for hypertensive emergency in pregnancy; β-blockers preferred post-MI, HFrEF, AF with RVR; avoid in decompensated HF — worsens acute CHF acutely"
+  },
+  "Alpha Blockers and Other Agents (HTN)": {
+    definition: "α1 blockers (prazosin, doxazosin, terazosin): block α1-receptors → ↓SVR; clonidine: central α2 agonist → ↓sympathetic outflow → ↓HR and ↓SVR; minoxidil: K+ channel opener → vascular smooth muscle hyperpolarization → vasodilation",
+    mechanism: "α1 blockers: ↓SVR + ↓venous tone (↓preload); clonidine: inhibits brainstem vasomotor center → ↓catecholamine release; minoxidil (activated to minoxidil sulfate): opens K+ channels → repolarization → ↓vasoconstriction",
+    adverseEffect: "α1 blockers: orthostatic hypotension (first-dose phenomenon — major risk, especially in elderly), priapism; clonidine: sedation, dry mouth, constipation, rebound HTN on abrupt discontinuation (clonidine withdrawal); minoxidil: hypertrichosis, fluid retention, tachycardia",
+    keyPearl: "α1 blockers useful in HTN + BPH (treat both simultaneously — doxazosin); clonidine = last-line agent for resistant HTN; minoxidil reserved for resistant HTN — requires co-administration of β-blocker (prevent reflex tachycardia) + diuretic (prevent fluid retention)"
+  }
+};
+const categoryKeys=["definition","mechanism","adverseEffect","keyPearl"];
+const categoryLabels={definition:"Definition",mechanism:"Mechanism/Use",adverseEffect:"Adverse Effects",keyPearl:"Key Pearl"};
+let correct=0,attempts=0,activeTab=categoryKeys[0];
+const placed={};
+Object.keys(gameData).forEach(e=>{placed[e]={};});
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildTabs(){const t=document.getElementById('tabs');t.innerHTML='';categoryKeys.forEach(k=>{const b=document.createElement('button');b.className='tab'+(k===activeTab?' active':'');b.textContent=categoryLabels[k];b.onclick=()=>{activeTab=k;buildTabs();renderWordBank();};t.appendChild(b);});}
+function renderWordBank(){const wb=document.getElementById('wordbank');wb.innerHTML='';const used=new Set();Object.values(placed).forEach(p=>{if(p[activeTab])used.add(p[activeTab]);});const answers=Object.values(gameData).map(e=>e[activeTab]);shuffleArray(answers).forEach(ans=>{if(!used.has(ans)){wb.appendChild(makeChip(ans));}});}
+function makeChip(text,forSlot=false){const c=document.createElement('div');c.className='chip';c.textContent=text;c.draggable=true;c.dataset.text=text;if(!forSlot){c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text',text);c.classList.add('dragging');});c.addEventListener('dragend',()=>c.classList.remove('dragging'));c.addEventListener('touchstart',touchStart,{passive:false});c.addEventListener('touchmove',touchMove,{passive:false});c.addEventListener('touchend',touchEnd);}return c;}
+function buildGrid(){const g=document.getElementById('grid');g.innerHTML='';Object.keys(gameData).forEach(entity=>{const card=document.createElement('div');card.className='card';const title=document.createElement('div');title.className='card-title';title.textContent=entity;card.appendChild(title);const slots=document.createElement('div');slots.className='slots';categoryKeys.forEach(k=>{const slot=document.createElement('div');slot.className='slot';slot.dataset.entity=entity;slot.dataset.cat=k;const label=document.createElement('span');label.className='slot-label';label.textContent=categoryLabels[k]+':';slot.appendChild(label);slot.addEventListener('dragover',e=>{e.preventDefault();slot.classList.add('drag-over');});slot.addEventListener('dragleave',()=>slot.classList.remove('drag-over'));slot.addEventListener('drop',e=>{e.preventDefault();slot.classList.remove('drag-over');handleDrop(slot,e.dataTransfer.getData('text'));});if(placed[entity][k]){const ch=makeChip(placed[entity][k],true);slot.appendChild(ch);}slots.appendChild(slot);});card.appendChild(slots);g.appendChild(card);});}
+function handleDrop(slot,text){const entity=slot.dataset.entity,cat=slot.dataset.cat;if(slot.querySelector('.chip')){const old=slot.querySelector('.chip').dataset.text;delete placed[entity][cat];returnChipToBank(old,cat);}placed[entity][cat]=text;removeFromBank(text);const ch=makeChip(text,true);slot.appendChild(ch);slot.classList.remove('correct','wrong');}
+function removeFromBank(text){const wb=document.getElementById('wordbank');[...wb.querySelectorAll('.chip')].forEach(c=>{if(c.dataset.text===text)c.remove();});}
+function returnChipToBank(text,cat){if(cat===activeTab){const wb=document.getElementById('wordbank');wb.appendChild(makeChip(text));}}
+function checkAll(){let c=0,a=0;document.querySelectorAll('.slot').forEach(slot=>{const ch=slot.querySelector('.chip');if(ch){a++;const correct=gameData[slot.dataset.entity][slot.dataset.cat]===ch.dataset.text;slot.classList.toggle('correct',correct);slot.classList.toggle('wrong',!correct);if(correct)c++;}});correct=c;attempts=a;document.getElementById('scoreVal').textContent=c;document.getElementById('attVal').textContent=a;if(a===Object.keys(gameData).length*categoryKeys.length&&c===a)showSummary();}
+function showHint(){const empties=[];document.querySelectorAll('.slot').forEach(slot=>{if(!slot.querySelector('.chip'))empties.push(slot);});if(!empties.length)return;const slot=empties[Math.floor(Math.random()*empties.length)];const ans=gameData[slot.dataset.entity][slot.dataset.cat];handleDrop(slot,ans);buildTabs();renderWordBank();}
+function showAllAnswers(){Object.keys(gameData).forEach(entity=>{categoryKeys.forEach(k=>{placed[entity][k]=gameData[entity][k];});});buildGrid();renderWordBank();}
+function showSummary(){const m=document.getElementById('modal');document.getElementById('modal-title').textContent='Game Complete!';document.getElementById('modal-body').textContent=`You scored ${correct} out of ${Object.keys(gameData).length*categoryKeys.length}. Attempts: ${attempts}.`;m.classList.add('open');}
+function resetGame(){Object.keys(placed).forEach(e=>{placed[e]={};});correct=0;attempts=0;document.getElementById('scoreVal').textContent=0;document.getElementById('attVal').textContent=0;buildGrid();buildTabs();renderWordBank();}
+let dragText='',ghostEl;
+function touchStart(e){const t=e.targetTouches[0];dragText=e.currentTarget.dataset.text;ghostEl=document.getElementById('ghost');ghostEl.textContent=dragText;ghostEl.style.display='block';ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
+function touchMove(e){const t=e.targetTouches[0];ghostEl.style.left=t.clientX-40+'px';ghostEl.style.top=t.clientY-20+'px';e.preventDefault();}
+function touchEnd(e){ghostEl.style.display='none';const t=e.changedTouches[0];const target=document.elementFromPoint(t.clientX,t.clientY);const slot=target&&(target.classList.contains('slot')?target:target.closest('.slot'));if(slot&&dragText)handleDrop(slot,dragText);buildTabs();renderWordBank();dragText='';}
+buildTabs();buildGrid();renderWordBank();
+</script>
+</body>
+</html>
