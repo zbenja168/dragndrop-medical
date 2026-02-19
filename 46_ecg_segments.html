@@ -225,7 +225,7 @@ function handleDrop(dz,dragged){
   updateStats();
 }
 function handleDropToBank(){
-  if(\!draggedElement||\!draggedElement.classList.contains("dropped-item"))return;
+  if(!draggedElement||!draggedElement.classList.contains("dropped-item"))return;
   if(draggedElement.classList.contains("correct"))score--;
   const bank=document.getElementById("bank-"+draggedElement.dataset.cat);
   if(bank)bank.insertBefore(makeItem(draggedElement.dataset.text,draggedElement.dataset.entity,draggedElement.dataset.cat,draggedElement.dataset.id,false),bank.firstChild);
@@ -238,7 +238,7 @@ function updateStats(){
   let rem=0;categoryKeys.forEach(cat=>{rem+=document.getElementById("bank-"+cat).querySelectorAll(".draggable-item").length;});
   document.getElementById("remaining").textContent=rem;
   const total=Object.keys(gameData).length*categoryKeys.length;
-  if(score===total&&total>0)setTimeout(()=>{if(confirm("Perfect score\! Play again?"))resetGame();},400);
+  if(score===total&&total>0)setTimeout(()=>{if(confirm("Perfect score! Play again?"))resetGame();},400);
 }
 function showHint(){
   const empties=[...document.querySelectorAll(".drop-zone")].filter(dz=>!dz.querySelector(".dropped-item"));
