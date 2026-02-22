@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class I Antiarrhythmic Subclasses</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',sans-serif;background:#0a0010;color:#f1f5f9;padding:20px;min-height:100vh;}
+  .container{max-width:1600px;margin:0 auto;}
+  h1{text-align:center;color:#e11d48;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(225,29,72,0.4);}
+  .subtitle{text-align:center;color:#94a3b8;margin-bottom:22px;font-size:.9em;}
+  .stats-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+  .stats{display:flex;gap:18px;flex-wrap:wrap;}
+  .stat-item{background:rgba(225,29,72,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(225,29,72,0.35);}
+  .stat-label{color:#e11d48;font-weight:700;margin-right:6px;font-size:.85em;}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-size:.85em;font-weight:600;transition:.2s;}
+  .btn-primary{background:#e11d48;color:#000;}
+  .btn-primary:hover{opacity:.85;transform:translateY(-1px);}
+  .btn-secondary{background:#220025;color:#f1f5f9;border:1px solid rgba(225,29,72,0.35);}
+  .btn-secondary:hover{opacity:.85;transform:translateY(-1px);}
+  .btn-danger{background:#220025;color:#94a3b8;border:1px solid #220025;}
+  .main-content{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start;}
+  .word-bank-container{position:sticky;top:20px;background:#150018;border-radius:12px;padding:14px;border:1px solid #220025;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+  .word-bank-title{color:#e11d48;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
+  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #220025;padding-bottom:8px;}
+  .tab{flex:1;min-width:55px;padding:6px 4px;background:#220025;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
+  .tab.active{background:#e11d48;color:#000;}
+  .tab:hover:not(.active){opacity:.8;}
+  .word-bank{min-height:180px;max-height:62vh;overflow-y:auto;display:none;}
+  .word-bank.active{display:block;}
+  .word-bank::-webkit-scrollbar{width:5px;}
+  .word-bank::-webkit-scrollbar-thumb{background:#e11d48;border-radius:3px;}
+  .draggable-item{background:#220025;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(225,29,72,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .draggable-item:hover{border-color:#e11d48;box-shadow:0 0 8px rgba(225,29,72,0.4);}
+  .draggable-item.dragging{opacity:.35;}
+  .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:14px;}
+  .drug-card{background:#150018;border-radius:12px;padding:14px;border:1px solid #220025;}
+  .drug-card-title{background:#e11d48;color:#000;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
+  .drop-zones{display:grid;gap:7px;}
+  .drop-row{display:grid;grid-template-columns:110px 1fr;gap:7px;align-items:start;}
+  .drop-label{background:rgba(225,29,72,0.1);padding:7px;border-radius:5px;font-weight:600;color:#e11d48;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(225,29,72,0.35);}
+  .drop-zone{min-height:40px;background:#220025;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
+  .drop-zone.drag-over{border-color:#e11d48;border-style:solid;background:rgba(225,29,72,0.1);}
+  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(225,29,72,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .dropped-item:hover{border-color:#e11d48;}
+  .dropped-item.correct{background:rgba(34,197,94,.12);border-color:#22c55e;}
+  .dropped-item.incorrect{background:rgba(239,68,68,.12);border-color:#ef4444;}
+  .summary-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;justify-content:center;align-items:center;padding:20px;}
+  .summary-modal.active{display:flex;}
+  .summary-content{background:#150018;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #e11d48;}
+  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #220025;}
+  .summary-title{color:#e11d48;font-size:1.3em;font-weight:700;}
+  .close-btn{background:#220025;border:1px solid #e11d48;color:#e11d48;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
+  .summary-entity{margin-bottom:18px;background:#220025;padding:14px;border-radius:8px;border-left:3px solid #e11d48;}
+  .summary-entity-title{color:#e11d48;font-size:1em;margin-bottom:8px;font-weight:700;}
+  .summary-cat{margin-bottom:7px;}
+  .summary-cat-label{color:#94a3b8;font-size:.75em;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+  .summary-cat-value{color:#f1f5f9;font-size:.82em;line-height:1.5;padding-left:8px;}
+  @media(max-width:1100px){.main-content{grid-template-columns:1fr;}.word-bank-container{position:relative;top:0;}.cards-container{grid-template-columns:1fr;}}
+  @media(max-width:600px){h1{font-size:1.3em;}.drop-row{grid-template-columns:1fr;}.stats-controls{flex-direction:column;}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
+<a href="102_small_vessel_vasculitis.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Previous</a>
+<a href="104_class_I_antiarrhythmic_drugs.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:12px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<div class="container">
+  <h1>Class I Antiarrhythmic Subclasses</h1>
+  <p class="subtitle">Compare IA, IB, and IC sodium-channel blockers</p>
+  <div class="stats-controls">
+    <div class="stats">
+      <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
+      <div class="stat-item"><span class="stat-label">Remaining:</span><span id="remaining">0</span></div>
+    </div>
+    <div class="controls">
+      <button class="btn btn-secondary" onclick="showHint()">Hint</button>
+      <button class="btn btn-secondary" onclick="showAllAnswers()">Show Answers</button>
+      <button class="btn btn-secondary" onclick="showSummary()">Summary</button>
+      <button class="btn btn-danger" onclick="resetGame()">Reset</button>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="word-bank-container">
+      <div class="word-bank-title">&#x1F4DA; Word Bank</div>
+      <div class="tabs" id="tabs"></div>
+      <div id="banks"></div>
+    </div>
+    <div class="cards-container" id="cards-container"></div>
+  </div>
+</div>
+<div class="summary-modal" id="summaryModal">
+  <div class="summary-content">
+    <div class="summary-header">
+      <div class="summary-title">&#x1F4D6; Summary</div>
+      <button class="close-btn" onclick="closeSummary()">Close</button>
+    </div>
+    <div id="summaryContent"></div>
+  </div>
+</div>
+<script>
+const gameData = {
+  "Class IA": {
+    drugs: "Quinidine, Procainamide, Disopyramide",
+    channelState: "Blocks open Na+ channels + K+ channel blocking effect",
+    apd: "Prolonged (delays phase 3 repolarization via K+ block)",
+    ecgEffect: "QRS widening AND QT prolongation",
+    useDependence: "Intermediate dissociation kinetics",
+    keyAdverse: "Torsades de pointes, thrombocytopenia"
+  },
+  "Class IB": {
+    drugs: "Lidocaine, Mexiletine",
+    channelState: "Binds inactivated Na+ channels (selective for ischemic tissue)",
+    apd: "Shortened or unchanged",
+    ecgEffect: "Minimal QRS widening (< 10% at therapeutic doses)",
+    useDependence: "Fastest dissociation (lowest use dependence)",
+    keyAdverse: "CNS effects (perioral numbness, seizures, confusion)"
+  },
+  "Class IC": {
+    drugs: "Propafenone, Flecainide",
+    channelState: "Binds open Na+ channels with slow dissociation",
+    apd: "Unchanged (no effect on K+ channels)",
+    ecgEffect: "Pronounced QRS widening; QT unchanged",
+    useDependence: "Strongest use dependence (most channel blockade at high HR)",
+    keyAdverse: "Proarrhythmia in structural heart disease; contraindicated in ischemia"
+  }
+};
+const categoryKeys = ["drugs", "channelState", "apd", "ecgEffect", "useDependence", "keyAdverse"];
+const categoryLabels = {
+  drugs: "Drug Examples",
+  channelState: "Channel Binding / State",
+  apd: "Action Potential Duration",
+  ecgEffect: "ECG Effect",
+  useDependence: "Use Dependence",
+  keyAdverse: "Key Adverse Effects"
+};
+let score=0,totalItems=0,draggedElement=null,allItems={};
+function initGame(){
+  const cc=document.getElementById("cards-container");cc.innerHTML="";
+  allItems={};
+  categoryKeys.forEach(cat=>{allItems[cat]=[];});
+  Object.keys(gameData).forEach(entity=>{
+    categoryKeys.forEach(cat=>{allItems[cat].push({text:gameData[entity][cat],entity,cat});});
+  });
+  categoryKeys.forEach(cat=>{allItems[cat]=shuffleArray(allItems[cat]);});
+  totalItems=Object.keys(gameData).length*categoryKeys.length;
+  document.getElementById("total").textContent=totalItems;
+  Object.keys(gameData).forEach(entity=>{
+    const card=document.createElement("div");card.className="drug-card";
+    const tt=document.createElement("div");tt.className="drug-card-title";tt.textContent=entity;
+    const zones=document.createElement("div");zones.className="drop-zones";
+    categoryKeys.forEach(cat=>{
+      const row=document.createElement("div");row.className="drop-row";
+      const lbl=document.createElement("div");lbl.className="drop-label";lbl.textContent=categoryLabels[cat];
+      const dz=document.createElement("div");dz.className="drop-zone";dz.dataset.entity=entity;dz.dataset.cat=cat;
+      dz.addEventListener("dragover",e=>{e.preventDefault();dz.classList.add("drag-over");});
+      dz.addEventListener("dragleave",()=>dz.classList.remove("drag-over"));
+      dz.addEventListener("drop",e=>{e.preventDefault();dz.classList.remove("drag-over");if(draggedElement)handleDrop(dz,draggedElement);});
+      row.appendChild(lbl);row.appendChild(dz);zones.appendChild(row);
+    });
+    card.appendChild(tt);card.appendChild(zones);cc.appendChild(card);
+  });
+  buildTabs();populateWordBanks();updateStats();
+}
+function buildTabs(){
+  const tc=document.getElementById("tabs");tc.innerHTML="";
+  const bc=document.getElementById("banks");bc.innerHTML="";
+  categoryKeys.forEach((cat,i)=>{
+    const btn=document.createElement("button");btn.className="tab"+(i===0?" active":"");
+    btn.textContent=categoryLabels[cat];
+    btn.onclick=()=>{
+      document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));btn.classList.add("active");
+      document.querySelectorAll(".word-bank").forEach(b=>b.classList.remove("active"));
+      document.getElementById("bank-"+cat).classList.add("active");
+    };
+    tc.appendChild(btn);
+    const bank=document.createElement("div");bank.className="word-bank"+(i===0?" active":"");bank.id="bank-"+cat;
+    bank.addEventListener("dragover",e=>e.preventDefault());
+    bank.addEventListener("drop",e=>{e.preventDefault();if(draggedElement&&draggedElement.classList.contains("dropped-item"))handleDropToBank();});
+    bc.appendChild(bank);
+  });
+}
+function populateWordBanks(){
+  categoryKeys.forEach(cat=>{
+    const bank=document.getElementById("bank-"+cat);bank.innerHTML="";
+    allItems[cat].forEach((item,idx)=>{bank.appendChild(makeItem(item.text,item.entity,cat,cat+"-"+idx,false));});
+  });
+}
+function makeItem(text,entity,cat,id,isDropped){
+  const div=document.createElement("div");
+  div.className=isDropped?"dropped-item":"draggable-item";
+  div.draggable=true;div.textContent=text;
+  div.dataset.text=text;div.dataset.entity=entity;div.dataset.cat=cat;div.dataset.id=id;
+  div.addEventListener("dragstart",e=>{draggedElement=div;div.classList.add("dragging");e.dataTransfer.effectAllowed="move";});
+  div.addEventListener("dragend",()=>div.classList.remove("dragging"));
+  return div;
+}
+function handleDrop(dz,dragged){
+  const existing=dz.querySelector(".dropped-item");
+  if(existing){
+    if(existing.classList.contains("correct"))score--;
+    const eBank=document.getElementById("bank-"+existing.dataset.cat);
+    if(eBank)eBank.insertBefore(makeItem(existing.dataset.text,existing.dataset.entity,existing.dataset.cat,existing.dataset.id,false),eBank.firstChild);
+    existing.remove();
+  }
+  if(dragged.parentElement)dragged.remove();
+  const dropped=makeItem(dragged.dataset.text,dragged.dataset.entity,dragged.dataset.cat,dragged.dataset.id,true);
+  const isCorrect=gameData[dz.dataset.entity][dz.dataset.cat]===dragged.dataset.text;
+  dropped.classList.add(isCorrect?"correct":"incorrect");
+  if(isCorrect)score++;
+  dz.appendChild(dropped);
+  updateStats();
+}
+function handleDropToBank(){
+  if(!draggedElement||!draggedElement.classList.contains("dropped-item"))return;
+  if(draggedElement.classList.contains("correct"))score--;
+  const bank=document.getElementById("bank-"+draggedElement.dataset.cat);
+  if(bank)bank.insertBefore(makeItem(draggedElement.dataset.text,draggedElement.dataset.entity,draggedElement.dataset.cat,draggedElement.dataset.id,false),bank.firstChild);
+  draggedElement.remove();
+  updateStats();
+}
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function updateStats(){
+  document.getElementById("score").textContent=score;
+  let rem=0;categoryKeys.forEach(cat=>{rem+=document.getElementById("bank-"+cat).querySelectorAll(".draggable-item").length;});
+  document.getElementById("remaining").textContent=rem;
+  const total=Object.keys(gameData).length*categoryKeys.length;
+  if(score===total&&total>0)setTimeout(()=>{if(confirm("Perfect score! Play again?"))resetGame();},400);
+}
+function showHint(){
+  const empties=[...document.querySelectorAll(".drop-zone")].filter(dz=>!dz.querySelector(".dropped-item"));
+  if(!empties.length)return;
+  const dz=empties[Math.floor(Math.random()*empties.length)];
+  const cat=dz.dataset.cat;
+  document.querySelectorAll(".tab").forEach(t=>{if(t.textContent===categoryLabels[cat])t.click();});
+  setTimeout(()=>{
+    const item=[...document.querySelectorAll(".draggable-item")].find(i=>i.dataset.entity===dz.dataset.entity&&i.dataset.cat===cat);
+    if(item){item.style.outline="2px solid #e11d48";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
+  },100);
+}
+function showAllAnswers(){
+  if(!confirm("Show all correct answers?"))return;
+  document.querySelectorAll(".drop-zone").forEach(dz=>{
+    if(dz.querySelector(".dropped-item"))return;
+    const dropped=makeItem(gameData[dz.dataset.entity][dz.dataset.cat],dz.dataset.entity,dz.dataset.cat,"ans-"+dz.dataset.entity+dz.dataset.cat,true);
+    dropped.classList.add("correct");dz.appendChild(dropped);
+  });
+  categoryKeys.forEach(cat=>{document.getElementById("bank-"+cat).innerHTML="";}); 
+  score=Object.keys(gameData).length*categoryKeys.length;updateStats();
+}
+function showSummary(){
+  const sc=document.getElementById("summaryContent");sc.innerHTML="";
+  Object.keys(gameData).forEach(entity=>{
+    const div=document.createElement("div");div.className="summary-entity";
+    div.innerHTML="<div class=\"summary-entity-title\">"+entity+"</div>"+
+      categoryKeys.map(cat=>"<div class=\"summary-cat\"><div class=\"summary-cat-label\">"+categoryLabels[cat]+"</div><div class=\"summary-cat-value\">"+gameData[entity][cat]+"</div></div>").join("");
+    sc.appendChild(div);
+  });
+  document.getElementById("summaryModal").classList.add("active");
+}
+function closeSummary(){document.getElementById("summaryModal").classList.remove("active");}
+function resetGame(){if(!confirm("Reset game?"))return;score=0;initGame();}
+document.getElementById("summaryModal").addEventListener("click",function(e){if(e.target===this)closeSummary();});
+window.onload=initGame;
+</script>
+</body>
+</html>
