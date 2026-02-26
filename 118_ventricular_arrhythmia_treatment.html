@@ -3,58 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SVT: ECG Clues & Treatment</title>
+<title>Ventricular Arrhythmias: Diagnosis & Treatment</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Segoe UI',sans-serif;background:#0a0010;color:#f1f5f9;padding:20px;min-height:100vh;}
   .container{max-width:1600px;margin:0 auto;}
-  h1{text-align:center;color:#0f766e;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(15,118,110,0.4);}
+  h1{text-align:center;color:#047857;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(4,120,87,0.4);}
   .subtitle{text-align:center;color:#94a3b8;margin-bottom:22px;font-size:.9em;}
   .stats-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
   .stats{display:flex;gap:18px;flex-wrap:wrap;}
-  .stat-item{background:rgba(15,118,110,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(15,118,110,0.35);}
-  .stat-label{color:#0f766e;font-weight:700;margin-right:6px;font-size:.85em;}
+  .stat-item{background:rgba(4,120,87,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(4,120,87,0.35);}
+  .stat-label{color:#047857;font-weight:700;margin-right:6px;font-size:.85em;}
   .controls{display:flex;gap:8px;flex-wrap:wrap;}
   .btn{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-size:.85em;font-weight:600;transition:.2s;}
-  .btn-primary{background:#0f766e;color:#000;}
+  .btn-primary{background:#047857;color:#000;}
   .btn-primary:hover{opacity:.85;transform:translateY(-1px);}
-  .btn-secondary{background:#220025;color:#f1f5f9;border:1px solid rgba(15,118,110,0.35);}
+  .btn-secondary{background:#220025;color:#f1f5f9;border:1px solid rgba(4,120,87,0.35);}
   .btn-secondary:hover{opacity:.85;transform:translateY(-1px);}
   .btn-danger{background:#220025;color:#94a3b8;border:1px solid #220025;}
   .main-content{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start;}
   .word-bank-container{position:sticky;top:20px;background:#150018;border-radius:12px;padding:14px;border:1px solid #220025;box-shadow:0 4px 20px rgba(0,0,0,.4);}
-  .word-bank-title{color:#0f766e;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
+  .word-bank-title{color:#047857;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
   .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #220025;padding-bottom:8px;}
   .tab{flex:1;min-width:55px;padding:6px 4px;background:#220025;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
-  .tab.active{background:#0f766e;color:#000;}
+  .tab.active{background:#047857;color:#000;}
   .tab:hover:not(.active){opacity:.8;}
   .word-bank{min-height:180px;max-height:62vh;overflow-y:auto;display:none;}
   .word-bank.active{display:block;}
   .word-bank::-webkit-scrollbar{width:5px;}
-  .word-bank::-webkit-scrollbar-thumb{background:#0f766e;border-radius:3px;}
-  .draggable-item{background:#220025;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(15,118,110,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .draggable-item:hover{border-color:#0f766e;box-shadow:0 0 8px rgba(15,118,110,0.4);}
+  .word-bank::-webkit-scrollbar-thumb{background:#047857;border-radius:3px;}
+  .draggable-item{background:#220025;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(4,120,87,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .draggable-item:hover{border-color:#047857;box-shadow:0 0 8px rgba(4,120,87,0.4);}
   .draggable-item.dragging{opacity:.35;}
   .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:14px;}
   .drug-card{background:#150018;border-radius:12px;padding:14px;border:1px solid #220025;}
-  .drug-card-title{background:#0f766e;color:#000;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
+  .drug-card-title{background:#047857;color:#000;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
   .drop-zones{display:grid;gap:7px;}
   .drop-row{display:grid;grid-template-columns:110px 1fr;gap:7px;align-items:start;}
-  .drop-label{background:rgba(15,118,110,0.1);padding:7px;border-radius:5px;font-weight:600;color:#0f766e;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(15,118,110,0.35);}
+  .drop-label{background:rgba(4,120,87,0.1);padding:7px;border-radius:5px;font-weight:600;color:#047857;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(4,120,87,0.35);}
   .drop-zone{min-height:40px;background:#220025;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
-  .drop-zone.drag-over{border-color:#0f766e;border-style:solid;background:rgba(15,118,110,0.1);}
-  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(15,118,110,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .dropped-item:hover{border-color:#0f766e;}
+  .drop-zone.drag-over{border-color:#047857;border-style:solid;background:rgba(4,120,87,0.1);}
+  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(4,120,87,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .dropped-item:hover{border-color:#047857;}
   .dropped-item.correct{background:rgba(34,197,94,.12);border-color:#22c55e;}
   .dropped-item.incorrect{background:rgba(239,68,68,.12);border-color:#ef4444;}
   .summary-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;justify-content:center;align-items:center;padding:20px;}
   .summary-modal.active{display:flex;}
-  .summary-content{background:#150018;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #0f766e;}
+  .summary-content{background:#150018;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #047857;}
   .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #220025;}
-  .summary-title{color:#0f766e;font-size:1.3em;font-weight:700;}
-  .close-btn{background:#220025;border:1px solid #0f766e;color:#0f766e;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
-  .summary-entity{margin-bottom:18px;background:#220025;padding:14px;border-radius:8px;border-left:3px solid #0f766e;}
-  .summary-entity-title{color:#0f766e;font-size:1em;margin-bottom:8px;font-weight:700;}
+  .summary-title{color:#047857;font-size:1.3em;font-weight:700;}
+  .close-btn{background:#220025;border:1px solid #047857;color:#047857;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
+  .summary-entity{margin-bottom:18px;background:#220025;padding:14px;border-radius:8px;border-left:3px solid #047857;}
+  .summary-entity-title{color:#047857;font-size:1em;margin-bottom:8px;font-weight:700;}
   .summary-cat{margin-bottom:7px;}
   .summary-cat-label{color:#94a3b8;font-size:.75em;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
   .summary-cat-value{color:#f1f5f9;font-size:.82em;line-height:1.5;padding-left:8px;}
@@ -64,11 +64,10 @@
 </head>
 <body>
 <a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="113_supraventricular_arrhythmia_types.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Previous</a>
-<a href="115_heart_block_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="117_ventricular_arrhythmia_types.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Previous</a>
 <div class="container">
-  <h1>SVT: ECG Clues & Treatment</h1>
-  <p class="subtitle">Match ECG findings and treatments to each supraventricular arrhythmia</p>
+  <h1>Ventricular Arrhythmias: Diagnosis &amp; Treatment</h1>
+  <p class="subtitle">Match ECG diagnosis, acute treatment, long-term management, and key features to each ventricular arrhythmia</p>
   <div class="stats-controls">
     <div class="stats">
       <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -101,49 +100,43 @@
 </div>
 <script>
 const gameData = {
-  "Sawtooth Waves + Rate ~150 bpm": {
-    diagnosis: "Atrial Flutter (typical, with 2:1 conduction)",
-    pWaveFinding: "Inverted flutter (F) waves best seen in leads II, III, aVF; atrial rate ~300 bpm",
-    rhythmRegularity: "Regular (with fixed conduction ratio) or irregular (with variable conduction)",
-    acuteTreatment: "Rate control with beta-blockers or CCBs; cardioversion if hemodynamically unstable",
-    definitiveTherapy: "Catheter ablation of cavotricuspid isthmus; anticoagulation same as AF"
+  "Premature Ventricular Contractions (PVCs)": {
+    ecgDiagnosis: "Single premature wide QRS (>120 ms) with abnormal morphology; compensatory pause; ST/T waves opposite to QRS direction",
+    acuteTreatment: "No acute treatment needed; avoid alcohol, tobacco, caffeine, and stimulant drugs (cocaine, amphetamines)",
+    longTermManagement: "Beta-blockers if symptomatic and lifestyle changes insufficient; no antiarrhythmic drugs needed",
+    keyFeature: "Bigeminy pattern = each normal sinus beat followed by a PVC; benign and not life-threatening"
   },
-  "Delta Wave + Short PR": {
-    diagnosis: "Wolff-Parkinson-White (WPW) Syndrome (during sinus rhythm)",
-    pWaveFinding: "Normal sinus P waves present but PR interval <120 ms due to accessory pathway preexcitation",
-    rhythmRegularity: "Regular sinus rhythm at baseline; paroxysmal tachycardia (AVRT) episodes",
-    acuteTreatment: "For AVRT: adenosine or beta-blockers; AVOID AV nodal blockers if AF develops",
-    definitiveTherapy: "Catheter radioablation of accessory pathway (Kent bundle); potentially curative"
+  "Ventricular Tachycardia (with pulse)": {
+    ecgDiagnosis: "Wide QRS complexes (>120 ms) at 100\u2013250 bpm, 3+ in a row; P waves (if visible) unrelated to QRS; monomorphic or polymorphic",
+    acuteTreatment: "Hypotensive with pulse: synchronized cardioversion; hemodynamically stable: amiodarone or lidocaine IV",
+    longTermManagement: "Implantable cardioverter-defibrillator (ICD) for structural heart disease; ICD combines pacemaker + defibrillator",
+    keyFeature: "Substrate (scar tissue from MI/cardiomyopathy) + trigger (ischemia, electrolytes, hypoxia) = arrhythmia"
   },
-  "Absent P Waves + Irregularly Irregular": {
-    diagnosis: "Atrial Fibrillation",
-    pWaveFinding: "No discrete P waves; fibrillatory baseline best seen in lead V1",
-    rhythmRegularity: "Irregularly irregular (hallmark feature); variable R-R intervals",
-    acuteTreatment: "Rate control with AV nodal blockers; anticoagulate based on CHA2DS2-VASc score",
-    definitiveTherapy: "Pulmonary vein isolation (catheter ablation); 60\u201380% success for paroxysmal AF"
+  "Pulseless VT / Ventricular Fibrillation": {
+    ecgDiagnosis: "Pulseless VT: wide regular complexes with no pulse; VF: chaotic oscillations, no identifiable QRS (fine quivering)",
+    acuteTreatment: "Immediate unsynchronized defibrillation + BCLS chest compressions; high-voltage shock not coordinated with heartbeat",
+    longTermManagement: "ICD implantation; exceptions: no ICD if VT/VF only in first 48h post-MI or caused by reversible non-cardiac cause (drug OD, electrolyte imbalance)",
+    keyFeature: "VF always fatal without treatment; synchronized cardioversion impossible because there is no QRS complex to sync with"
   },
-  "\u22653 P Wave Morphologies + Irregular": {
-    diagnosis: "Multifocal Atrial Tachycardia (MAT)",
-    pWaveFinding: "At least 3 different P wave shapes; P waves visible (unlike AF) but morphologically variable",
-    rhythmRegularity: "Irregular (timing varies because impulses originate from different atrial foci)",
-    acuteTreatment: "Treat underlying cause (usually COPD exacerbation); correct electrolyte abnormalities",
-    definitiveTherapy: "Optimize pulmonary function; no role for cardioversion or ablation"
+  "Torsades de Pointes": {
+    ecgDiagnosis: "Polymorphic VT with twisting QRS axis over 180\u00b0; long QT must be measured on non-tachycardia beats; alternating amplitude waveforms",
+    acuteTreatment: "IV magnesium and/or potassium; defibrillation if hemodynamic compromise or cardiac arrest",
+    longTermManagement: "Hereditary: beta-blockers or implanted defibrillator; acquired: discontinue offending drug and correct electrolytes",
+    keyFeature: "Drug causes mnemonic ABCDEF: AntiArrhythmics, AntiBiotics, AntiCpsychotics, AntiDepressants, AntiEmetics, AntiFungals"
   },
-  "Retrograde P Waves + Sudden Onset": {
-    diagnosis: "AVNRT (most common paroxysmal SVT)",
-    pWaveFinding: "Retrograde P waves may be buried in QRS or seen just after it (pseudo-R\u2032 in V1)",
-    rhythmRegularity: "Regular narrow complex tachycardia at 120\u2013220 bpm with abrupt onset and termination",
-    acuteTreatment: "Vagal maneuvers first (25% effective); then IV adenosine (>90% effective)",
-    definitiveTherapy: "Catheter ablation of slow pathway; beta-blockers or verapamil for prevention"
+  "Accelerated Idioventricular Rhythm (AIVR)": {
+    ecgDiagnosis: "Wide QRS complexes at 60\u2013100 bpm; below 60 bpm it is simply called idioventricular rhythm (IVR)",
+    acuteTreatment: "Typically no specific antiarrhythmic treatment required; usually benign and self-limiting",
+    longTermManagement: "Monitor; commonly seen during myocardial ischemia or reperfusion after MI; generally resolves spontaneously",
+    keyFeature: "Slower version of VT defined by rate (60\u2013100 bpm); distinguished from VT by rate threshold, not mechanism"
   }
 };
-const categoryKeys = ["diagnosis", "pWaveFinding", "rhythmRegularity", "acuteTreatment", "definitiveTherapy"];
+const categoryKeys = ["ecgDiagnosis","acuteTreatment","longTermManagement","keyFeature"];
 const categoryLabels = {
-  diagnosis: "Diagnosis",
-  pWaveFinding: "P Wave Finding",
-  rhythmRegularity: "Rhythm Regularity",
+  ecgDiagnosis: "ECG Diagnosis",
   acuteTreatment: "Acute Treatment",
-  definitiveTherapy: "Definitive Therapy"
+  longTermManagement: "Long-Term Management",
+  keyFeature: "Key Feature"
 };
 let score=0,totalItems=0,draggedElement=null,allItems={};
 function initGame(){
@@ -246,7 +239,7 @@ function showHint(){
   document.querySelectorAll(".tab").forEach(t=>{if(t.textContent===categoryLabels[cat])t.click();});
   setTimeout(()=>{
     const item=[...document.querySelectorAll(".draggable-item")].find(i=>i.dataset.entity===dz.dataset.entity&&i.dataset.cat===cat);
-    if(item){item.style.outline="2px solid #0f766e";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
+    if(item){item.style.outline="2px solid #047857";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
   },100);
 }
 function showAllAnswers(){
@@ -256,7 +249,7 @@ function showAllAnswers(){
     const dropped=makeItem(gameData[dz.dataset.entity][dz.dataset.cat],dz.dataset.entity,dz.dataset.cat,"ans-"+dz.dataset.entity+dz.dataset.cat,true);
     dropped.classList.add("correct");dz.appendChild(dropped);
   });
-  categoryKeys.forEach(cat=>{document.getElementById("bank-"+cat).innerHTML="";}); 
+  categoryKeys.forEach(cat=>{document.getElementById("bank-"+cat).innerHTML="";});
   score=Object.keys(gameData).length*categoryKeys.length;updateStats();
 }
 function showSummary(){
