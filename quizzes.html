@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardioStudy – Quizzes</title>
+<style>
+  :root{--bg:#080810;--surface:#101018;--surface2:#181824;--text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,0.07);--accent:#fb923c;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
+
+  /* ── Header ── */
+  header{background:linear-gradient(160deg,#0d0010 0%,#1a0800 50%,#080810 100%);border-bottom:1px solid var(--border);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+  header::after{content:'\1F4DD';position:absolute;font-size:280px;opacity:.03;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+  header h1{font-size:2.4rem;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#f8fafc 30%,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;position:relative;}
+  header p{color:var(--muted);font-size:.9rem;position:relative;}
+  .pills{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;position:relative;}
+  .pill{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.78rem;color:var(--muted);}
+  .pill b{color:var(--accent);}
+  .pill-link{text-decoration:none;}
+  .pill-nav{border-color:rgba(225,29,72,0.4);cursor:pointer;transition:.15s;}
+  .pill-nav:hover{background:rgba(225,29,72,0.15);border-color:#e11d48;}
+  .pill-nav b{color:#f43f5e;}
+
+  /* ── Layout ── */
+  main{max-width:900px;margin:0 auto;padding:32px 16px 56px;}
+
+  /* ── Week sections ── */
+  .week{margin-bottom:32px;}
+  .week-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .week-icon{font-size:1.1rem;line-height:1;}
+  .week-title{font-size:.95rem;font-weight:700;color:var(--text);}
+  .week-dates{margin-left:auto;font-size:.72rem;color:var(--muted);background:var(--surface2);border-radius:10px;padding:2px 10px;}
+
+  /* ── Quiz cards ── */
+  .quiz-list{display:grid;gap:8px;}
+  a.quiz-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;text-decoration:none;color:var(--text);transition:.15s;}
+  a.quiz-card:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.5);}
+  .quiz-day{flex-shrink:0;background:rgba(251,146,60,0.12);color:var(--accent);border:1px solid rgba(251,146,60,0.3);border-radius:8px;padding:6px 10px;font-size:.7rem;font-weight:700;text-align:center;min-width:52px;line-height:1.3;}
+  .quiz-day .dow{font-size:.6rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+  .quiz-info{flex:1;min-width:0;}
+  .quiz-title{font-size:.85rem;font-weight:600;line-height:1.4;}
+  .quiz-sub{font-size:.72rem;color:var(--muted);margin-top:2px;}
+  .quiz-arrow{color:var(--muted);font-size:.85rem;flex-shrink:0;transition:.15s;}
+  a.quiz-card:hover .quiz-arrow{color:var(--accent);transform:translateX(3px);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CardioStudy Quizzes</h1>
+  <p>Practice Quizzes &nbsp;·&nbsp; Cardiovascular Medicine</p>
+  <div class="pills">
+    <span class="pill"><b>12</b> quizzes</span>
+    <span class="pill"><b>4</b> weeks</span>
+    <a href="index.html" class="pill-link"><span class="pill pill-nav">&#x1F3AE; <b>Drag &amp; Drop Games</b></span></a>
+  </div>
+</header>
+
+<main>
+
+<!-- ── WEEK 1 ── -->
+<section class="week">
+  <div class="week-head">
+    <span class="week-icon">&#x1F4C5;</span>
+    <span class="week-title">Week 1</span>
+    <span class="week-dates">Feb 2 – Feb 5</span>
+  </div>
+  <div class="quiz-list">
+    <a class="quiz-card" href="https://take.quiz-maker.com/Q0JDWRKXM" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Mon</div>2/2</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Monday 2/2</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/Q3WODM0O9" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Tue</div>2/3</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Tuesday 2/3</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/QBISK8X4Y" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Thu</div>2/5</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Thursday 2/5</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── WEEK 2 ── -->
+<section class="week">
+  <div class="week-head">
+    <span class="week-icon">&#x1F4C5;</span>
+    <span class="week-title">Week 2</span>
+    <span class="week-dates">Feb 9 – Feb 12</span>
+  </div>
+  <div class="quiz-list">
+    <a class="quiz-card" href="https://take.quiz-maker.com/QPXRGLS8O" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Mon</div>2/9</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Monday 2/9</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/QETDGNGSV" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Tue</div>2/10</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Tuesday 2/10</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/Q3W8D4FO9" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Thu</div>2/12</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Thursday 2/12</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── WEEK 3 ── -->
+<section class="week">
+  <div class="week-head">
+    <span class="week-icon">&#x1F4C5;</span>
+    <span class="week-title">Week 3</span>
+    <span class="week-dates">Feb 16 – Feb 18</span>
+  </div>
+  <div class="quiz-list">
+    <a class="quiz-card" href="https://take.quiz-maker.com/QV8G7DJQ3" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Mon</div>2/16</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Monday 2/16</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/QE9V6FR8J" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Tue</div>2/17</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Tuesday 2/17</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/QM8CI2V5H" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Wed</div>2/18</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Wednesday 2/18</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── WEEK 4 ── -->
+<section class="week">
+  <div class="week-head">
+    <span class="week-icon">&#x1F4C5;</span>
+    <span class="week-title">Week 4</span>
+    <span class="week-dates">Feb 23 – Feb 26</span>
+  </div>
+  <div class="quiz-list">
+    <a class="quiz-card" href="https://take.quiz-maker.com/Q0ZDERKAM" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Mon</div>2/23</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Monday 2/23</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/QOXZD5YI8" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Wed</div>2/25</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Wednesday 2/25</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+    <a class="quiz-card" href="https://take.quiz-maker.com/Q1EO9U25F" target="_blank" rel="noopener">
+      <div class="quiz-day"><div class="dow">Thu</div>2/26</div>
+      <div class="quiz-info"><div class="quiz-title">Cardiovascular Thursday 2/26</div><div class="quiz-sub">quiz-maker.com</div></div>
+      <span class="quiz-arrow">&#8594;</span>
+    </a>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
