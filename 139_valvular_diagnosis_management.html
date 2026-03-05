@@ -3,58 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardiac Tumors: Rhabdomyoma & Overview</title>
+<title>Valvular Heart Disease: Diagnosis & Management</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Segoe UI',sans-serif;background:#0a0010;color:#f1f5f9;padding:20px;min-height:100vh;}
   .container{max-width:1600px;margin:0 auto;}
-  h1{text-align:center;color:#7e22ce;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(126,34,206,0.4);}
+  h1{text-align:center;color:#0e7490;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(14,116,144,0.4);}
   .subtitle{text-align:center;color:#94a3b8;margin-bottom:22px;font-size:.9em;}
   .stats-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
   .stats{display:flex;gap:18px;flex-wrap:wrap;}
-  .stat-item{background:rgba(126,34,206,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(126,34,206,0.35);}
-  .stat-label{color:#7e22ce;font-weight:700;margin-right:6px;font-size:.85em;}
+  .stat-item{background:rgba(14,116,144,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(14,116,144,0.35);}
+  .stat-label{color:#0e7490;font-weight:700;margin-right:6px;font-size:.85em;}
   .controls{display:flex;gap:8px;flex-wrap:wrap;}
   .btn{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-size:.85em;font-weight:600;transition:.2s;}
-  .btn-primary{background:#7e22ce;color:#000;}
+  .btn-primary{background:#0e7490;color:#fff;}
   .btn-primary:hover{opacity:.85;transform:translateY(-1px);}
-  .btn-secondary{background:#220025;color:#f1f5f9;border:1px solid rgba(126,34,206,0.35);}
+  .btn-secondary{background:#00131a;color:#f1f5f9;border:1px solid rgba(14,116,144,0.35);}
   .btn-secondary:hover{opacity:.85;transform:translateY(-1px);}
-  .btn-danger{background:#220025;color:#94a3b8;border:1px solid #220025;}
+  .btn-danger{background:#00131a;color:#94a3b8;border:1px solid #00131a;}
   .main-content{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start;}
-  .word-bank-container{position:sticky;top:20px;background:#150018;border-radius:12px;padding:14px;border:1px solid #220025;box-shadow:0 4px 20px rgba(0,0,0,.4);}
-  .word-bank-title{color:#7e22ce;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
-  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #220025;padding-bottom:8px;}
-  .tab{flex:1;min-width:55px;padding:6px 4px;background:#220025;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
-  .tab.active{background:#7e22ce;color:#000;}
+  .word-bank-container{position:sticky;top:20px;background:#001520;border-radius:12px;padding:14px;border:1px solid #00131a;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+  .word-bank-title{color:#0e7490;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
+  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #00131a;padding-bottom:8px;}
+  .tab{flex:1;min-width:55px;padding:6px 4px;background:#00131a;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
+  .tab.active{background:#0e7490;color:#fff;}
   .tab:hover:not(.active){opacity:.8;}
   .word-bank{min-height:180px;max-height:62vh;overflow-y:auto;display:none;}
   .word-bank.active{display:block;}
   .word-bank::-webkit-scrollbar{width:5px;}
-  .word-bank::-webkit-scrollbar-thumb{background:#7e22ce;border-radius:3px;}
-  .draggable-item{background:#220025;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(126,34,206,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .draggable-item:hover{border-color:#7e22ce;box-shadow:0 0 8px rgba(126,34,206,0.4);}
+  .word-bank::-webkit-scrollbar-thumb{background:#0e7490;border-radius:3px;}
+  .draggable-item{background:#00131a;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(14,116,144,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .draggable-item:hover{border-color:#0e7490;box-shadow:0 0 8px rgba(14,116,144,0.4);}
   .draggable-item.dragging{opacity:.35;}
   .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:14px;}
-  .drug-card{background:#150018;border-radius:12px;padding:14px;border:1px solid #220025;}
-  .drug-card-title{background:#7e22ce;color:#000;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
+  .drug-card{background:#001520;border-radius:12px;padding:14px;border:1px solid #00131a;}
+  .drug-card-title{background:#0e7490;color:#fff;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
   .drop-zones{display:grid;gap:7px;}
   .drop-row{display:grid;grid-template-columns:110px 1fr;gap:7px;align-items:start;}
-  .drop-label{background:rgba(126,34,206,0.1);padding:7px;border-radius:5px;font-weight:600;color:#7e22ce;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(126,34,206,0.35);}
-  .drop-zone{min-height:40px;background:#220025;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
-  .drop-zone.drag-over{border-color:#7e22ce;border-style:solid;background:rgba(126,34,206,0.1);}
-  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(126,34,206,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .dropped-item:hover{border-color:#7e22ce;}
+  .drop-label{background:rgba(14,116,144,0.1);padding:7px;border-radius:5px;font-weight:600;color:#0e7490;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(14,116,144,0.35);}
+  .drop-zone{min-height:40px;background:#00131a;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
+  .drop-zone.drag-over{border-color:#0e7490;border-style:solid;background:rgba(14,116,144,0.1);}
+  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(14,116,144,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .dropped-item:hover{border-color:#0e7490;}
   .dropped-item.correct{background:rgba(34,197,94,.12);border-color:#22c55e;}
   .dropped-item.incorrect{background:rgba(239,68,68,.12);border-color:#ef4444;}
   .summary-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;justify-content:center;align-items:center;padding:20px;}
   .summary-modal.active{display:flex;}
-  .summary-content{background:#150018;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #7e22ce;}
-  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #220025;}
-  .summary-title{color:#7e22ce;font-size:1.3em;font-weight:700;}
-  .close-btn{background:#220025;border:1px solid #7e22ce;color:#7e22ce;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
-  .summary-entity{margin-bottom:18px;background:#220025;padding:14px;border-radius:8px;border-left:3px solid #7e22ce;}
-  .summary-entity-title{color:#7e22ce;font-size:1em;margin-bottom:8px;font-weight:700;}
+  .summary-content{background:#001520;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #0e7490;}
+  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #00131a;}
+  .summary-title{color:#0e7490;font-size:1.3em;font-weight:700;}
+  .close-btn{background:#00131a;border:1px solid #0e7490;color:#0e7490;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
+  .summary-entity{margin-bottom:18px;background:#00131a;padding:14px;border-radius:8px;border-left:3px solid #0e7490;}
+  .summary-entity-title{color:#0e7490;font-size:1em;margin-bottom:8px;font-weight:700;}
   .summary-cat{margin-bottom:7px;}
   .summary-cat-label{color:#94a3b8;font-size:.75em;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
   .summary-cat-value{color:#f1f5f9;font-size:.82em;line-height:1.5;padding-left:8px;}
@@ -64,11 +64,10 @@
 </head>
 <body>
 <a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="135_cardiac_tumors_myxoma.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Previous</a>
-<a href="137_valvular_etiology_pathophysiology.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="138_valvular_murmurs_clinical_findings.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Previous</a>
 <div class="container">
-  <h1>Cardiac Tumors: Rhabdomyoma & Overview</h1>
-  <p class="subtitle">Match rhabdomyoma and other cardiac tumor features</p>
+  <h1>Valvular Heart Disease: Diagnosis & Management</h1>
+  <p class="subtitle">Match diagnostic approaches, medical therapies, and definitive treatments for each valve condition</p>
   <div class="stats-controls">
     <div class="stats">
       <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -101,42 +100,52 @@
 </div>
 <script>
 const gameData = {
-  "Rhabdomyoma Epidemiology": {
-    detail: "Most common primary cardiac tumor in infants and children; mean age at diagnosis 2 weeks",
-    association: "Equally common in males and females; diagnosed in utero or soon after birth",
-    management: "Often asymptomatic and may regress spontaneously without treatment"
+  "Aortic Stenosis": {
+    diagnosis: "Echo shows valve calcification and LV hypertrophy; Doppler measures pressure gradient for severity staging",
+    medical_tx: "No effective medical therapy; AVOID nitroglycerin (reduces preload, dangerous in preload-dependent AS)",
+    definitive_tx: "Aortic valve replacement (surgical AVR or transcatheter TAVR) for severe symptomatic AS"
   },
-  "Tuberous Sclerosis": {
-    detail: "80-90% of rhabdomyoma patients have this autosomal dominant multisystem disorder",
-    association: "Classic triad: seizures, intellectual disabilities, facial angiofibromas; TSC1 (hamartin) and TSC2 (tuberin) genes",
-    management: "All rhabdomyoma patients should be evaluated for tuberous sclerosis manifestations"
+  "Aortic Regurgitation": {
+    diagnosis: "Echo shows dilated LV with large EDV/ESV; Doppler quantifies regurgitant flow back into LV during diastole",
+    medical_tx: "Afterload reduction: ACE inhibitors, ARBs, dihydropyridine CCBs (nifedipine); hydralazine for chronic AR only",
+    definitive_tx: "Aortic valve replacement for acute AR (e.g., aortic dissection) or symptomatic chronic AR"
   },
-  "Rhabdomyoma Pathology": {
-    detail: "Benign hamartoma of striated muscle; gray-white lobulated masses in ventricles",
-    association: "Enlarged myocytes with clear cytoplasm from stored intracellular glycogen",
-    management: "Spider cells: glycogen washes away leaving thin cytoplasmic strands from nucleus to membrane"
+  "Mitral Stenosis": {
+    diagnosis: "TTE confirms stenotic valve and severity; TEE for detailed LA and valve anatomy for surgical planning",
+    medical_tx: "Beta-blockers (slow HR, lengthen diastole); warfarin if A fib present; diuretics for volume overload",
+    definitive_tx: "Percutaneous mitral balloon commissurotomy (PMBC) via femoral vein with transseptal puncture"
   },
-  "Symptomatic Rhabdomyoma": {
-    detail: "Blood flow obstruction causes heart failure; arrhythmias may develop",
-    association: "Severe cases: fetal demise, hydrops fetalis, neonatal death",
-    management: "First-line: mTOR inhibitor to shrink tumor; surgical resection if medical therapy fails"
+  "Mitral Regurgitation": {
+    diagnosis: "Echo quantifies regurgitant volume; Doppler shows regurgitant jet crossing mitral valve into LA during systole",
+    medical_tx: "ACE inhibitors, beta-blockers, diuretics for HF; acute MR: IV sodium nitroprusside for stabilization",
+    definitive_tx: "Mitral valve repair or replacement (annuloplasty or mechanical valve) for symptomatic chronic MR"
   },
-  "Metastatic Cardiac Tumors": {
-    detail: "Most common cardiac tumors overall; affect up to 10% of patients with metastatic cancer",
-    association: "Far more common than primary cardiac tumors; any cancer can metastasize to heart",
-    management: "Treatment directed at primary malignancy"
+  "Mitral Valve Prolapse": {
+    diagnosis: "Mid-to-late systolic click on auscultation; echo confirms leaflet prolapse above the mitral annulus plane",
+    medical_tx: "Usually no treatment; beta-blockers for palpitations and PVCs; avoid caffeine, alcohol, and stress",
+    definitive_tx: "Valve repair only if significant MR develops; Holter monitoring for concerning arrhythmias"
   },
-  "Cardiac Myxoma vs Rhabdomyoma": {
-    detail: "Myxoma: adults, left atrium, pedunculated; Rhabdomyoma: infants, ventricles, intramural",
-    association: "Myxoma: Carney complex (5%); Rhabdomyoma: tuberous sclerosis (80-90%)",
-    management: "Myxoma: surgical resection required; Rhabdomyoma: often regresses, mTOR inhibitor if symptomatic"
+  "Tricuspid Regurgitation": {
+    diagnosis: "Echo shows retrograde systolic flow through tricuspid valve; Doppler confirms regurgitant jet from RV to RA",
+    medical_tx: "Fluid and salt restriction with diuretics to decrease venous return and manage right heart failure",
+    definitive_tx: "Tricuspid valve repair or replacement when right heart failure progresses despite medical treatment"
+  },
+  "Tricuspid Stenosis": {
+    diagnosis: "Echo shows narrowed tricuspid orifice, decreased valve mobility, RA dilation; RV size remains normal",
+    medical_tx: "Diuretics; beta-blockers to prolong diastole; CCBs or beta-blockers plus anticoagulants for A fib",
+    definitive_tx: "Percutaneous balloon valvotomy for severe refractory stenosis; isolated surgical repair is rarely done"
+  },
+  "Rheumatic Heart Disease": {
+    diagnosis: "Jones Criteria: GAS evidence plus 2 major or 1 major + 2 minor criteria; echo detects valve lesions",
+    medical_tx: "ARF: prednisone + penicillin; secondary prevention: penicillin prophylaxis for 5-10 years post-ARF",
+    definitive_tx: "Valve replacement for severe chronic valvular disease; cardiology follow-up; pacemaker for heart block"
   }
 };
-const categoryKeys = ["detail", "association", "management"];
+const categoryKeys = ["diagnosis", "medical_tx", "definitive_tx"];
 const categoryLabels = {
-  detail: "Detail",
-  association: "Key Association",
-  management: "Management"
+  diagnosis: "Diagnosis",
+  medical_tx: "Medical Tx",
+  definitive_tx: "Definitive Tx"
 };
 let score=0,totalItems=0,draggedElement=null,allItems={};
 function initGame(){
@@ -239,7 +248,7 @@ function showHint(){
   document.querySelectorAll(".tab").forEach(t=>{if(t.textContent===categoryLabels[cat])t.click();});
   setTimeout(()=>{
     const item=[...document.querySelectorAll(".draggable-item")].find(i=>i.dataset.entity===dz.dataset.entity&&i.dataset.cat===cat);
-    if(item){item.style.outline="2px solid #7e22ce";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
+    if(item){item.style.outline="2px solid #0e7490";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
   },100);
 }
 function showAllAnswers(){
@@ -249,7 +258,7 @@ function showAllAnswers(){
     const dropped=makeItem(gameData[dz.dataset.entity][dz.dataset.cat],dz.dataset.entity,dz.dataset.cat,"ans-"+dz.dataset.entity+dz.dataset.cat,true);
     dropped.classList.add("correct");dz.appendChild(dropped);
   });
-  categoryKeys.forEach(cat=>{document.getElementById("bank-"+cat).innerHTML="";}); 
+  categoryKeys.forEach(cat=>{document.getElementById("bank-"+cat).innerHTML="";});
   score=Object.keys(gameData).length*categoryKeys.length;updateStats();
 }
 function showSummary(){
