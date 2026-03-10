@@ -3,58 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pericardial Disease: Comprehensive Overview</title>
+<title>Aortic Arch Development &amp; Derivatives</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Segoe UI',sans-serif;background:#0a0010;color:#f1f5f9;padding:20px;min-height:100vh;}
   .container{max-width:1600px;margin:0 auto;}
-  h1{text-align:center;color:#be123c;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(190,18,60,0.4);}
+  h1{text-align:center;color:#14b8a6;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(20,184,166,0.4);}
   .subtitle{text-align:center;color:#94a3b8;margin-bottom:22px;font-size:.9em;}
   .stats-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
   .stats{display:flex;gap:18px;flex-wrap:wrap;}
-  .stat-item{background:rgba(190,18,60,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(190,18,60,0.35);}
-  .stat-label{color:#be123c;font-weight:700;margin-right:6px;font-size:.85em;}
+  .stat-item{background:rgba(20,184,166,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(20,184,166,0.35);}
+  .stat-label{color:#14b8a6;font-weight:700;margin-right:6px;font-size:.85em;}
   .controls{display:flex;gap:8px;flex-wrap:wrap;}
   .btn{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-size:.85em;font-weight:600;transition:.2s;}
-  .btn-primary{background:#be123c;color:#fff;}
+  .btn-primary{background:#14b8a6;color:#fff;}
   .btn-primary:hover{opacity:.85;transform:translateY(-1px);}
-  .btn-secondary{background:#1a0810;color:#f1f5f9;border:1px solid rgba(190,18,60,0.35);}
+  .btn-secondary{background:#0a1a14;color:#f1f5f9;border:1px solid rgba(20,184,166,0.35);}
   .btn-secondary:hover{opacity:.85;transform:translateY(-1px);}
-  .btn-danger{background:#1a0810;color:#94a3b8;border:1px solid #1a0810;}
+  .btn-danger{background:#0a1a14;color:#94a3b8;border:1px solid #0a1a14;}
   .main-content{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start;}
-  .word-bank-container{position:sticky;top:20px;background:#200e16;border-radius:12px;padding:14px;border:1px solid #1a0810;box-shadow:0 4px 20px rgba(0,0,0,.4);}
-  .word-bank-title{color:#be123c;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
-  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #1a0810;padding-bottom:8px;}
-  .tab{flex:1;min-width:55px;padding:6px 4px;background:#1a0810;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
-  .tab.active{background:#be123c;color:#fff;}
+  .word-bank-container{position:sticky;top:20px;background:#0e2018;border-radius:12px;padding:14px;border:1px solid #0a1a14;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+  .word-bank-title{color:#14b8a6;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
+  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #0a1a14;padding-bottom:8px;}
+  .tab{flex:1;min-width:55px;padding:6px 4px;background:#0a1a14;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
+  .tab.active{background:#14b8a6;color:#fff;}
   .tab:hover:not(.active){opacity:.8;}
   .word-bank{min-height:180px;max-height:62vh;overflow-y:auto;display:none;}
   .word-bank.active{display:block;}
   .word-bank::-webkit-scrollbar{width:5px;}
-  .word-bank::-webkit-scrollbar-thumb{background:#be123c;border-radius:3px;}
-  .draggable-item{background:#1a0810;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(190,18,60,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .draggable-item:hover{border-color:#be123c;box-shadow:0 0 8px rgba(190,18,60,0.4);}
+  .word-bank::-webkit-scrollbar-thumb{background:#14b8a6;border-radius:3px;}
+  .draggable-item{background:#0a1a14;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(20,184,166,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .draggable-item:hover{border-color:#14b8a6;box-shadow:0 0 8px rgba(20,184,166,0.4);}
   .draggable-item.dragging{opacity:.35;}
   .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:14px;}
-  .drug-card{background:#200e16;border-radius:12px;padding:14px;border:1px solid #1a0810;}
-  .drug-card-title{background:#be123c;color:#fff;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
+  .drug-card{background:#0e2018;border-radius:12px;padding:14px;border:1px solid #0a1a14;}
+  .drug-card-title{background:#14b8a6;color:#fff;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
   .drop-zones{display:grid;gap:7px;}
   .drop-row{display:grid;grid-template-columns:110px 1fr;gap:7px;align-items:start;}
-  .drop-label{background:rgba(190,18,60,0.1);padding:7px;border-radius:5px;font-weight:600;color:#be123c;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(190,18,60,0.35);}
-  .drop-zone{min-height:40px;background:#1a0810;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
-  .drop-zone.drag-over{border-color:#be123c;border-style:solid;background:rgba(190,18,60,0.1);}
-  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(190,18,60,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .dropped-item:hover{border-color:#be123c;}
+  .drop-label{background:rgba(20,184,166,0.1);padding:7px;border-radius:5px;font-weight:600;color:#14b8a6;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(20,184,166,0.35);}
+  .drop-zone{min-height:40px;background:#0a1a14;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
+  .drop-zone.drag-over{border-color:#14b8a6;border-style:solid;background:rgba(20,184,166,0.1);}
+  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(20,184,166,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .dropped-item:hover{border-color:#14b8a6;}
   .dropped-item.correct{background:rgba(34,197,94,.12);border-color:#22c55e;}
   .dropped-item.incorrect{background:rgba(239,68,68,.12);border-color:#ef4444;}
   .summary-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;justify-content:center;align-items:center;padding:20px;}
   .summary-modal.active{display:flex;}
-  .summary-content{background:#200e16;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #be123c;}
-  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #1a0810;}
-  .summary-title{color:#be123c;font-size:1.3em;font-weight:700;}
-  .close-btn{background:#1a0810;border:1px solid #be123c;color:#be123c;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
-  .summary-entity{margin-bottom:18px;background:#1a0810;padding:14px;border-radius:8px;border-left:3px solid #be123c;}
-  .summary-entity-title{color:#be123c;font-size:1em;margin-bottom:8px;font-weight:700;}
+  .summary-content{background:#0e2018;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #14b8a6;}
+  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #0a1a14;}
+  .summary-title{color:#14b8a6;font-size:1.3em;font-weight:700;}
+  .close-btn{background:#0a1a14;border:1px solid #14b8a6;color:#14b8a6;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
+  .summary-entity{margin-bottom:18px;background:#0a1a14;padding:14px;border-radius:8px;border-left:3px solid #14b8a6;}
+  .summary-entity-title{color:#14b8a6;font-size:1em;margin-bottom:8px;font-weight:700;}
   .summary-cat{margin-bottom:7px;}
   .summary-cat-label{color:#94a3b8;font-size:.75em;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
   .summary-cat-value{color:#f1f5f9;font-size:.82em;line-height:1.5;padding-left:8px;}
@@ -63,12 +63,12 @@
 </style>
 </head>
 <body>
-<a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="147_shock_management.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Previous</a>
-<a href="149_chd_classification_risk_factors.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&larr; Index</a>
+<a href="152_obstructive_chd.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&larr; Previous</a>
+<a href="154_chd_murmurs_imaging_features.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &rarr;</a>
 <div class="container">
-  <h1>Pericardial Disease: Comprehensive Overview</h1>
-  <p class="subtitle">Match the pathophysiology, key diagnostic findings, and treatment across all pericardial conditions</p>
+  <h1>Aortic Arch Development &amp; Derivatives</h1>
+  <p class="subtitle">Match each embryonic aortic arch to its adult derivatives and clinical significance</p>
   <div class="stats-controls">
     <div class="stats">
       <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -101,52 +101,37 @@
 </div>
 <script>
 const gameData = {
-  "Acute Viral Pericarditis": {
-    pathophysiology: "Viral infection (Coxsackievirus B, echovirus) causes inflammatory infiltrate in pericardial layers",
-    key_diagnostic: "Diffuse ST elevation with PR depression on ECG (stage I); pericardial friction rub on auscultation",
-    treatment: "NSAIDs (ibuprofen 600mg TID) plus colchicine 0.5mg BID for 3 months; avoid corticosteroids initially"
+  "1st Aortic Arch": {
+    right_derivative: "Part of maxillary artery",
+    left_derivative: "Part of maxillary artery",
+    clinical_significance: "Mostly regresses; small remnant contributes to blood supply of the upper jaw and face"
   },
-  "Purulent Pericarditis": {
-    pathophysiology: "Bacterial infection (S. aureus, strep, gram-negatives) spreads hematogenously or from adjacent pneumonia",
-    key_diagnostic: "Pericardial fluid: purulent, high WBC with neutrophil predominance; glucose low; positive Gram stain",
-    treatment: "Emergent pericardial drainage (surgical or catheter) plus systemic IV antibiotics; high mortality"
+  "2nd Aortic Arch": {
+    right_derivative: "Stapedial artery (transient, regresses)",
+    left_derivative: "Stapedial artery (transient, regresses)",
+    clinical_significance: "Mostly regresses; transient stapedial arteries supply the developing stapes of the middle ear"
   },
-  "Cardiac Tamponade": {
-    pathophysiology: "Rapid fluid accumulation exceeds pericardial stretch capacity, compressing cardiac chambers in diastole",
-    key_diagnostic: "Pulsus paradoxus >10 mmHg; echo: RA/RV diastolic collapse; electrical alternans on ECG",
-    treatment: "Emergent pericardiocentesis via subxiphoid approach; IV fluids as bridge; treat underlying cause"
+  "3rd Aortic Arch": {
+    right_derivative: "Right common carotid artery and proximal right internal carotid artery",
+    left_derivative: "Left common carotid artery and proximal left internal carotid artery",
+    clinical_significance: "Forms the major arteries supplying the head and neck; critical for cerebral blood supply"
   },
-  "Constrictive Pericarditis": {
-    pathophysiology: "Chronic inflammation leads to fibrotic, calcified pericardium that restricts diastolic filling of all chambers",
-    key_diagnostic: "Kussmaul sign (JVP rises with inspiration); pericardial knock; dip-and-plateau on catheterization",
-    treatment: "Pericardiectomy for symptomatic constriction; diuretics for volume management; anti-TB therapy if TB cause"
+  "4th Aortic Arch": {
+    right_derivative: "Proximal right subclavian artery (right recurrent laryngeal nerve loops under it)",
+    left_derivative: "Arch of the aorta (between left common carotid and left subclavian arteries)",
+    clinical_significance: "Asymmetric remodeling; left side forms aortic arch; abnormal development causes coarctation of the aorta"
   },
-  "Uremic Pericarditis": {
-    pathophysiology: "Uremic toxins (BUN >60) cause serosal inflammation; occurs in ESRD patients on or not yet on dialysis",
-    key_diagnostic: "Pericardial friction rub WITHOUT typical ECG changes (no diffuse ST elevation); hemorrhagic effusion",
-    treatment: "Intensified hemodialysis (daily for 1-2 weeks); poor response to NSAIDs; may need pericardiocentesis"
-  },
-  "Dressler Syndrome": {
-    pathophysiology: "Post-cardiac injury autoimmune response to exposed pericardial antigens; occurs 2-10 weeks post-MI",
-    key_diagnostic: "Pleuritic chest pain with fever and elevated ESR/CRP weeks after MI; pericardial effusion on echo",
-    treatment: "Aspirin (preferred post-MI to maintain coronary flow) plus colchicine; avoid NSAIDs early post-MI"
-  },
-  "Recurrent Pericarditis": {
-    pathophysiology: "Incomplete resolution of initial episode or autoimmune mechanism; recurs in 15-30% of acute pericarditis",
-    key_diagnostic: "Recurrence of symptoms after symptom-free interval of at least 4-6 weeks; elevated inflammatory markers",
-    treatment: "Colchicine is cornerstone for prevention; IL-1 blocker (anakinra/rilonacept) for colchicine-resistant cases"
-  },
-  "Malignant Pericardial Effusion": {
-    pathophysiology: "Metastatic cancer (lung, breast, lymphoma) invades pericardium or blocks lymphatic drainage",
-    key_diagnostic: "Large effusion on echo; pericardial fluid cytology positive for malignant cells; CT shows pericardial masses",
-    treatment: "Pericardiocentesis with extended catheter drainage; pericardial window for recurrence; systemic chemotherapy"
+  "6th Aortic Arch": {
+    right_derivative: "Proximal right pulmonary artery (distal portion regresses, freeing right recurrent laryngeal nerve)",
+    left_derivative: "Proximal left pulmonary artery AND ductus arteriosus (becomes ligamentum arteriosum after birth)",
+    clinical_significance: "Left recurrent laryngeal nerve loops under aortic arch near ligamentum arteriosum; vulnerable during aortic/DA repair"
   }
 };
-const categoryKeys = ["pathophysiology", "key_diagnostic", "treatment"];
+const categoryKeys = ["right_derivative","left_derivative","clinical_significance"];
 const categoryLabels = {
-  pathophysiology: "Pathophysiology",
-  key_diagnostic: "Key Diagnostic Finding",
-  treatment: "Treatment"
+  right_derivative: "Right Derivative",
+  left_derivative: "Left Derivative",
+  clinical_significance: "Clinical Significance"
 };
 let score=0,totalItems=0,draggedElement=null,allItems={};
 function initGame(){
@@ -249,7 +234,7 @@ function showHint(){
   document.querySelectorAll(".tab").forEach(t=>{if(t.textContent===categoryLabels[cat])t.click();});
   setTimeout(()=>{
     const item=[...document.querySelectorAll(".draggable-item")].find(i=>i.dataset.entity===dz.dataset.entity&&i.dataset.cat===cat);
-    if(item){item.style.outline="2px solid #be123c";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
+    if(item){item.style.outline="2px solid #14b8a6";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
   },100);
 }
 function showAllAnswers(){

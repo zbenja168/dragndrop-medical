@@ -3,58 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pericardial Disease: Comprehensive Overview</title>
+<title>CHD Management &amp; Prognosis</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Segoe UI',sans-serif;background:#0a0010;color:#f1f5f9;padding:20px;min-height:100vh;}
   .container{max-width:1600px;margin:0 auto;}
-  h1{text-align:center;color:#be123c;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(190,18,60,0.4);}
+  h1{text-align:center;color:#10b981;margin-bottom:8px;font-size:1.75em;text-shadow:0 0 18px rgba(16,185,129,0.4);}
   .subtitle{text-align:center;color:#94a3b8;margin-bottom:22px;font-size:.9em;}
   .stats-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
   .stats{display:flex;gap:18px;flex-wrap:wrap;}
-  .stat-item{background:rgba(190,18,60,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(190,18,60,0.35);}
-  .stat-label{color:#be123c;font-weight:700;margin-right:6px;font-size:.85em;}
+  .stat-item{background:rgba(16,185,129,0.1);padding:9px 16px;border-radius:8px;border:1px solid rgba(16,185,129,0.35);}
+  .stat-label{color:#10b981;font-weight:700;margin-right:6px;font-size:.85em;}
   .controls{display:flex;gap:8px;flex-wrap:wrap;}
   .btn{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-size:.85em;font-weight:600;transition:.2s;}
-  .btn-primary{background:#be123c;color:#fff;}
+  .btn-primary{background:#10b981;color:#fff;}
   .btn-primary:hover{opacity:.85;transform:translateY(-1px);}
-  .btn-secondary{background:#1a0810;color:#f1f5f9;border:1px solid rgba(190,18,60,0.35);}
+  .btn-secondary{background:#0a1a10;color:#f1f5f9;border:1px solid rgba(16,185,129,0.35);}
   .btn-secondary:hover{opacity:.85;transform:translateY(-1px);}
-  .btn-danger{background:#1a0810;color:#94a3b8;border:1px solid #1a0810;}
+  .btn-danger{background:#0a1a10;color:#94a3b8;border:1px solid #0a1a10;}
   .main-content{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start;}
-  .word-bank-container{position:sticky;top:20px;background:#200e16;border-radius:12px;padding:14px;border:1px solid #1a0810;box-shadow:0 4px 20px rgba(0,0,0,.4);}
-  .word-bank-title{color:#be123c;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
-  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #1a0810;padding-bottom:8px;}
-  .tab{flex:1;min-width:55px;padding:6px 4px;background:#1a0810;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
-  .tab.active{background:#be123c;color:#fff;}
+  .word-bank-container{position:sticky;top:20px;background:#0e2014;border-radius:12px;padding:14px;border:1px solid #0a1a10;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+  .word-bank-title{color:#10b981;font-size:1em;margin-bottom:10px;text-align:center;font-weight:700;}
+  .tabs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px;border-bottom:1px solid #0a1a10;padding-bottom:8px;}
+  .tab{flex:1;min-width:55px;padding:6px 4px;background:#0a1a10;border:none;color:#94a3b8;cursor:pointer;font-size:.72em;font-weight:700;border-radius:5px;transition:.2s;}
+  .tab.active{background:#10b981;color:#fff;}
   .tab:hover:not(.active){opacity:.8;}
   .word-bank{min-height:180px;max-height:62vh;overflow-y:auto;display:none;}
   .word-bank.active{display:block;}
   .word-bank::-webkit-scrollbar{width:5px;}
-  .word-bank::-webkit-scrollbar-thumb{background:#be123c;border-radius:3px;}
-  .draggable-item{background:#1a0810;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(190,18,60,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .draggable-item:hover{border-color:#be123c;box-shadow:0 0 8px rgba(190,18,60,0.4);}
+  .word-bank::-webkit-scrollbar-thumb{background:#10b981;border-radius:3px;}
+  .draggable-item{background:#0a1a10;padding:7px 10px;margin-bottom:6px;border-radius:7px;cursor:move;border:1px solid rgba(16,185,129,0.35);font-size:.78em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .draggable-item:hover{border-color:#10b981;box-shadow:0 0 8px rgba(16,185,129,0.4);}
   .draggable-item.dragging{opacity:.35;}
   .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:14px;}
-  .drug-card{background:#200e16;border-radius:12px;padding:14px;border:1px solid #1a0810;}
-  .drug-card-title{background:#be123c;color:#fff;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
+  .drug-card{background:#0e2014;border-radius:12px;padding:14px;border:1px solid #0a1a10;}
+  .drug-card-title{background:#10b981;color:#fff;padding:9px 12px;border-radius:7px;font-size:.95em;font-weight:700;margin-bottom:11px;text-align:center;}
   .drop-zones{display:grid;gap:7px;}
   .drop-row{display:grid;grid-template-columns:110px 1fr;gap:7px;align-items:start;}
-  .drop-label{background:rgba(190,18,60,0.1);padding:7px;border-radius:5px;font-weight:600;color:#be123c;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(190,18,60,0.35);}
-  .drop-zone{min-height:40px;background:#1a0810;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
-  .drop-zone.drag-over{border-color:#be123c;border-style:solid;background:rgba(190,18,60,0.1);}
-  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(190,18,60,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-  .dropped-item:hover{border-color:#be123c;}
+  .drop-label{background:rgba(16,185,129,0.1);padding:7px;border-radius:5px;font-weight:600;color:#10b981;font-size:.72em;display:flex;align-items:center;border:1px solid rgba(16,185,129,0.35);}
+  .drop-zone{min-height:40px;background:#0a1a10;border:1px dashed #94a3b8;border-radius:6px;padding:5px;transition:.2s;}
+  .drop-zone.drag-over{border-color:#10b981;border-style:solid;background:rgba(16,185,129,0.1);}
+  .dropped-item{padding:6px 9px;border-radius:5px;cursor:move;border:1px solid rgba(16,185,129,0.35);font-size:.76em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .dropped-item:hover{border-color:#10b981;}
   .dropped-item.correct{background:rgba(34,197,94,.12);border-color:#22c55e;}
   .dropped-item.incorrect{background:rgba(239,68,68,.12);border-color:#ef4444;}
   .summary-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;justify-content:center;align-items:center;padding:20px;}
   .summary-modal.active{display:flex;}
-  .summary-content{background:#200e16;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #be123c;}
-  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #1a0810;}
-  .summary-title{color:#be123c;font-size:1.3em;font-weight:700;}
-  .close-btn{background:#1a0810;border:1px solid #be123c;color:#be123c;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
-  .summary-entity{margin-bottom:18px;background:#1a0810;padding:14px;border-radius:8px;border-left:3px solid #be123c;}
-  .summary-entity-title{color:#be123c;font-size:1em;margin-bottom:8px;font-weight:700;}
+  .summary-content{background:#0e2014;border-radius:12px;padding:22px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;border:1px solid #10b981;}
+  .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #0a1a10;}
+  .summary-title{color:#10b981;font-size:1.3em;font-weight:700;}
+  .close-btn{background:#0a1a10;border:1px solid #10b981;color:#10b981;padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:600;}
+  .summary-entity{margin-bottom:18px;background:#0a1a10;padding:14px;border-radius:8px;border-left:3px solid #10b981;}
+  .summary-entity-title{color:#10b981;font-size:1em;margin-bottom:8px;font-weight:700;}
   .summary-cat{margin-bottom:7px;}
   .summary-cat-label{color:#94a3b8;font-size:.75em;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
   .summary-cat-value{color:#f1f5f9;font-size:.82em;line-height:1.5;padding-left:8px;}
@@ -63,12 +63,11 @@
 </style>
 </head>
 <body>
-<a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="147_shock_management.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Previous</a>
-<a href="149_chd_classification_risk_factors.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&larr; Index</a>
+<a href="154_chd_murmurs_imaging_features.html" style="position:fixed;top:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;right:115px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&larr; Previous</a>
 <div class="container">
-  <h1>Pericardial Disease: Comprehensive Overview</h1>
-  <p class="subtitle">Match the pathophysiology, key diagnostic findings, and treatment across all pericardial conditions</p>
+  <h1>CHD Management &amp; Prognosis</h1>
+  <p class="subtitle">Match each congenital heart defect to its acute/emergent intervention, definitive treatment, and prognosis</p>
   <div class="stats-controls">
     <div class="stats">
       <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -101,52 +100,57 @@
 </div>
 <script>
 const gameData = {
-  "Acute Viral Pericarditis": {
-    pathophysiology: "Viral infection (Coxsackievirus B, echovirus) causes inflammatory infiltrate in pericardial layers",
-    key_diagnostic: "Diffuse ST elevation with PR depression on ECG (stage I); pericardial friction rub on auscultation",
-    treatment: "NSAIDs (ibuprofen 600mg TID) plus colchicine 0.5mg BID for 3 months; avoid corticosteroids initially"
+  "Patent Ductus Arteriosus (PDA)": {
+    acute_intervention: "Premature infants: COX inhibitors (indomethacin or ibuprofen) block PGE1 production to induce DA closure; ineffective in term infants",
+    definitive_treatment: "Percutaneous catheter occlusion with coil or implantable device (preferred); surgical ligation if catheter not available",
+    prognosis: "Some close spontaneously in first months; rarely close after this period; excellent outcomes after intervention; Eisenmenger risk if untreated"
   },
-  "Purulent Pericarditis": {
-    pathophysiology: "Bacterial infection (S. aureus, strep, gram-negatives) spreads hematogenously or from adjacent pneumonia",
-    key_diagnostic: "Pericardial fluid: purulent, high WBC with neutrophil predominance; glucose low; positive Gram stain",
-    treatment: "Emergent pericardial drainage (surgical or catheter) plus systemic IV antibiotics; high mortality"
+  "Atrial Septal Defect (ASD)": {
+    acute_intervention: "No emergent intervention needed; small ASDs (<8mm) monitored for spontaneous closure (80% close by 15 months of age)",
+    definitive_treatment: "Percutaneous closure preferred over surgery for larger defects; surgical repair reserved for complex anatomy or failed percutaneous approach",
+    prognosis: "Well-tolerated for years even without repair; late complications include pulmonary hypertension, atrial arrhythmias, and right heart failure"
   },
-  "Cardiac Tamponade": {
-    pathophysiology: "Rapid fluid accumulation exceeds pericardial stretch capacity, compressing cardiac chambers in diastole",
-    key_diagnostic: "Pulsus paradoxus >10 mmHg; echo: RA/RV diastolic collapse; electrical alternans on ECG",
-    treatment: "Emergent pericardiocentesis via subxiphoid approach; IV fluids as bridge; treat underlying cause"
+  "Ventricular Septal Defect (VSD)": {
+    acute_intervention: "Small-moderate VSDs: observation only (50% undergo spontaneous partial or complete closure by age 2); medical management of HF symptoms if needed",
+    definitive_treatment: "Large VSDs with HF or pulmonary vascular disease: catheter-based occlusion preferred; repair recommended within first few years to prevent remodeling",
+    prognosis: "Most common CHD (42%); small VSDs have excellent prognosis; untreated large VSDs risk Eisenmenger syndrome and right heart failure"
   },
-  "Constrictive Pericarditis": {
-    pathophysiology: "Chronic inflammation leads to fibrotic, calcified pericardium that restricts diastolic filling of all chambers",
-    key_diagnostic: "Kussmaul sign (JVP rises with inspiration); pericardial knock; dip-and-plateau on catheterization",
-    treatment: "Pericardiectomy for symptomatic constriction; diuretics for volume management; anti-TB therapy if TB cause"
+  "Tetralogy of Fallot (TOF)": {
+    acute_intervention: "Tet spells: knee-to-chest position (increases SVR); supplemental O2; morphine for sedation; propranolol to relax RVOT obstruction",
+    definitive_treatment: "Surgical repair in first year of life: open pulmonary stenosis (valvuloplasty) + close VSD; complications include arrhythmias and pulmonic regurgitation",
+    prognosis: "Without surgery: ~50% mortality by age 3; with surgery: generally good long-term outcomes; may need pulmonary valve replacement later in life"
   },
-  "Uremic Pericarditis": {
-    pathophysiology: "Uremic toxins (BUN >60) cause serosal inflammation; occurs in ESRD patients on or not yet on dialysis",
-    key_diagnostic: "Pericardial friction rub WITHOUT typical ECG changes (no diffuse ST elevation); hemorrhagic effusion",
-    treatment: "Intensified hemodialysis (daily for 1-2 weeks); poor response to NSAIDs; may need pericardiocentesis"
+  "Tricuspid Atresia": {
+    acute_intervention: "PGE1 infusion to maintain patent ductus arteriosus and ensure pulmonary blood flow; critical for survival in neonatal period",
+    definitive_treatment: "Staged surgical repair over first months of life (multiple operations); heart transplantation if ventricular dysfunction progresses and surgery fails",
+    prognosis: "Incompatible with life without shunt (ASD + VSD/PDA); with staged surgical repair, survival has improved significantly but lifelong follow-up needed"
   },
-  "Dressler Syndrome": {
-    pathophysiology: "Post-cardiac injury autoimmune response to exposed pericardial antigens; occurs 2-10 weeks post-MI",
-    key_diagnostic: "Pleuritic chest pain with fever and elevated ESR/CRP weeks after MI; pericardial effusion on echo",
-    treatment: "Aspirin (preferred post-MI to maintain coronary flow) plus colchicine; avoid NSAIDs early post-MI"
+  "Transposition of Great Arteries (TGA)": {
+    acute_intervention: "Balloon atrial septostomy (Rashkind procedure) to enlarge foramen ovale and allow greater mixing of oxygenated and deoxygenated blood",
+    definitive_treatment: "Arterial switch operation (Jatene procedure) within first week of life: physically switch aorta and PA to correct ventricles; repair VSD if present",
+    prognosis: "Without treatment: only 10% survive first year; with arterial switch: 90% survival at 20 years; excellent long-term quality of life"
   },
-  "Recurrent Pericarditis": {
-    pathophysiology: "Incomplete resolution of initial episode or autoimmune mechanism; recurs in 15-30% of acute pericarditis",
-    key_diagnostic: "Recurrence of symptoms after symptom-free interval of at least 4-6 weeks; elevated inflammatory markers",
-    treatment: "Colchicine is cornerstone for prevention; IL-1 blocker (anakinra/rilonacept) for colchicine-resistant cases"
+  "Persistent Truncus Arteriosus (PTA)": {
+    acute_intervention: "Diuretics to reduce pulmonary edema; supplemental O2 may be HARMFUL (increases pulmonary blood flow and worsens heart failure)",
+    definitive_treatment: "Surgical VSD closure to direct blood into truncal root + separation of pulmonary arteries from truncus + aortic arch repair if needed",
+    prognosis: "Without treatment: only 15% survive at 1 year; with surgical repair: 90% survive 10 years; associated with 22q11 deletion (DiGeorge) in ~35%"
   },
-  "Malignant Pericardial Effusion": {
-    pathophysiology: "Metastatic cancer (lung, breast, lymphoma) invades pericardium or blocks lymphatic drainage",
-    key_diagnostic: "Large effusion on echo; pericardial fluid cytology positive for malignant cells; CT shows pericardial masses",
-    treatment: "Pericardiocentesis with extended catheter drainage; pericardial window for recurrence; systemic chemotherapy"
+  "Total Anomalous Pulmonary Venous Return (TAPVR)": {
+    acute_intervention: "PGE1 to keep ductus arteriosus open; supplemental O2 and inotropic support; mechanical ventilation if needed; early recognition is lifesaving",
+    definitive_treatment: "Surgical correction always indicated regardless of obstruction: redirect pulmonary veins to drain into left atrium",
+    prognosis: "Without treatment: 80% die within first year; with surgical correction: 80-90% survive longer than 10 years"
+  },
+  "Coarctation of the Aorta (CoA)": {
+    acute_intervention: "Neonates with severe preductal CoA: PGE1 to keep ductus arteriosus open and maintain blood flow to lower body until surgery",
+    definitive_treatment: "Neonates/young children: surgical resection with end-to-end anastomosis; older children/adults: transcatheter stenting (preferred approach)",
+    prognosis: "Leading cause of secondary hypertension in children; untreated complications include LVH, atherosclerosis, cerebral aneurysms; good outcomes after repair"
   }
 };
-const categoryKeys = ["pathophysiology", "key_diagnostic", "treatment"];
+const categoryKeys = ["acute_intervention","definitive_treatment","prognosis"];
 const categoryLabels = {
-  pathophysiology: "Pathophysiology",
-  key_diagnostic: "Key Diagnostic Finding",
-  treatment: "Treatment"
+  acute_intervention: "Acute / Emergent",
+  definitive_treatment: "Definitive Treatment",
+  prognosis: "Prognosis"
 };
 let score=0,totalItems=0,draggedElement=null,allItems={};
 function initGame(){
@@ -249,7 +253,7 @@ function showHint(){
   document.querySelectorAll(".tab").forEach(t=>{if(t.textContent===categoryLabels[cat])t.click();});
   setTimeout(()=>{
     const item=[...document.querySelectorAll(".draggable-item")].find(i=>i.dataset.entity===dz.dataset.entity&&i.dataset.cat===cat);
-    if(item){item.style.outline="2px solid #be123c";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
+    if(item){item.style.outline="2px solid #10b981";item.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>item.style.outline="",2500);}
   },100);
 }
 function showAllAnswers(){
