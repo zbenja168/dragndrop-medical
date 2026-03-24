@@ -1150,26 +1150,26 @@ def make_html(game, prev_file, next_file):
 # GENERATE ALL GAME FILES
 # ════════════════════════════════════════════
 
-# Reorder games alphabetically by brick name:
-# 1. Anatomy of the Diaphragm → old games[0], games[1]
-# 2. Anatomy of the Lower RT → old games[2], games[3]
-# 3. Anatomy of the Upper RT → old games[4], games[5]
-# 4. Development → old games[6]
-# 5. Histology → old games[7], games[8]
-# 6. Overview of Respiratory Physiology → old games[9], games[10]
-# 7. Alveolar Gas Exchange & Diffusion → old games[11]
-# 8. Mechanics & Pressures → old games[12], games[13]
-# 9. Alveolar Ventilation & Dead Space → old games[14], games[15]
+# Reorder games by brick folder addition date (oldest first):
+# 1. Histology (Mar 22 22:39) → old games[7], games[8]
+# 2. Development (Mar 22 22:44) → old games[6]
+# 3. Upper RT (Mar 22 22:53) → old games[4], games[5]
+# 4. Lower RT (Mar 22 23:01) → old games[2], games[3]
+# 5. Diaphragm (Mar 22 23:05) → old games[0], games[1]
+# 6. Overview Physio (Mar 23 16:18) → old games[9], games[10]
+# 7. Mechanics (Mar 23 16:18) → old games[12], games[13]
+# 8. Ventilation/DS (Mar 23 16:19) → old games[14], games[15]
+# 9. Gas Exchange (Mar 23 16:19) → old games[11]
 games = [
-    games[0], games[1],       # Anatomy of the Diaphragm
-    games[2], games[3],       # Anatomy of the Lower RT
-    games[4], games[5],       # Anatomy of the Upper RT
-    games[6],                  # Development
     games[7], games[8],       # Histology
-    games[9], games[10],      # Overview of Respiratory Physiology
-    games[11],                 # Alveolar Gas Exchange & Diffusion
-    games[12], games[13],     # Mechanics & Pressures
-    games[14], games[15],     # Alveolar Ventilation & Dead Space
+    games[6],                  # Development
+    games[4], games[5],       # Upper RT
+    games[2], games[3],       # Lower RT
+    games[0], games[1],       # Diaphragm
+    games[9], games[10],      # Overview Physio
+    games[12], games[13],     # Mechanics
+    games[14], games[15],     # Ventilation/DS
+    games[11],                 # Gas Exchange
 ]
 # Reassign file names with new numbering
 for i, game in enumerate(games):
@@ -1193,36 +1193,36 @@ print(f"\nGenerated {len(games)} respiratory games.")
 # GENERATE RESPIRATORY INDEX
 # ════════════════════════════════════════════
 
-# Build sections dynamically from the reordered games list (alphabetical by brick)
+# Build sections dynamically from the reordered games list (by brick addition date)
 sections = [
     {
-        "icon": "🫁",
-        "title": "Anatomy of the Diaphragm, Ribs & Intercostals",
-        "color": "#14b8a6",
+        "icon": "🔬",
+        "title": "Histology of the Respiratory Tract",
+        "color": "#2dd4bf",
         "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(0, 2)]
-    },
-    {
-        "icon": "🌬️",
-        "title": "Anatomy of the Lower Respiratory Tract",
-        "color": "#0d9488",
-        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(2, 4)]
-    },
-    {
-        "icon": "👃",
-        "title": "Anatomy of the Upper Respiratory Tract",
-        "color": "#0f766e",
-        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(4, 6)]
     },
     {
         "icon": "🧬",
         "title": "Development of the Respiratory Tract",
         "color": "#115e59",
-        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(6, 7)]
+        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(2, 3)]
     },
     {
-        "icon": "🔬",
-        "title": "Histology of the Respiratory Tract",
-        "color": "#2dd4bf",
+        "icon": "👃",
+        "title": "Anatomy of the Upper Respiratory Tract",
+        "color": "#0f766e",
+        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(3, 5)]
+    },
+    {
+        "icon": "🌬️",
+        "title": "Anatomy of the Lower Respiratory Tract",
+        "color": "#0d9488",
+        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(5, 7)]
+    },
+    {
+        "icon": "🫁",
+        "title": "Anatomy of the Diaphragm, Ribs & Intercostals",
+        "color": "#14b8a6",
         "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(7, 9)]
     },
     {
@@ -1232,22 +1232,22 @@ sections = [
         "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(9, 11)]
     },
     {
-        "icon": "🧪",
-        "title": "Alveolar Gas Exchange & Diffusion",
-        "color": "#a7f3d0",
-        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(11, 12)]
-    },
-    {
         "icon": "📊",
         "title": "Mechanics & Pressures of Breathing",
         "color": "#99f6e4",
-        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(12, 14)]
+        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(11, 13)]
     },
     {
         "icon": "📐",
         "title": "Alveolar Ventilation & Dead Space",
         "color": "#ccfbf1",
-        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(14, 16)]
+        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(13, 15)]
+    },
+    {
+        "icon": "🧪",
+        "title": "Alveolar Gas Exchange & Diffusion",
+        "color": "#a7f3d0",
+        "games": [(i+1, games[i]["title"], games[i]["file"]) for i in range(15, 16)]
     },
 ]
 
