@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RespiStudy – Drag &amp; Drop Games</title>
+<style>
+  :root{--bg:#030f0f;--surface:#081414;--surface2:#0c1e1e;--text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,0.07);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
+
+  /* ── Header ── */
+  header{background:linear-gradient(160deg,#001010 0%,#002020 50%,#030f0f 100%);border-bottom:1px solid var(--border);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+  header::after{content:'\1FAC1';position:absolute;font-size:360px;opacity:.025;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+  header h1{font-size:2.4rem;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#f8fafc 30%,#14b8a6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;position:relative;}
+  header p{color:var(--muted);font-size:.9rem;position:relative;}
+  .pills{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;position:relative;}
+  .pill{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.78rem;color:var(--muted);}
+  .pill b{color:#14b8a6;}
+
+  /* ── Search ── */
+  .search-wrap{max-width:460px;margin:22px auto 0;position:relative;}
+  .search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:10px 44px 10px 18px;color:var(--text);font-size:.85rem;outline:none;transition:.2s;}
+  .search-wrap input:focus{border-color:#14b8a6;box-shadow:0 0 0 3px rgba(20,184,166,.18);}
+  .search-wrap input::placeholder{color:var(--muted);}
+  .search-ico{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem;pointer-events:none;}
+
+  /* ── Layout ── */
+  main{max-width:1380px;margin:0 auto;padding:32px 16px 56px;}
+  .no-results{text-align:center;color:var(--muted);padding:60px 20px;font-size:.9rem;display:none;}
+
+  /* ── Section ── */
+  .section{margin-bottom:32px;}
+  .section-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:1.2rem;line-height:1;}
+  .section-title{font-size:.95rem;font-weight:700;color:var(--text);}
+  .section-badge{margin-left:auto;background:var(--surface2);border-radius:10px;padding:2px 8px;font-size:.68rem;color:var(--muted);}
+
+  /* ── Cards ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:7px;}
+  a.card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:11px 12px;text-decoration:none;color:var(--text);display:flex;align-items:flex-start;gap:9px;transition:.15s;}
+  a.card:hover{border-color:var(--c,#14b8a6);background:var(--surface2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.5);}
+  .num{flex-shrink:0;background:var(--c,#14b8a6);color:#fff;border-radius:5px;padding:2px 5px;font-size:.6rem;font-weight:800;margin-top:1px;opacity:.9;letter-spacing:.3px;}
+  .ctitle{font-size:.75rem;line-height:1.45;color:var(--text);}
+
+  /* ── Back link ── */
+  .back-link{display:inline-block;margin-bottom:16px;color:var(--muted);text-decoration:none;font-size:.85rem;padding:6px 14px;border:1px solid var(--border);border-radius:20px;transition:.15s;}
+  .back-link:hover{color:var(--text);border-color:rgba(255,255,255,0.3);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>RespiStudy</h1>
+  <p>Drag &amp; Drop Study Games &nbsp;&middot;&nbsp; Respiratory Medicine</p>
+  <div class="pills">
+    <span class="pill"><b>16</b> games</span>
+    <span class="pill"><b>9</b> source bricks</span>
+    <span class="pill"><b>9</b> sections</span>
+    <a href="index.html" style="text-decoration:none;"><span class="pill" style="border-color:rgba(225,29,72,0.4);cursor:pointer;transition:.15s;" onmouseover="this.style.background='rgba(225,29,72,0.15)';this.style.borderColor='#e11d48'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(225,29,72,0.4)'">&#x2764; <b style="color:#e11d48">CardioStudy</b></span></a>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search by topic or number\u2026" autocomplete="off">
+    <span class="search-ico">&#x2315;</span>
+  </div>
+</header>
+
+<main>
+<div class="no-results" id="noResults">No games match your search.</div>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">🔬</span>
+    <span class="section-title">Histology</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_01_respiratory_histology.html" style="--c:#2dd4bf"><span class="num">01</span><span class="ctitle">Respiratory Tract Histology</span></a>
+    <a class="card" href="resp_02_alveolar_cells.html" style="--c:#2dd4bf"><span class="num">02</span><span class="ctitle">Alveolar &amp; Airway Cell Types</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">🧬</span>
+    <span class="section-title">Embryology &amp; Development</span>
+    <span class="section-badge">1 game</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_03_lung_development.html" style="--c:#115e59"><span class="num">03</span><span class="ctitle">Stages of Lung Development</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">👃</span>
+    <span class="section-title">Upper Respiratory Tract</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_04_sinus_drainage.html" style="--c:#0f766e"><span class="num">04</span><span class="ctitle">Paranasal Sinuses &amp; Nasal Drainage</span></a>
+    <a class="card" href="resp_05_larynx.html" style="--c:#0f766e"><span class="num">05</span><span class="ctitle">Laryngeal Anatomy &amp; Innervation</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">🌬️</span>
+    <span class="section-title">Lower Respiratory Tract</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_06_airway_zones.html" style="--c:#0d9488"><span class="num">06</span><span class="ctitle">Conducting vs Respiratory Zones</span></a>
+    <a class="card" href="resp_07_lung_anatomy.html" style="--c:#0d9488"><span class="num">07</span><span class="ctitle">Lung Anatomy &amp; Pleurae</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">🫁</span>
+    <span class="section-title">Diaphragm, Ribs &amp; Intercostals</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_08_diaphragm_anatomy.html" style="--c:#14b8a6"><span class="num">08</span><span class="ctitle">Diaphragm Anatomy &amp; Openings</span></a>
+    <a class="card" href="resp_09_muscles_of_breathing.html" style="--c:#14b8a6"><span class="num">09</span><span class="ctitle">Muscles of Breathing</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">💨</span>
+    <span class="section-title">Respiratory Physiology Overview</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_10_gas_exchange_principles.html" style="--c:#5eead4"><span class="num">10</span><span class="ctitle">Gas Exchange &amp; Fick&#39;s Law</span></a>
+    <a class="card" href="resp_11_airway_defense.html" style="--c:#5eead4"><span class="num">11</span><span class="ctitle">Airway Defense Mechanisms</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">📊</span>
+    <span class="section-title">Breathing Mechanics &amp; Pressures</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_12_breathing_pressures.html" style="--c:#99f6e4"><span class="num">12</span><span class="ctitle">Pressures of Breathing</span></a>
+    <a class="card" href="resp_13_surfactant_compliance.html" style="--c:#99f6e4"><span class="num">13</span><span class="ctitle">Surfactant, LaPlace&#39;s Law &amp; Compliance</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">📐</span>
+    <span class="section-title">Ventilation &amp; Dead Space</span>
+    <span class="section-badge">2 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_14_dead_space_ventilation.html" style="--c:#ccfbf1"><span class="num">14</span><span class="ctitle">Dead Space &amp; Ventilation</span></a>
+    <a class="card" href="resp_15_oxygen_cascade.html" style="--c:#ccfbf1"><span class="num">15</span><span class="ctitle">Oxygen Cascade &amp; Alveolar Gas Equation</span></a>
+  </div>
+</section>
+
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">🧪</span>
+    <span class="section-title">Gas Exchange &amp; Diffusion</span>
+    <span class="section-badge">1 game</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="resp_16_diffusion_dlco.html" style="--c:#a7f3d0"><span class="num">16</span><span class="ctitle">DLCO, Perfusion vs Diffusion Limitation</span></a>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.getElementById('search').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  let anyVisible = false;
+  document.querySelectorAll('.section').forEach(sec => {
+    let secVisible = false;
+    sec.querySelectorAll('.card').forEach(c => {
+      const match = c.textContent.toLowerCase().includes(q);
+      c.style.display = match ? '' : 'none';
+      if (match) secVisible = true;
+    });
+    sec.style.display = secVisible ? '' : 'none';
+    if (secVisible) anyVisible = true;
+  });
+  document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
+});
+</script>
+</body>
+</html>
