@@ -665,7 +665,12 @@ games.append({
 # ════════════════════════════════════════════
 
 def esc(s):
+    """HTML-escape for use in HTML attributes/content."""
     return s.replace("&", "&amp;").replace('"', "&quot;").replace("'", "&#39;").replace("<", "&lt;").replace(">", "&gt;")
+
+def js_esc(s):
+    """Escape for use inside JS double-quoted strings."""
+    return s.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
 
 def make_html(game, prev_file, next_file):
     cats = game["categoryKeys"]
@@ -675,8 +680,8 @@ def make_html(game, prev_file, next_file):
     # Build JS gameData
     js_data_lines = []
     for entity, cats_dict in data.items():
-        props = ",\n                ".join(f'{k}: "{esc(v)}"' for k, v in cats_dict.items())
-        js_data_lines.append(f'            "{esc(entity)}": {{\n                {props}\n            }}')
+        props = ",\n                ".join(f'{k}: "{js_esc(v)}"' for k, v in cats_dict.items())
+        js_data_lines.append(f'            "{js_esc(entity)}": {{\n                {props}\n            }}')
     js_data = "{\n" + ",\n".join(js_data_lines) + "\n        }"
 
     js_cat_keys = json.dumps(cats)
