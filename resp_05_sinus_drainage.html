@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airway Defense Mechanisms - Drag &amp; Drop Study Game</title>
+    <title>Paranasal Sinuses &amp; Nasal Drainage - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_10_gas_exchange_principles.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_12_diffusion_dlco.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_04_lung_anatomy.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_06_larynx.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🛡️ Airway Defense Mechanisms</h1>
-        <p class="subtitle">Match each defense component to its role</p>
+        <h1>👃 Paranasal Sinuses &amp; Nasal Drainage</h1>
+        <p class="subtitle">Match each sinus to its drainage and blood supply</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -196,12 +196,12 @@
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
                     <button class="tab active" onclick="switchTab('location', this)">Location</button>
-                    <button class="tab" onclick="switchTab('mechanism', this)">Defense Mechanism</button>
-                    <button class="tab" onclick="switchTab('pathology', this)">Associated Pathology</button>
+                    <button class="tab" onclick="switchTab('drainage', this)">Drainage Site</button>
+                    <button class="tab" onclick="switchTab('blood_supply', this)">Blood Supply / Innervation</button>
                 </div>
                 <div id="location-bank" class="word-bank active"></div>
-                <div id="mechanism-bank" class="word-bank"></div>
-                <div id="pathology-bank" class="word-bank"></div>
+                <div id="drainage-bank" class="word-bank"></div>
+                <div id="blood_supply-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -216,34 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["location", "mechanism", "pathology"];
-        const categoryLabels = {"location": "Location", "mechanism": "Defense Mechanism", "pathology": "Associated Pathology"};
+        const categoryKeys = ["location", "drainage", "blood_supply"];
+        const categoryLabels = {"location": "Location", "drainage": "Drainage Site", "blood_supply": "Blood Supply / Innervation"};
 
         const gameData = {
-            "Goblet Cells": {
-                location: "Trachea through bronchioles; progressively decrease distally; absent at terminal bronchioles",
-                mechanism: "Secrete mucus that traps inhaled particles and pathogens on airway surface",
-                pathology: "Goblet cell hyperplasia in asthma and chronic bronchitis → mucus hypersecretion"
+            "Frontal Sinus": {
+                location: "Within the frontal bone, above the orbits",
+                drainage: "Drains into middle meatus (via frontonasal duct into semilunar hiatus)",
+                blood_supply: "Ophthalmic artery (internal carotid); innervated by CN V1"
             },
-            "Cilia": {
-                location: "Line conducting airways from nasal cavity to terminal bronchioles",
-                mechanism: "Beat rhythmically in coordinated waves → propel mucus upward toward pharynx (mucociliary escalator)",
-                pathology: "Smoking reduces ciliary beat frequency and length; Kartagener syndrome: immotile cilia"
+            "Maxillary Sinus": {
+                location: "Within the maxilla — largest paranasal sinus",
+                drainage: "Drains into middle meatus; ostium high on medial wall → poor gravity drainage",
+                blood_supply: "Maxillary artery (external carotid); innervated by CN V2"
             },
-            "Submucosal Glands": {
-                location: "Trachea and bronchi submucosa; parasympathetic nerve stimulation increases secretion",
-                mechanism: "Secrete mucus plus antimicrobial proteins (lysozyme, lactoferrin, IgA)",
-                pathology: "Cystic fibrosis: defective CFTR → dehydrated, viscous secretions → impaired clearance"
+            "Anterior Ethmoid Air Cells": {
+                location: "Within the ethmoid bone, between the orbits",
+                drainage: "Drain into middle meatus (ethmoidal infundibulum / semilunar hiatus)",
+                blood_supply: "Ophthalmic artery (internal carotid); innervated by CN V1"
             },
-            "Club Cells": {
-                location: "Terminal and respiratory bronchioles (replace goblet cells distally)",
-                mechanism: "Secrete surfactant-like protective proteins; detoxify inhaled substances via cytochrome P450",
-                pathology: "Damage from toxin exposure can impair small airway repair capacity"
+            "Posterior Ethmoid Air Cells": {
+                location: "Within posterior ethmoid bone, near sphenoid sinus",
+                drainage: "Drain into superior meatus and sphenoethmoidal recess",
+                blood_supply: "Ophthalmic artery (internal carotid); innervated by CN V1"
             },
-            "Alveolar Macrophages": {
-                location: "Alveolar lumen — beyond the reach of the mucociliary escalator",
-                mechanism: "Phagocytose bacteria, particles, and cellular debris; present antigens to immune cells",
-                pathology: "Overwhelmed in pneumoconioses (silicosis, asbestosis) → chronic inflammation and fibrosis"
+            "Sphenoid Sinus": {
+                location: "Within the body of the sphenoid bone, behind the nasal cavity",
+                drainage: "Drains into sphenoethmoidal recess (above superior turbinate)",
+                blood_supply: "Maxillary artery (external carotid); innervated by CN V1"
             }
         };
 

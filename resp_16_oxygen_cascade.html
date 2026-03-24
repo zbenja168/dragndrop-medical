@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airway Defense Mechanisms - Drag &amp; Drop Study Game</title>
+    <title>Oxygen Cascade &amp; Alveolar Gas Equation - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,14 +171,11 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_10_gas_exchange_principles.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_12_diffusion_dlco.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
-</div>
+<a href="resp_15_dead_space_ventilation.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
 
     <div class="container">
-        <h1>🛡️ Airway Defense Mechanisms</h1>
-        <p class="subtitle">Match each defense component to its role</p>
+        <h1>⬇️ Oxygen Cascade &amp; Alveolar Gas Equation</h1>
+        <p class="subtitle">Match each stage of O₂ delivery to its values and mechanisms</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,13 +192,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('location', this)">Location</button>
-                    <button class="tab" onclick="switchTab('mechanism', this)">Defense Mechanism</button>
-                    <button class="tab" onclick="switchTab('pathology', this)">Associated Pathology</button>
+                    <button class="tab active" onclick="switchTab('po2_value', this)">PO₂ Value</button>
+                    <button class="tab" onclick="switchTab('mechanism', this)">Mechanism of PO₂ Drop</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Application</button>
                 </div>
-                <div id="location-bank" class="word-bank active"></div>
+                <div id="po2_value-bank" class="word-bank active"></div>
                 <div id="mechanism-bank" class="word-bank"></div>
-                <div id="pathology-bank" class="word-bank"></div>
+                <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -216,34 +213,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["location", "mechanism", "pathology"];
-        const categoryLabels = {"location": "Location", "mechanism": "Defense Mechanism", "pathology": "Associated Pathology"};
+        const categoryKeys = ["po2_value", "mechanism", "clinical"];
+        const categoryLabels = {"po2_value": "PO\u2082 Value", "mechanism": "Mechanism of PO\u2082 Drop", "clinical": "Clinical Application"};
 
         const gameData = {
-            "Goblet Cells": {
-                location: "Trachea through bronchioles; progressively decrease distally; absent at terminal bronchioles",
-                mechanism: "Secrete mucus that traps inhaled particles and pathogens on airway surface",
-                pathology: "Goblet cell hyperplasia in asthma and chronic bronchitis → mucus hypersecretion"
+            "Atmospheric O₂": {
+                po2_value: "PO₂ = 159 mmHg (FiO₂ 0.21 × 760 mmHg at sea level)",
+                mechanism: "Dalton&#39;s Law: partial pressure = fractional concentration × total atmospheric pressure",
+                clinical: "High altitude: lower Patm → lower PiO₂ → hypoxemia (e.g., Mt. Everest Patm ~250 mmHg)"
             },
-            "Cilia": {
-                location: "Line conducting airways from nasal cavity to terminal bronchioles",
-                mechanism: "Beat rhythmically in coordinated waves → propel mucus upward toward pharynx (mucociliary escalator)",
-                pathology: "Smoking reduces ciliary beat frequency and length; Kartagener syndrome: immotile cilia"
+            "Humidified Air (Trachea)": {
+                po2_value: "PiO₂ = ~149 mmHg (159 → 149; ~10 mmHg drop from water vapor)",
+                mechanism: "Water vapor pressure = 47 mmHg at body temp; PiO₂ = FiO₂ × (Patm - 47)",
+                clinical: "Alveolar gas equation starts with PiO₂: PAO₂ = PiO₂ - (PaCO₂ / R)"
             },
-            "Submucosal Glands": {
-                location: "Trachea and bronchi submucosa; parasympathetic nerve stimulation increases secretion",
-                mechanism: "Secrete mucus plus antimicrobial proteins (lysozyme, lactoferrin, IgA)",
-                pathology: "Cystic fibrosis: defective CFTR → dehydrated, viscous secretions → impaired clearance"
+            "Alveolar Gas": {
+                po2_value: "PAO₂ ≈ 100 mmHg (149 → 100; ~50 mmHg drop from CO₂ dilution)",
+                mechanism: "CO₂ continuously entering alveoli from blood displaces O₂; R (respiratory quotient) = VCO₂/VO₂ ≈ 0.8",
+                clinical: "Hypoventilation → PaCO₂ ↑ → PAO₂ ↓; Hyperventilation → PaCO₂ ↓ → PAO₂ ↑"
             },
-            "Club Cells": {
-                location: "Terminal and respiratory bronchioles (replace goblet cells distally)",
-                mechanism: "Secrete surfactant-like protective proteins; detoxify inhaled substances via cytochrome P450",
-                pathology: "Damage from toxin exposure can impair small airway repair capacity"
+            "Arterial Blood": {
+                po2_value: "PaO₂ ≈ 92-100 mmHg (small drop from alveolar level = normal A-a gradient)",
+                mechanism: "Physiologic shunt: bronchial venous blood + thebesian veins mix deoxygenated blood into pulmonary veins",
+                clinical: "Normal A-a gradient &lt;10 mmHg (young); elevated A-a → V/Q mismatch, shunt, or diffusion impairment"
             },
-            "Alveolar Macrophages": {
-                location: "Alveolar lumen — beyond the reach of the mucociliary escalator",
-                mechanism: "Phagocytose bacteria, particles, and cellular debris; present antigens to immune cells",
-                pathology: "Overwhelmed in pneumoconioses (silicosis, asbestosis) → chronic inflammation and fibrosis"
+            "Tissue / Mitochondria": {
+                po2_value: "PO₂ drops to ~40 mmHg (venous) → ~5 mmHg at mitochondria",
+                mechanism: "O₂ consumed by oxidative phosphorylation; steep gradient drives diffusion from capillary to cell",
+                clinical: "Cyanide poisoning: mitochondria cannot use O₂ → venous PO₂ paradoxically high (O₂ not consumed)"
             }
         };
 
