@@ -1035,7 +1035,7 @@ def make_html(game, prev_file, next_file):
             droppedItem.dataset.entity = draggedEntity;
             droppedItem.dataset.category = draggedCategory;
             droppedItem.dataset.id = draggedElement.dataset.id;
-            if (entityName === draggedEntity && category === draggedCategory) {{
+            if (category === draggedCategory && draggedElement.textContent === gameData[entityName][category]) {{
                 droppedItem.classList.add('correct'); score++;
             }} else {{
                 droppedItem.classList.add('incorrect');
