@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPM Study – Drag &amp; Drop Games</title>
+<style>
+  :root{--bg:#080810;--surface:#101018;--surface2:#181824;--text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,0.07);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
+
+  /* ── Header ── */
+  header{background:linear-gradient(160deg,#0d0010 0%,#1a0030 50%,#080810 100%);border-bottom:1px solid var(--border);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+  header::after{content:'\2695';position:absolute;font-size:360px;opacity:.025;top:50%;left:50%;transform:translate(-50%,-50%);color:#8b5cf6;pointer-events:none;}
+  header h1{font-size:2.4rem;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#f8fafc 30%,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;position:relative;}
+  header p{color:var(--muted);font-size:.9rem;position:relative;}
+  .pills{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;position:relative;}
+  .pill{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.78rem;color:var(--muted);}
+  .pill b{color:#a78bfa;}
+
+  /* ── Search ── */
+  .search-wrap{max-width:460px;margin:22px auto 0;position:relative;}
+  .search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:10px 44px 10px 18px;color:var(--text);font-size:.85rem;outline:none;transition:.2s;}
+  .search-wrap input:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.18);}
+  .search-wrap input::placeholder{color:var(--muted);}
+  .search-ico{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem;pointer-events:none;}
+
+  /* ── Layout ── */
+  main{max-width:1380px;margin:0 auto;padding:32px 16px 56px;}
+  .no-results{text-align:center;color:var(--muted);padding:60px 20px;font-size:.9rem;display:none;}
+
+  /* ── Section ── */
+  .section{margin-bottom:32px;}
+  .section-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:1.2rem;line-height:1;}
+  .section-title{font-size:.95rem;font-weight:700;color:var(--text);}
+  .section-badge{margin-left:auto;background:var(--surface2);border-radius:10px;padding:2px 8px;font-size:.68rem;color:var(--muted);}
+
+  /* ── Cards ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:7px;}
+  a.card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:11px 12px;text-decoration:none;color:var(--text);display:flex;align-items:flex-start;gap:9px;transition:.15s;}
+  a.card:hover{border-color:var(--c,#8b5cf6);background:var(--surface2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.5);}
+  .num{flex-shrink:0;background:var(--c,#8b5cf6);color:#fff;border-radius:5px;padding:2px 5px;font-size:.6rem;font-weight:800;margin-top:1px;opacity:.9;letter-spacing:.3px;}
+  .ctitle{font-size:.75rem;line-height:1.45;color:var(--text);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>IPM Study</h1>
+  <p>Drag &amp; Drop Study Games &nbsp;&middot;&nbsp; Integrated Patient Management</p>
+  <div class="pills">
+    <span class="pill"><b>12</b> games</span>
+    <span class="pill"><b>12</b> source topics</span>
+    <span class="pill"><b>3</b> sections</span>
+    <a href="index.html" style="text-decoration:none;"><span class="pill" style="border-color:rgba(225,29,72,0.4);cursor:pointer;transition:.15s;" onmouseover="this.style.background='rgba(225,29,72,0.15)';this.style.borderColor='#e11d48'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(225,29,72,0.4)'">&#x2764; <b style="color:#e11d48">CardioStudy</b></span></a>
+    <a href="resp_index.html" style="text-decoration:none;"><span class="pill" style="border-color:rgba(20,184,166,0.4);cursor:pointer;transition:.15s;" onmouseover="this.style.background='rgba(20,184,166,0.15)';this.style.borderColor='#14b8a6'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(20,184,166,0.4)'">&#x1FAC1; <b style="color:#14b8a6">RespiStudy</b></span></a>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search by topic or number..." autocomplete="off">
+    <span class="search-ico">&#x2315;</span>
+  </div>
+</header>
+
+<main>
+<div class="no-results" id="noResults">No games match your search.</div>
+
+<!-- 1. PROFESSIONALISM & ETHICS -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x2696;</span>
+    <span class="section-title">Professionalism &amp; Ethics</span>
+    <span class="section-badge">4 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="ipm_05_professionalism.html" style="--c:#8b5cf6"><span class="num">05</span><span class="ctitle">Professionalism &amp; Identity Formation</span></a>
+    <a class="card" href="ipm_06_boundaries_safety.html" style="--c:#8b5cf6"><span class="num">06</span><span class="ctitle">Professional Boundaries &amp; Safety</span></a>
+    <a class="card" href="ipm_07_justice_allocation.html" style="--c:#7c3aed"><span class="num">07</span><span class="ctitle">Justice &amp; Resource Allocation</span></a>
+    <a class="card" href="ipm_08_physician_society.html" style="--c:#7c3aed"><span class="num">08</span><span class="ctitle">Physician &amp; Society</span></a>
+  </div>
+</section>
+
+<!-- 2. HEALTHCARE SYSTEMS & QUALITY -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F3E5;</span>
+    <span class="section-title">Healthcare Systems &amp; Quality</span>
+    <span class="section-badge">4 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="ipm_01_sdoh.html" style="--c:#a78bfa"><span class="num">01</span><span class="ctitle">Social Determinants of Health</span></a>
+    <a class="card" href="ipm_02_teamstepps.html" style="--c:#a78bfa"><span class="num">02</span><span class="ctitle">TeamSTEPPS &amp; Interprofessional Care</span></a>
+    <a class="card" href="ipm_03_value_based_care.html" style="--c:#8b5cf6"><span class="num">03</span><span class="ctitle">Value-Based Care &amp; Quality</span></a>
+    <a class="card" href="ipm_04_patient_safety.html" style="--c:#8b5cf6"><span class="num">04</span><span class="ctitle">Patient Safety &amp; Quality Improvement</span></a>
+  </div>
+</section>
+
+<!-- 3. WELLNESS & NUTRITION -->
+<section class="section" data-section>
+  <div class="section-head">
+    <span class="section-icon">&#x1F9D8;</span>
+    <span class="section-title">Wellness &amp; Nutrition</span>
+    <span class="section-badge">4 games</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="ipm_09_whole_health.html" style="--c:#a78bfa"><span class="num">09</span><span class="ctitle">Whole Health &amp; Positive Psychology</span></a>
+    <a class="card" href="ipm_10_burnout_resilience.html" style="--c:#a78bfa"><span class="num">10</span><span class="ctitle">Burnout &amp; Resilience</span></a>
+    <a class="card" href="ipm_11_nutrition_coaching.html" style="--c:#7c3aed"><span class="num">11</span><span class="ctitle">Functional Nutrition &amp; Coaching</span></a>
+    <a class="card" href="ipm_12_metabolic_change.html" style="--c:#7c3aed"><span class="num">12</span><span class="ctitle">Metabolic Flexibility &amp; Stages of Change</span></a>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.getElementById('search').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  let anyVisible = false;
+  document.querySelectorAll('[data-section]').forEach(sec => {
+    let secVisible = false;
+    sec.querySelectorAll('.card').forEach(c => {
+      const match = !q || c.textContent.toLowerCase().includes(q);
+      c.style.display = match ? '' : 'none';
+      if (match) secVisible = true;
+    });
+    sec.style.display = secVisible ? '' : 'none';
+    if (secVisible) anyVisible = true;
+  });
+  document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
+});
+</script>
+</body>
+</html>
