@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laryngeal Anatomy &amp; Innervation - Drag &amp; Drop Study Game</title>
+    <title>Hypercapnia: Causes &amp; Management - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_05_sinus_drainage.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_07_lung_development.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_29_hypoxemia.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_31_hypoxemia_vs_hypercapnia.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🗣️ Laryngeal Anatomy &amp; Innervation</h1>
-        <p class="subtitle">Match laryngeal structures to their features</p>
+        <h1>💨 Hypercapnia: Causes &amp; Management</h1>
+        <p class="subtitle">Match each cause of hypercapnia to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,13 +195,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('structure_type', this)">Structure Type</button>
-                    <button class="tab" onclick="switchTab('function', this)">Function</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Pearl</button>
+                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
+                    <button class="tab" onclick="switchTab('example', this)">Clinical Example</button>
+                    <button class="tab" onclick="switchTab('management', this)">Management</button>
                 </div>
-                <div id="structure_type-bank" class="word-bank active"></div>
-                <div id="function-bank" class="word-bank"></div>
-                <div id="clinical-bank" class="word-bank"></div>
+                <div id="mechanism-bank" class="word-bank active"></div>
+                <div id="example-bank" class="word-bank"></div>
+                <div id="management-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -216,39 +216,29 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["structure_type", "function", "clinical"];
-        const categoryLabels = {"structure_type": "Structure Type", "function": "Function", "clinical": "Clinical Pearl"};
+        const categoryKeys = ["mechanism", "example", "management"];
+        const categoryLabels = {"mechanism": "Mechanism", "example": "Clinical Example", "management": "Management"};
 
         const gameData = {
-            "Epiglottis": {
-                structure_type: "Unpaired elastic cartilage; leaf-shaped; attached to thyroid cartilage",
-                function: "Folds posteriorly during swallowing to close laryngeal inlet and prevent aspiration",
-                clinical: "Epiglottitis: life-threatening swelling (H. influenzae); thumb sign on lateral X-ray"
+            "Decreased Alveolar Ventilation": {
+                mechanism: "PaCO2 = VCO2 / VA; if VA falls (hypoventilation), PaCO2 must rise; primary cause of hypercapnia",
+                example: "Opioid overdose, obesity hypoventilation, neuromuscular disease (GBS, MG)",
+                management: "Increase alveolar ventilation: treat underlying cause; mechanical ventilation if needed"
             },
-            "Thyroid Cartilage": {
-                structure_type: "Unpaired hyaline cartilage; largest laryngeal cartilage (&quot;Adam&#39;s apple&quot;)",
-                function: "Protects and supports the vocal folds; attachment for vocal ligaments",
-                clinical: "Laryngeal prominence more visible in males due to testosterone-driven growth"
+            "Increased Dead Space": {
+                mechanism: "Dead space ventilation is wasted → effective alveolar ventilation decreases → CO2 rises",
+                example: "COPD (emphysema), pulmonary embolism, ARDS with high VD/VT ratio",
+                management: "Increase minute ventilation to compensate; treat underlying pathology; mechanical ventilation"
             },
-            "Cricoid Cartilage": {
-                structure_type: "Unpaired hyaline cartilage; complete signet ring shape",
-                function: "Only complete cartilaginous ring in the airway; landmark for cricothyrotomy",
-                clinical: "Cricothyrotomy: emergency airway through cricothyroid membrane (between thyroid and cricoid)"
+            "Increased CO2 Production": {
+                mechanism: "Normally compensated by increased ventilation; becomes problematic when ventilatory reserve is limited",
+                example: "Fever, sepsis, burns, excessive carbohydrate feeding in ventilated patients (high RQ)",
+                management: "Reduce metabolic demand (treat fever, adjust nutrition); ensure adequate ventilatory reserve"
             },
-            "Posterior Cricoarytenoid": {
-                structure_type: "Paired intrinsic laryngeal muscle attached to arytenoid cartilage",
-                function: "ONLY muscle that abducts (opens) the vocal folds — essential for breathing",
-                clinical: "Bilateral paralysis → airway obstruction (cords fixed in midline); surgical emergency"
-            },
-            "Recurrent Laryngeal Nerve": {
-                structure_type: "Branch of vagus nerve (CN X); left loops under aortic arch, right under subclavian",
-                function: "Motor to ALL intrinsic laryngeal muscles except cricothyroid; sensory below vocal folds",
-                clinical: "Vulnerable during thyroid surgery; unilateral damage → hoarseness; bilateral → stridor"
-            },
-            "Superior Laryngeal Nerve": {
-                structure_type: "Branch of vagus nerve (CN X); divides into internal and external branches",
-                function: "Internal branch: sensory above vocal folds; External branch: motor to cricothyroid (pitch)",
-                clinical: "External branch injury → monotone voice (cannot tense vocal cords to change pitch)"
+            "Oxygen-Induced Hypercapnia": {
+                mechanism: "Excessive O2 in COPD: blunts hypoxic drive + Haldane effect (O2 displaces CO2 from Hb) + reverses HPV",
+                example: "COPD patient given high-flow O2 → PaCO2 rises from 55 to 80 mmHg → obtundation",
+                management: "Target SpO2 88-92% in COPD; use controlled low-flow O2; Venturi mask for precise FiO2"
             }
         };
 
@@ -359,7 +349,7 @@
             droppedItem.dataset.entity = draggedEntity;
             droppedItem.dataset.category = draggedCategory;
             droppedItem.dataset.id = draggedElement.dataset.id;
-            if (entityName === draggedEntity && category === draggedCategory) {
+            if (category === draggedCategory && draggedElement.textContent === gameData[entityName][category]) {
                 droppedItem.classList.add('correct'); score++;
             } else {
                 droppedItem.classList.add('incorrect');

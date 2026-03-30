@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Respiratory Tract Histology - Drag &amp; Drop Study Game</title>
+    <title>Asthma &amp; COPD Pharmacotherapy - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,11 +171,14 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_02_alveolar_cells.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
+<a href="resp_36_asthma.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_38_bronchiectasis.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+</div>
 
     <div class="container">
-        <h1>🔬 Respiratory Tract Histology</h1>
-        <p class="subtitle">Match each structure to its epithelium and features</p>
+        <h1>💊 Asthma &amp; COPD Pharmacotherapy</h1>
+        <p class="subtitle">Match each medication class to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -192,13 +195,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('epithelium', this)">Epithelium Type</button>
-                    <button class="tab" onclick="switchTab('special_features', this)">Special Features</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Pearl</button>
+                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism of Action</button>
+                    <button class="tab" onclick="switchTab('indication', this)">Primary Indication</button>
+                    <button class="tab" onclick="switchTab('side_effects', this)">Key Side Effects</button>
                 </div>
-                <div id="epithelium-bank" class="word-bank active"></div>
-                <div id="special_features-bank" class="word-bank"></div>
-                <div id="clinical-bank" class="word-bank"></div>
+                <div id="mechanism-bank" class="word-bank active"></div>
+                <div id="indication-bank" class="word-bank"></div>
+                <div id="side_effects-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -213,39 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["epithelium", "special_features", "clinical"];
-        const categoryLabels = {"epithelium": "Epithelium Type", "special_features": "Special Features", "clinical": "Clinical Pearl"};
+        const categoryKeys = ["mechanism", "indication", "side_effects"];
+        const categoryLabels = {"mechanism": "Mechanism of Action", "indication": "Primary Indication", "side_effects": "Key Side Effects"};
 
         const gameData = {
-            "Nasal Cavity": {
-                epithelium: "Ciliated pseudostratified columnar (respiratory) with goblet cells; olfactory epithelium at roof",
-                special_features: "Rich vascular lamina propria; warms and humidifies inspired air",
-                clinical: "Kiesselbach plexus on anterior septum — most common site of epistaxis"
+            "SABA (Albuterol)": {
+                mechanism: "Short-acting beta-2 agonist → bronchial smooth muscle relaxation → rapid bronchodilation (onset 5-15 min)",
+                indication: "Acute relief (\"rescue\") for asthma and COPD exacerbations; pre-exercise prophylaxis",
+                side_effects: "Tremor, tachycardia, hypokalemia (drives K+ into cells); tolerance with overuse"
             },
-            "Oropharynx / Laryngopharynx": {
-                epithelium: "Non-keratinized stratified squamous epithelium",
-                special_features: "Resists mechanical abrasion from food bolus passage",
-                clinical: "Palatine tonsils in oropharynx; Zenker diverticulum in laryngopharynx"
+            "Inhaled Corticosteroids": {
+                mechanism: "Suppress airway inflammation by inhibiting NF-kB, reducing eosinophils, decreasing cytokine production",
+                indication: "Cornerstone of persistent asthma controller therapy (all severity levels); COPD: add-on for frequent exacerbations",
+                side_effects: "Oral candidiasis (thrush), dysphonia; rinse mouth after use; systemic effects rare at standard doses"
             },
-            "Trachea": {
-                epithelium: "Ciliated pseudostratified columnar with goblet cells",
-                special_features: "C-shaped hyaline cartilage rings; submucosa with seromucous glands; adventitia layer",
-                clinical: "Tracheoesophageal fistula: posterior membranous wall connects to esophagus"
+            "Leukotriene Receptor Antagonists": {
+                mechanism: "Montelukast blocks CysLT1 receptor → reduces bronchoconstriction, mucus, eosinophilic inflammation",
+                indication: "Adjunctive asthma therapy; exercise-induced bronchoconstriction; aspirin-exacerbated respiratory disease",
+                side_effects: "FDA black box warning: neuropsychiatric events (mood changes, suicidality); generally well-tolerated"
             },
-            "Bronchioles": {
-                epithelium: "Transitions: simple columnar → simple cuboidal (no goblet cells at terminal level)",
-                special_features: "No cartilage; prominent smooth muscle; club cells replace goblet cells distally",
-                clinical: "Asthma: smooth muscle contraction → bronchoconstriction; albuterol relaxes via β₂ receptors"
+            "Anti-IgE (Omalizumab)": {
+                mechanism: "Monoclonal antibody binds free IgE → prevents IgE from binding mast cells → reduces allergic cascades",
+                indication: "Moderate-to-severe allergic asthma uncontrolled on ICS/LABA; requires elevated serum IgE",
+                side_effects: "Anaphylaxis risk (0.1-0.2%); injection site reactions; administered subcutaneously every 2-4 weeks"
             },
-            "Vocal Cords": {
-                epithelium: "Non-keratinized stratified squamous epithelium (exception to respiratory epithelium)",
-                special_features: "Adapted for mechanical stress of vibration during phonation",
-                clinical: "Singer's nodules from chronic vocal cord abuse"
-            },
-            "Alveoli": {
-                epithelium: "Simple squamous (type I pneumocytes cover 95% of surface area)",
-                special_features: "Type II pneumocytes (cuboidal): secrete surfactant; progenitor cells for type I",
-                clinical: "Tobacco smoke → metaplasia of respiratory epithelium → dysplasia → potential neoplasia"
+            "Anticholinergics (Ipratropium)": {
+                mechanism: "Blocks muscarinic M3 receptors on bronchial smooth muscle → bronchodilation",
+                indication: "Acute asthma (with SABA in nebulizer); COPD maintenance (tiotropium = LAMA preferred)",
+                side_effects: "Dry mouth, urinary retention, blurred vision (minimal systemic absorption with inhaled route)"
             }
         };
 

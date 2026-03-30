@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alveolar &amp; Airway Cell Types - Drag &amp; Drop Study Game</title>
+    <title>Lung Volumes &amp; Capacities - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_01_histology.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_03_lung_development.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_25_airway_resistance.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_27_pft_patterns.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🧫 Alveolar &amp; Airway Cell Types</h1>
-        <p class="subtitle">Match each cell type to its characteristics</p>
+        <h1>📏 Lung Volumes &amp; Capacities</h1>
+        <p class="subtitle">Match each volume or capacity to its definition</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,12 +195,12 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('morphology', this)">Morphology</button>
-                    <button class="tab" onclick="switchTab('function', this)">Primary Function</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Relevance</button>
+                    <button class="tab active" onclick="switchTab('definition', this)">Definition</button>
+                    <button class="tab" onclick="switchTab('normal_value', this)">Normal Value / Measurement</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Significance</button>
                 </div>
-                <div id="morphology-bank" class="word-bank active"></div>
-                <div id="function-bank" class="word-bank"></div>
+                <div id="definition-bank" class="word-bank active"></div>
+                <div id="normal_value-bank" class="word-bank"></div>
                 <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
@@ -216,29 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["morphology", "function", "clinical"];
-        const categoryLabels = {"morphology": "Morphology", "function": "Primary Function", "clinical": "Clinical Relevance"};
+        const categoryKeys = ["definition", "normal_value", "clinical"];
+        const categoryLabels = {"definition": "Definition", "normal_value": "Normal Value / Measurement", "clinical": "Clinical Significance"};
 
         const gameData = {
-            "Type I Pneumocytes": {
-                morphology: "Large, flat squamous cells; cover ~95% of alveolar surface area",
-                function: "Form the alveolar side of the blood-air barrier; enable gas diffusion",
-                clinical: "Cannot divide — must be replaced by type II pneumocyte differentiation"
+            "Tidal Volume (TV)": {
+                definition: "Volume of air inhaled or exhaled in one normal breath",
+                normal_value: "~500 mL; measured by spirometry",
+                clinical: "Used to calculate minute ventilation (VE = TV x RR) and alveolar ventilation"
             },
-            "Type II Pneumocytes": {
-                morphology: "Cuboidal cells with lamellar bodies; ~5% of alveolar surface but more numerous",
-                function: "Secrete pulmonary surfactant (DPPC/lecithin); progenitor cells for type I",
-                clinical: "L/S ratio >= 2.0 indicates fetal lung maturity (~34-36 weeks); target of antenatal steroids"
+            "Residual Volume (RV)": {
+                definition: "Volume of air remaining in lungs after maximal expiration; CANNOT be measured by spirometry",
+                normal_value: "~1200 mL; measured by helium dilution, nitrogen washout, or body plethysmography",
+                clinical: "Increased in obstructive diseases (air trapping); decreased in restrictive diseases"
             },
-            "Alveolar Macrophages": {
-                morphology: "Large phagocytic cells (\"dust cells\") in alveolar lumen",
-                function: "Phagocytose inhaled particles, bacteria, and debris beyond the mucociliary escalator",
-                clinical: "Hemosiderin-laden macrophages (\"heart failure cells\") in pulmonary edema"
+            "Functional Residual Capacity (FRC)": {
+                definition: "Volume remaining after normal expiration = ERV + RV; resting lung volume",
+                normal_value: "~2400 mL; cannot be measured by spirometry (includes RV)",
+                clinical: "Represents the equilibrium point where lung elastic recoil = chest wall recoil (outward)"
             },
-            "Club Cells (Clara Cells)": {
-                morphology: "Non-ciliated, dome-shaped secretory cells in terminal bronchioles",
-                function: "Secrete protective proteins; metabolize inhaled toxins; serve as progenitor cells",
-                clinical: "Abundant where goblet cells are absent; help maintain small airway patency"
+            "Total Lung Capacity (TLC)": {
+                definition: "Maximum volume of air in lungs after maximal inspiration = TV + IRV + ERV + RV",
+                normal_value: "~6000 mL; cannot be measured by spirometry (includes RV)",
+                clinical: "Increased in obstructive (hyperinflation); decreased in restrictive diseases; KEY to distinguish pattern"
+            },
+            "Vital Capacity (VC)": {
+                definition: "Maximum air that can be exhaled after maximal inspiration = IRV + TV + ERV (does NOT include RV)",
+                normal_value: "~4800 mL; measured by spirometry",
+                clinical: "Decreased in both obstructive and restrictive diseases; VC <10-15 mL/kg may indicate need for ventilation"
             }
         };
 

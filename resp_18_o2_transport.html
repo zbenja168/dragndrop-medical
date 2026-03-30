@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conducting vs Respiratory Zones - Drag &amp; Drop Study Game</title>
+    <title>Oxygen Transport &amp; Hemoglobin - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_02_muscles_of_breathing.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_04_lung_anatomy.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_17_pulmonary_circulation.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_19_co2_transport.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🌬️ Conducting vs Respiratory Zones</h1>
-        <p class="subtitle">Classify airway structures by zone and features</p>
+        <h1>🔴 Oxygen Transport &amp; Hemoglobin</h1>
+        <p class="subtitle">Match each concept of O2 transport to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,13 +195,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('zone', this)">Zone</button>
-                    <button class="tab" onclick="switchTab('wall_structure', this)">Wall Structure</button>
-                    <button class="tab" onclick="switchTab('key_feature', this)">Key Feature</button>
+                    <button class="tab active" onclick="switchTab('description', this)">Description</button>
+                    <button class="tab" onclick="switchTab('physiology', this)">Physiology</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Relevance</button>
                 </div>
-                <div id="zone-bank" class="word-bank active"></div>
-                <div id="wall_structure-bank" class="word-bank"></div>
-                <div id="key_feature-bank" class="word-bank"></div>
+                <div id="description-bank" class="word-bank active"></div>
+                <div id="physiology-bank" class="word-bank"></div>
+                <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -216,34 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["zone", "wall_structure", "key_feature"];
-        const categoryLabels = {"zone": "Zone", "wall_structure": "Wall Structure", "key_feature": "Key Feature"};
+        const categoryKeys = ["description", "physiology", "clinical"];
+        const categoryLabels = {"description": "Description", "physiology": "Physiology", "clinical": "Clinical Relevance"};
 
         const gameData = {
-            "Trachea": {
-                zone: "Conducting zone — no gas exchange; humidifies and warms air",
-                wall_structure: "C-shaped hyaline cartilage rings anteriorly; trachealis muscle posteriorly",
-                key_feature: "~11 cm long; bifurcates at carina (T5) into left and right main bronchi"
+            "Dissolved O2": {
+                description: "O2 physically dissolved in plasma; directly proportional to PaO2 (Henry's law)",
+                physiology: "Only ~1.5% of total O2 content at normal PaO2; 0.003 mL O2 per mmHg per dL plasma",
+                clinical: "Only dissolved O2 exerts partial pressure and drives diffusion gradient into tissues"
             },
-            "Bronchi": {
-                zone: "Conducting zone — right main bronchus is wider with narrower angle",
-                wall_structure: "Irregular cartilage plates (decrease distally); smooth muscle increases distally",
-                key_feature: "Foreign bodies lodge preferentially in right main bronchus"
+            "Hemoglobin-Bound O2": {
+                description: "~98.5% of O2 carried bound to hemoglobin; each Hb binds 4 O2 molecules (cooperative binding)",
+                physiology: "O2 content = (1.34 x Hb x SaO2) + (0.003 x PaO2); normal ~20 mL O2/dL",
+                clinical: "Anemia reduces O2 content despite normal PaO2 and SaO2; cyanosis when deoxyHb >5 g/dL"
             },
-            "Terminal Bronchioles": {
-                zone: "Last structure of conducting zone — end of anatomic dead space",
-                wall_structure: "No cartilage; smooth muscle; simple cuboidal epithelium with club cells",
-                key_feature: "Club cells secrete protective proteins; progenitor cells for repair"
+            "Oxyhemoglobin Dissociation Curve": {
+                description: "Sigmoidal curve relating PO2 to Hb O2 saturation; P50 = ~26.7 mmHg (PO2 at 50% saturation)",
+                physiology: "Cooperative binding: first O2 hardest to bind, subsequent O2 easier → steep middle portion of curve",
+                clinical: "Flat upper portion: large PO2 changes above 70 mmHg cause small saturation changes (safety buffer)"
             },
-            "Respiratory Bronchioles": {
-                zone: "First structure of respiratory (gas exchange) zone",
-                wall_structure: "Thin walls with scattered alveoli; minimal smooth muscle",
-                key_feature: "Transition point: some gas exchange begins here"
+            "Right Shift (Decreased Affinity)": {
+                description: "Hb releases O2 more readily; shifted by increased temp, CO2, H+, and 2,3-DPG",
+                physiology: "Bohr effect: increased CO2/H+ → right shift → enhanced O2 unloading at tissues",
+                clinical: "Exercise, fever, acidosis → right shift → more O2 delivered to metabolically active tissues"
             },
-            "Alveoli": {
-                zone: "Respiratory zone — primary site of O₂/CO₂ exchange",
-                wall_structure: "Simple squamous epithelium (type I pneumocytes); surfactant layer",
-                key_feature: "~400 million per lung; enormous surface area (~70 m²)"
+            "Left Shift (Increased Affinity)": {
+                description: "Hb holds O2 more tightly; shifted by decreased temp, CO2, H+, and 2,3-DPG",
+                physiology: "Fetal hemoglobin (HbF) has left-shifted curve — higher O2 affinity than adult HbA (cannot bind 2,3-DPG)",
+                clinical: "CO poisoning: CO shifts curve left + reduces O2 content; methemoglobinemia also shifts left"
             }
         };
 
@@ -354,7 +354,7 @@
             droppedItem.dataset.entity = draggedEntity;
             droppedItem.dataset.category = draggedCategory;
             droppedItem.dataset.id = draggedElement.dataset.id;
-            if (entityName === draggedEntity && category === draggedCategory) {
+            if (category === draggedCategory && draggedElement.textContent === gameData[entityName][category]) {
                 droppedItem.classList.add('correct'); score++;
             } else {
                 droppedItem.classList.add('incorrect');

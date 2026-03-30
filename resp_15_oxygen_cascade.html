@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_14_dead_space_ventilation.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_14_dead_space.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
 <a href="resp_16_diffusion_dlco.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
         <h1>⬇️ Oxygen Cascade &amp; Alveolar Gas Equation</h1>
-        <p class="subtitle">Match each stage of O₂ delivery to its values and mechanisms</p>
+        <p class="subtitle">Match each stage of O2 delivery to its values and mechanisms</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,8 +195,8 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('po2_value', this)">PO₂ Value</button>
-                    <button class="tab" onclick="switchTab('mechanism', this)">Mechanism of PO₂ Drop</button>
+                    <button class="tab active" onclick="switchTab('po2_value', this)">PO2 Value</button>
+                    <button class="tab" onclick="switchTab('mechanism', this)">Mechanism of PO2 Drop</button>
                     <button class="tab" onclick="switchTab('clinical', this)">Clinical Application</button>
                 </div>
                 <div id="po2_value-bank" class="word-bank active"></div>
@@ -217,33 +217,33 @@
     </div>
     <script>
         const categoryKeys = ["po2_value", "mechanism", "clinical"];
-        const categoryLabels = {"po2_value": "PO\u2082 Value", "mechanism": "Mechanism of PO\u2082 Drop", "clinical": "Clinical Application"};
+        const categoryLabels = {"po2_value": "PO2 Value", "mechanism": "Mechanism of PO2 Drop", "clinical": "Clinical Application"};
 
         const gameData = {
-            "Atmospheric O₂": {
-                po2_value: "PO₂ = 159 mmHg (FiO₂ 0.21 × 760 mmHg at sea level)",
-                mechanism: "Dalton's Law: partial pressure = fractional concentration × total atmospheric pressure",
-                clinical: "High altitude: lower Patm → lower PiO₂ → hypoxemia (e.g., Mt. Everest Patm ~250 mmHg)"
+            "Atmospheric O2": {
+                po2_value: "PO2 = 159 mmHg (FiO2 0.21 x 760 mmHg at sea level)",
+                mechanism: "Dalton's Law: partial pressure = fractional concentration x total atmospheric pressure",
+                clinical: "High altitude: lower Patm → lower PiO2 → hypoxemia (e.g., Mt. Everest Patm ~250 mmHg)"
             },
             "Humidified Air (Trachea)": {
-                po2_value: "PiO₂ = ~149 mmHg (159 → 149; ~10 mmHg drop from water vapor)",
-                mechanism: "Water vapor pressure = 47 mmHg at body temp; PiO₂ = FiO₂ × (Patm - 47)",
-                clinical: "Alveolar gas equation starts with PiO₂: PAO₂ = PiO₂ - (PaCO₂ / R)"
+                po2_value: "PiO2 = ~149 mmHg (159 → 149; ~10 mmHg drop from water vapor)",
+                mechanism: "Water vapor pressure = 47 mmHg at body temp; PiO2 = FiO2 x (Patm - 47)",
+                clinical: "Alveolar gas equation starts with PiO2: PAO2 = PiO2 - (PaCO2 / R)"
             },
             "Alveolar Gas": {
-                po2_value: "PAO₂ ≈ 100 mmHg (149 → 100; ~50 mmHg drop from CO₂ dilution)",
-                mechanism: "CO₂ continuously entering alveoli from blood displaces O₂; R (respiratory quotient) = VCO₂/VO₂ ≈ 0.8",
-                clinical: "Hypoventilation → PaCO₂ ↑ → PAO₂ ↓; Hyperventilation → PaCO₂ ↓ → PAO₂ ↑"
+                po2_value: "PAO2 approx 100 mmHg (149 → 100; ~50 mmHg drop from CO2 dilution)",
+                mechanism: "CO2 continuously entering alveoli from blood displaces O2; R (respiratory quotient) = VCO2/VO2 approx 0.8",
+                clinical: "Hypoventilation → PaCO2 up → PAO2 down; Hyperventilation → PaCO2 down → PAO2 up"
             },
             "Arterial Blood": {
-                po2_value: "PaO₂ ≈ 92-100 mmHg (small drop from alveolar level = normal A-a gradient)",
+                po2_value: "PaO2 approx 92-100 mmHg (small drop from alveolar level = normal A-a gradient)",
                 mechanism: "Physiologic shunt: bronchial venous blood + thebesian veins mix deoxygenated blood into pulmonary veins",
                 clinical: "Normal A-a gradient <10 mmHg (young); elevated A-a → V/Q mismatch, shunt, or diffusion impairment"
             },
             "Tissue / Mitochondria": {
-                po2_value: "PO₂ drops to ~40 mmHg (venous) → ~5 mmHg at mitochondria",
-                mechanism: "O₂ consumed by oxidative phosphorylation; steep gradient drives diffusion from capillary to cell",
-                clinical: "Cyanide poisoning: mitochondria cannot use O₂ → venous PO₂ paradoxically high (O₂ not consumed)"
+                po2_value: "PO2 drops to ~40 mmHg (venous) → ~5 mmHg at mitochondria",
+                mechanism: "O2 consumed by oxidative phosphorylation; steep gradient drives diffusion from capillary to cell",
+                clinical: "Cyanide poisoning: mitochondria cannot use O2 → venous PO2 paradoxically high (O2 not consumed)"
             }
         };
 

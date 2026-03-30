@@ -172,7 +172,7 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_09_muscles_of_breathing.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_09_muscles_breathing.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
 <a href="resp_11_airway_defense.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
@@ -221,29 +221,29 @@
 
         const gameData = {
             "Surface Area (A)": {
-                role_in_ficks_law: "Directly proportional to gas diffusion rate (Vgas = A × D × ΔP / T)",
+                role_in_ficks_law: "Directly proportional to gas diffusion rate (Vgas = A x D x deltaP / T)",
                 disease_example: "Emphysema: destruction of alveolar walls → reduced surface area → impaired diffusion",
                 clinical: "Exercise increases functional surface area by recruiting additional capillary beds"
             },
             "Membrane Thickness (T)": {
                 role_in_ficks_law: "Inversely proportional to diffusion rate — thicker membrane = slower gas transfer",
-                disease_example: "Pulmonary fibrosis: thickened interstitium → impaired O₂ diffusion → hypoxemia at rest/exertion",
+                disease_example: "Pulmonary fibrosis: thickened interstitium → impaired O2 diffusion → hypoxemia at rest/exertion",
                 clinical: "Pulmonary edema increases effective thickness → impairs gas exchange"
             },
-            "Pressure Gradient (ΔP)": {
+            "Pressure Gradient (deltaP)": {
                 role_in_ficks_law: "Primary driving force for diffusion; directly proportional to diffusion rate",
-                disease_example: "High altitude: decreased atmospheric PO₂ → decreased alveolar-capillary gradient → hypoxemia",
-                clinical: "Supplemental O₂ increases FiO₂ → steepens alveolar gradient → improves oxygenation"
+                disease_example: "High altitude: decreased atmospheric PO2 → decreased alveolar-capillary gradient → hypoxemia",
+                clinical: "Supplemental O2 increases FiO2 → steepens alveolar gradient → improves oxygenation"
             },
             "Diffusion Coefficient (D)": {
                 role_in_ficks_law: "Gas-specific constant; depends on molecular weight and solubility in tissue",
-                disease_example: "CO₂ has 20× higher solubility than O₂ → diffuses much more readily across membrane",
-                clinical: "CO₂ retention is a late finding — O₂ impairment occurs first because CO₂ diffuses so easily"
+                disease_example: "CO2 has 20x higher solubility than O2 → diffuses much more readily across membrane",
+                clinical: "CO2 retention is a late finding — O2 impairment occurs first because CO2 diffuses so easily"
             },
             "Hemoglobin": {
-                role_in_ficks_law: "Not in Fick's equation directly, but maintains gradient by binding O₂ (removing it from solution)",
-                disease_example: "Anemia: decreased Hb → less O₂ binding → decreased DLCO; Polycythemia: increased DLCO",
-                clinical: "Only dissolved (unbound) gas exerts partial pressure; Hb keeps PaO₂ low to maintain diffusion gradient"
+                role_in_ficks_law: "Not in Fick's equation directly, but maintains gradient by binding O2 (removing it from solution)",
+                disease_example: "Anemia: decreased Hb → less O2 binding → decreased DLCO; Polycythemia: increased DLCO",
+                clinical: "Only dissolved (unbound) gas exerts partial pressure; Hb keeps PaO2 low to maintain diffusion gradient"
             }
         };
 

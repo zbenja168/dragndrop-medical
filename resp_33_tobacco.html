@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dead Space &amp; Ventilation - Drag &amp; Drop Study Game</title>
+    <title>Tobacco Smoking &amp; Cessation - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_13_surfactant_compliance.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_15_oxygen_cascade.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_32_obstructive_restrictive.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_34_copd_pathophys.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>📐 Dead Space &amp; Ventilation</h1>
-        <p class="subtitle">Match each ventilation concept to its details</p>
+        <h1>🚬 Tobacco Smoking &amp; Cessation</h1>
+        <p class="subtitle">Match each aspect of tobacco to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,13 +195,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('definition', this)">Definition</button>
-                    <button class="tab" onclick="switchTab('equation_or_value', this)">Equation / Normal Value</button>
-                    <button class="tab" onclick="switchTab('clinical_example', this)">Clinical Example</button>
+                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
+                    <button class="tab" onclick="switchTab('clinical_effects', this)">Clinical Effects</button>
+                    <button class="tab" onclick="switchTab('treatment', this)">Cessation Pharmacotherapy</button>
                 </div>
-                <div id="definition-bank" class="word-bank active"></div>
-                <div id="equation_or_value-bank" class="word-bank"></div>
-                <div id="clinical_example-bank" class="word-bank"></div>
+                <div id="mechanism-bank" class="word-bank active"></div>
+                <div id="clinical_effects-bank" class="word-bank"></div>
+                <div id="treatment-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -216,34 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["definition", "equation_or_value", "clinical_example"];
-        const categoryLabels = {"definition": "Definition", "equation_or_value": "Equation / Normal Value", "clinical_example": "Clinical Example"};
+        const categoryKeys = ["mechanism", "clinical_effects", "treatment"];
+        const categoryLabels = {"mechanism": "Mechanism", "clinical_effects": "Clinical Effects", "treatment": "Cessation Pharmacotherapy"};
 
         const gameData = {
-            "Anatomic Dead Space": {
-                definition: "Volume of conducting airways (nose/mouth to terminal bronchioles) where no gas exchange occurs",
-                equation_or_value: "~150 mL in adults (~1 mL per pound ideal body weight)",
-                clinical_example: "Mechanical ventilation tubing adds to anatomic dead space → adjust tidal volumes"
+            "Nicotine": {
+                mechanism: "Binds nicotinic acetylcholine receptors in CNS → dopamine release in mesolimbic pathway → reward and addiction",
+                clinical_effects: "Increased heart rate, vasoconstriction, appetite suppression; highly addictive; withdrawal: irritability, anxiety, cravings",
+                treatment: "NRT (patch, gum, lozenge, inhaler, nasal spray): provides nicotine without tobacco combustion products"
             },
-            "Alveolar Dead Space": {
-                definition: "Ventilated alveoli that receive NO blood flow — ventilation is wasted",
-                equation_or_value: "Minimal in healthy lungs; increases with pulmonary vascular disease",
-                clinical_example: "Pulmonary embolism: clot blocks perfusion → ventilated but unperfused alveoli"
+            "Tar and Carcinogens": {
+                mechanism: "Polycyclic aromatic hydrocarbons and nitrosamines → DNA damage → mutations in oncogenes and tumor suppressors",
+                clinical_effects: "Lung cancer (#1 cause), bladder cancer, laryngeal cancer, esophageal cancer; dose-response with pack-years",
+                treatment: "Cessation at any age reduces risk; lung cancer screening (low-dose CT) for high-risk patients (20+ pack-years)"
             },
-            "Physiologic Dead Space": {
-                definition: "Total wasted ventilation = anatomic + alveolar dead space",
-                equation_or_value: "Bohr equation: VD/VT = (PaCO₂ - PECO₂) / PaCO₂; normal VD/VT = 0.2-0.4",
-                clinical_example: "Emphysema and ARDS: elevated physiologic dead space → inefficient gas exchange → hypercapnia"
+            "Airway Damage": {
+                mechanism: "Oxidants and irritants → ciliary dysfunction, goblet cell hyperplasia, inflammatory cell recruitment → protease release",
+                clinical_effects: "COPD (chronic bronchitis + emphysema); recurrent infections; accelerated FEV1 decline",
+                treatment: "Varenicline: partial nicotinic receptor agonist — highest cessation rates; reduces cravings and rewarding effects"
             },
-            "Minute Ventilation": {
-                definition: "Total volume of air moved per minute (includes dead space)",
-                equation_or_value: "VE = VT × RR (e.g., 500 mL × 12 = 6000 mL/min)",
-                clinical_example: "Same VE can yield very different alveolar ventilation depending on breathing pattern"
+            "Cardiovascular Effects": {
+                mechanism: "Endothelial dysfunction, oxidative stress, platelet activation, increased fibrinogen → accelerated atherosclerosis",
+                clinical_effects: "Coronary artery disease, peripheral artery disease, stroke, aortic aneurysm; synergistic with other risk factors",
+                treatment: "Bupropion: NDRI that also blocks nicotinic receptors; helpful for patients with co-existing depression"
             },
-            "Alveolar Ventilation": {
-                definition: "Volume of fresh air reaching alveoli per minute — the effective gas exchange ventilation",
-                equation_or_value: "VA = (VT - VD) × RR (e.g., (500-150) × 12 = 4200 mL/min)",
-                clinical_example: "Slow deep breaths (1000 × 6) = VA 5100 mL/min vs rapid shallow (200 × 30) = VA 1500 mL/min"
+            "Vaping / E-Cigarettes": {
+                mechanism: "Aerosolized nicotine with propylene glycol/vegetable glycerin; fewer combustion products but NOT harmless",
+                clinical_effects: "EVALI (e-cigarette/vaping-associated lung injury); nicotine addiction especially in youth; unknown long-term effects",
+                treatment: "Not recommended as cessation strategy; FDA has not approved e-cigarettes for smoking cessation"
             }
         };
 

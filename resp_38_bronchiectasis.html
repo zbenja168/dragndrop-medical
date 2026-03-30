@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alveolar &amp; Airway Cell Types - Drag &amp; Drop Study Game</title>
+    <title>Bronchiectasis - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_01_histology.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_03_lung_development.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_37_asthma_copd_treatment.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_39_cf_genetics.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🧫 Alveolar &amp; Airway Cell Types</h1>
-        <p class="subtitle">Match each cell type to its characteristics</p>
+        <h1>🫁 Bronchiectasis</h1>
+        <p class="subtitle">Match each feature of bronchiectasis</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,12 +195,12 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('morphology', this)">Morphology</button>
-                    <button class="tab" onclick="switchTab('function', this)">Primary Function</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Relevance</button>
+                    <button class="tab active" onclick="switchTab('definition', this)">Definition / Pathology</button>
+                    <button class="tab" onclick="switchTab('etiology', this)">Etiology / Risk Factor</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Features / Diagnosis</button>
                 </div>
-                <div id="morphology-bank" class="word-bank active"></div>
-                <div id="function-bank" class="word-bank"></div>
+                <div id="definition-bank" class="word-bank active"></div>
+                <div id="etiology-bank" class="word-bank"></div>
                 <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
@@ -216,29 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["morphology", "function", "clinical"];
-        const categoryLabels = {"morphology": "Morphology", "function": "Primary Function", "clinical": "Clinical Relevance"};
+        const categoryKeys = ["definition", "etiology", "clinical"];
+        const categoryLabels = {"definition": "Definition / Pathology", "etiology": "Etiology / Risk Factor", "clinical": "Clinical Features / Diagnosis"};
 
         const gameData = {
-            "Type I Pneumocytes": {
-                morphology: "Large, flat squamous cells; cover ~95% of alveolar surface area",
-                function: "Form the alveolar side of the blood-air barrier; enable gas diffusion",
-                clinical: "Cannot divide — must be replaced by type II pneumocyte differentiation"
+            "Bronchiectasis (General)": {
+                definition: "Irreversible dilation and destruction of bronchial walls due to chronic infection and inflammation",
+                etiology: "Vicious cycle: impaired clearance → infection → inflammation → structural damage → worsened clearance",
+                clinical: "Chronic productive cough with copious purulent sputum; recurrent pulmonary infections; hemoptysis"
             },
-            "Type II Pneumocytes": {
-                morphology: "Cuboidal cells with lamellar bodies; ~5% of alveolar surface but more numerous",
-                function: "Secrete pulmonary surfactant (DPPC/lecithin); progenitor cells for type I",
-                clinical: "L/S ratio >= 2.0 indicates fetal lung maturity (~34-36 weeks); target of antenatal steroids"
+            "Cystic Fibrosis": {
+                definition: "Most common cause of bronchiectasis in developed nations; CFTR mutation → thick secretions",
+                etiology: "Defective chloride channel → dehydrated airway secretions → impaired mucociliary clearance → chronic Pseudomonas colonization",
+                clinical: "Onset in childhood; upper lobe predominant bronchiectasis; pancreatic insufficiency; sweat chloride >60 mEq/L"
             },
-            "Alveolar Macrophages": {
-                morphology: "Large phagocytic cells (\"dust cells\") in alveolar lumen",
-                function: "Phagocytose inhaled particles, bacteria, and debris beyond the mucociliary escalator",
-                clinical: "Hemosiderin-laden macrophages (\"heart failure cells\") in pulmonary edema"
+            "Infections": {
+                definition: "Severe or recurrent pulmonary infections causing structural airway damage",
+                etiology: "Post-infectious: TB (upper lobes), NTM (MAC), pertussis, measles, severe childhood pneumonia",
+                clinical: "CT chest: dilated airways (signet ring sign — airway larger than adjacent vessel); bronchial wall thickening"
             },
-            "Club Cells (Clara Cells)": {
-                morphology: "Non-ciliated, dome-shaped secretory cells in terminal bronchioles",
-                function: "Secrete protective proteins; metabolize inhaled toxins; serve as progenitor cells",
-                clinical: "Abundant where goblet cells are absent; help maintain small airway patency"
+            "Immune Deficiency": {
+                definition: "Immunodeficiency states predispose to recurrent sinopulmonary infections → bronchiectasis",
+                etiology: "Common variable immunodeficiency (CVID), IgA deficiency, HIV; check immunoglobulin levels",
+                clinical: "Recurrent sinusitis plus pneumonia in young adult → check IgG, IgA, IgM subclasses"
+            },
+            "Allergic Bronchopulmonary Aspergillosis": {
+                definition: "Hypersensitivity reaction to Aspergillus colonizing airways → central bronchiectasis",
+                etiology: "Aspergillus fumigatus in asthma or CF patients; IgE-mediated + eosinophilic inflammation",
+                clinical: "Central bronchiectasis, elevated total IgE, eosinophilia, Aspergillus-specific IgE/IgG; Tx: corticosteroids + itraconazole"
             }
         };
 

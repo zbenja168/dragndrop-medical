@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pressures of Breathing - Drag &amp; Drop Study Game</title>
+    <title>Nasal &amp; Sinus Inflammatory Disorders - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_12_diffusion_dlco.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_14_surfactant_compliance.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_42_pertussis_diphtheria.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_44_ild_foundations.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>📊 Pressures of Breathing</h1>
-        <p class="subtitle">Match each pressure to its values and significance</p>
+        <h1>👃 Nasal &amp; Sinus Inflammatory Disorders</h1>
+        <p class="subtitle">Match each disorder to its features</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,13 +195,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('definition', this)">Definition</button>
-                    <button class="tab" onclick="switchTab('values', this)">Normal Values</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Significance</button>
+                    <button class="tab active" onclick="switchTab('etiology', this)">Etiology / Pathology</button>
+                    <button class="tab" onclick="switchTab('presentation', this)">Clinical Presentation</button>
+                    <button class="tab" onclick="switchTab('management', this)">Management</button>
                 </div>
-                <div id="definition-bank" class="word-bank active"></div>
-                <div id="values-bank" class="word-bank"></div>
-                <div id="clinical-bank" class="word-bank"></div>
+                <div id="etiology-bank" class="word-bank active"></div>
+                <div id="presentation-bank" class="word-bank"></div>
+                <div id="management-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -216,29 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["definition", "values", "clinical"];
-        const categoryLabels = {"definition": "Definition", "values": "Normal Values", "clinical": "Clinical Significance"};
+        const categoryKeys = ["etiology", "presentation", "management"];
+        const categoryLabels = {"etiology": "Etiology / Pathology", "presentation": "Clinical Presentation", "management": "Management"};
 
         const gameData = {
-            "Alveolar Pressure (Palv)": {
-                definition: "Pressure inside the alveoli; fluctuates during breathing cycle",
-                values: "0 cm H₂O at rest; -1 cm H₂O during inspiration (air flows in); +1 cm H₂O during expiration (air flows out)",
-                clinical: "Boyle&#39;s Law: thorax expands → volume ↑ → Palv ↓ below atmospheric → air drawn in"
+            "Acute Rhinosinusitis (Viral)": {
+                etiology: "Rhinovirus most common; mucosal edema obstructs sinus ostia → mucus stasis",
+                presentation: "Nasal congestion, purulent discharge, facial pain/pressure, headache; self-limited (<10 days)",
+                management: "Supportive: saline irrigation, decongestants, analgesics; antibiotics NOT indicated for viral sinusitis"
             },
-            "Intrapleural Pressure (Ppl)": {
-                definition: "Pressure in the pleural space between visceral and parietal pleura",
-                values: "Always negative in normal breathing: ~-5 cm H₂O at rest; ~-8 cm H₂O during inspiration",
-                clinical: "Created by opposing forces: lung elastic recoil (inward) vs chest wall recoil (outward)"
+            "Acute Bacterial Rhinosinusitis": {
+                etiology: "S. pneumoniae, H. influenzae, M. catarrhalis; complicates viral URI (secondary bacterial infection)",
+                presentation: "Symptoms >10 days without improvement, OR worsening after initial improvement (double-worsening), OR severe onset (high fever + purulent discharge >=3 days)",
+                management: "First-line: amoxicillin-clavulanate; alternatives: doxycycline or respiratory fluoroquinolone; course 5-7 days"
             },
-            "Transpulmonary Pressure (Ptp)": {
-                definition: "Pressure difference across lung wall: Ptp = Palv - Ppl; distending pressure of the lung",
-                values: "Always positive normally: ~+5 cm H₂O at rest (keeps alveoli open)",
-                clinical: "If Ptp falls to zero (pneumothorax) → lung collapses; chest tube restores negative Ppl"
+            "Chronic Rhinosinusitis": {
+                etiology: "Inflammation >=12 weeks; associated with nasal polyps (eosinophilic), allergic fungal sinusitis, mucociliary dysfunction",
+                presentation: "Persistent nasal obstruction, hyposmia/anosmia, facial pressure, post-nasal drip; CT: mucosal thickening, air-fluid levels",
+                management: "Intranasal corticosteroids (first-line); saline irrigation; functional endoscopic sinus surgery (FESS) if refractory"
             },
-            "Pneumothorax": {
-                definition: "Air enters pleural space → Ppl rises to 0 (atmospheric) → Ptp drops to 0 or negative",
-                values: "Ppl rises from -5 to 0 cm H₂O; transpulmonary pressure drops from +5 to 0 cm H₂O",
-                clinical: "Lung collapses on affected side; tension pneumothorax: mediastinal shift → emergency needle decompression"
+            "Nasal Polyps": {
+                etiology: "Pedunculated edematous mucosa; associated with aspirin-exacerbated respiratory disease (Samter triad), CF, eosinophilic inflammation",
+                presentation: "Bilateral nasal obstruction, anosmia, rhinorrhea; Samter triad: asthma + ASA sensitivity + nasal polyps",
+                management: "Intranasal steroids, short oral steroid courses; biologics (dupilumab — anti-IL-4/IL-13); FESS for refractory cases"
+            },
+            "Allergic Rhinitis": {
+                etiology: "IgE-mediated type I hypersensitivity to inhaled allergens (pollen, dust mites, mold, pet dander)",
+                presentation: "Sneezing, clear rhinorrhea, nasal congestion, itchy/watery eyes; pale boggy turbinates on exam; allergic shiners",
+                management: "Intranasal corticosteroids (most effective); oral antihistamines (cetirizine, loratadine); allergen avoidance; immunotherapy for refractory cases"
             }
         };
 
@@ -349,7 +354,7 @@
             droppedItem.dataset.entity = draggedEntity;
             droppedItem.dataset.category = draggedCategory;
             droppedItem.dataset.id = draggedElement.dataset.id;
-            if (entityName === draggedEntity && category === draggedCategory) {
+            if (category === draggedCategory && draggedElement.textContent === gameData[entityName][category]) {
                 droppedItem.classList.add('correct'); score++;
             } else {
                 droppedItem.classList.add('incorrect');

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alveolar &amp; Airway Cell Types - Drag &amp; Drop Study Game</title>
+    <title>Asthma Pathophysiology - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_01_histology.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_03_lung_development.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_35_copd_management.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_37_asthma_copd_treatment.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🧫 Alveolar &amp; Airway Cell Types</h1>
-        <p class="subtitle">Match each cell type to its characteristics</p>
+        <h1>🌬️ Asthma Pathophysiology</h1>
+        <p class="subtitle">Match each component of asthma to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,12 +195,12 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('morphology', this)">Morphology</button>
-                    <button class="tab" onclick="switchTab('function', this)">Primary Function</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Relevance</button>
+                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
+                    <button class="tab" onclick="switchTab('mediators', this)">Key Mediators</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Features</button>
                 </div>
-                <div id="morphology-bank" class="word-bank active"></div>
-                <div id="function-bank" class="word-bank"></div>
+                <div id="mechanism-bank" class="word-bank active"></div>
+                <div id="mediators-bank" class="word-bank"></div>
                 <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
@@ -216,29 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["morphology", "function", "clinical"];
-        const categoryLabels = {"morphology": "Morphology", "function": "Primary Function", "clinical": "Clinical Relevance"};
+        const categoryKeys = ["mechanism", "mediators", "clinical"];
+        const categoryLabels = {"mechanism": "Mechanism", "mediators": "Key Mediators", "clinical": "Clinical Features"};
 
         const gameData = {
-            "Type I Pneumocytes": {
-                morphology: "Large, flat squamous cells; cover ~95% of alveolar surface area",
-                function: "Form the alveolar side of the blood-air barrier; enable gas diffusion",
-                clinical: "Cannot divide — must be replaced by type II pneumocyte differentiation"
+            "Early Phase (Minutes)": {
+                mechanism: "Allergen cross-links IgE on mast cells → immediate degranulation → bronchoconstriction within minutes",
+                mediators: "Histamine, tryptase, prostaglandin D2, leukotrienes C4/D4/E4",
+                clinical: "Acute wheeze, dyspnea, chest tightness; responds to SABA (albuterol); resolves in 1-2 hours"
             },
-            "Type II Pneumocytes": {
-                morphology: "Cuboidal cells with lamellar bodies; ~5% of alveolar surface but more numerous",
-                function: "Secrete pulmonary surfactant (DPPC/lecithin); progenitor cells for type I",
-                clinical: "L/S ratio >= 2.0 indicates fetal lung maturity (~34-36 weeks); target of antenatal steroids"
+            "Late Phase (Hours)": {
+                mechanism: "Eosinophils, Th2 lymphocytes, and other inflammatory cells recruited to airways 4-8 hours later",
+                mediators: "Major basic protein (MBP), eosinophil cationic protein, IL-4, IL-5, IL-13",
+                clinical: "Recurrent symptoms 4-8 hours after exposure; more responsive to corticosteroids than bronchodilators"
             },
-            "Alveolar Macrophages": {
-                morphology: "Large phagocytic cells (\"dust cells\") in alveolar lumen",
-                function: "Phagocytose inhaled particles, bacteria, and debris beyond the mucociliary escalator",
-                clinical: "Hemosiderin-laden macrophages (\"heart failure cells\") in pulmonary edema"
+            "Airway Remodeling": {
+                mechanism: "Chronic inflammation → structural changes: subepithelial fibrosis, smooth muscle hypertrophy, angiogenesis",
+                mediators: "TGF-beta, PDGF, fibroblast growth factors → irreversible structural changes over time",
+                clinical: "Fixed airflow obstruction in severe long-standing asthma; reduced treatment responsiveness"
             },
-            "Club Cells (Clara Cells)": {
-                morphology: "Non-ciliated, dome-shaped secretory cells in terminal bronchioles",
-                function: "Secrete protective proteins; metabolize inhaled toxins; serve as progenitor cells",
-                clinical: "Abundant where goblet cells are absent; help maintain small airway patency"
+            "Bronchial Hyperresponsiveness": {
+                mechanism: "Exaggerated bronchoconstrictor response to stimuli (cold air, exercise, methacholine) in asthmatic airways",
+                mediators: "Increased smooth muscle mass + neural reflexes + inflammatory mediator sensitization",
+                clinical: "Methacholine challenge test: PC20 <8 mg/mL confirms hyperresponsiveness; high sensitivity for asthma"
+            },
+            "Mucus Plugging": {
+                mechanism: "Goblet cell hyperplasia + submucosal gland hypertrophy → excessive mucus; eosinophils and cellular debris worsen plugging",
+                mediators: "MUC5AC, MUC5B mucin glycoproteins; Charcot-Leyden crystals (from eosinophil breakdown)",
+                clinical: "Curschmann spirals (mucus casts of airways); mucus plugs → atelectasis; status asthmaticus: life-threatening"
             }
         };
 

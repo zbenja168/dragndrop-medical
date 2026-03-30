@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alveolar &amp; Airway Cell Types - Drag &amp; Drop Study Game</title>
+    <title>Control of Ventilation - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_08_respiratory_histology.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_10_gas_exchange_principles.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_23_co_cn_poisoning.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_25_airway_resistance.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🧫 Alveolar &amp; Airway Cell Types</h1>
-        <p class="subtitle">Match each cell type to its characteristics</p>
+        <h1>🧠 Control of Ventilation</h1>
+        <p class="subtitle">Match each respiratory control center to its function</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,12 +195,12 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('morphology', this)">Morphology</button>
-                    <button class="tab" onclick="switchTab('function', this)">Primary Function</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Relevance</button>
+                    <button class="tab active" onclick="switchTab('location', this)">Location</button>
+                    <button class="tab" onclick="switchTab('stimulus', this)">Stimulus / Response</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Significance</button>
                 </div>
-                <div id="morphology-bank" class="word-bank active"></div>
-                <div id="function-bank" class="word-bank"></div>
+                <div id="location-bank" class="word-bank active"></div>
+                <div id="stimulus-bank" class="word-bank"></div>
                 <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
@@ -216,29 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["morphology", "function", "clinical"];
-        const categoryLabels = {"morphology": "Morphology", "function": "Primary Function", "clinical": "Clinical Relevance"};
+        const categoryKeys = ["location", "stimulus", "clinical"];
+        const categoryLabels = {"location": "Location", "stimulus": "Stimulus / Response", "clinical": "Clinical Significance"};
 
         const gameData = {
-            "Type I Pneumocytes": {
-                morphology: "Large, flat squamous cells; cover ~95% of alveolar surface area",
-                function: "Form the alveolar side of the blood-air barrier; enable gas diffusion",
-                clinical: "Cannot divide — must be replaced by type II pneumocyte differentiation"
+            "Medullary Respiratory Center": {
+                location: "Dorsal respiratory group (DRG) and ventral respiratory group (VRG) in medulla oblongata",
+                stimulus: "DRG: sets basic inspiratory rhythm (quiet breathing); VRG: active expiration and increased ventilation",
+                clinical: "Damage → loss of automatic breathing; central apnea; Ondine's curse"
             },
-            "Type II Pneumocytes": {
-                morphology: "Cuboidal cells with lamellar bodies; ~5% of alveolar surface but more numerous",
-                function: "Secrete pulmonary surfactant (DPPC/lecithin); progenitor cells for type I",
-                clinical: "L/S ratio ≥ 2.0 indicates fetal lung maturity (~34-36 weeks); target of antenatal steroids"
+            "Pneumotaxic Center": {
+                location: "Upper pons (parabrachial nucleus)",
+                stimulus: "Limits inspiration duration → increases respiratory rate; fine-tunes tidal volume",
+                clinical: "Damage → prolonged inspiration (apneustic breathing); works with vagal input"
             },
-            "Alveolar Macrophages": {
-                morphology: "Large phagocytic cells (&quot;dust cells&quot;) in alveolar lumen",
-                function: "Phagocytose inhaled particles, bacteria, and debris beyond the mucociliary escalator",
-                clinical: "Hemosiderin-laden macrophages (&quot;heart failure cells&quot;) in pulmonary edema"
+            "Central Chemoreceptors": {
+                location: "Ventral medullary surface; surrounded by CSF (blood-brain barrier separates from blood)",
+                stimulus: "Respond to CSF H+ concentration (from CO2 diffusing across BBB → H2CO3 → H+ + HCO3-)",
+                clinical: "Primary driver of ventilation in normal individuals; most sensitive to changes in PaCO2"
             },
-            "Club Cells (Clara Cells)": {
-                morphology: "Non-ciliated, dome-shaped secretory cells in terminal bronchioles",
-                function: "Secrete protective proteins; metabolize inhaled toxins; serve as progenitor cells",
-                clinical: "Abundant where goblet cells are absent; help maintain small airway patency"
+            "Peripheral Chemoreceptors": {
+                location: "Carotid bodies (CN IX) and aortic bodies (CN X)",
+                stimulus: "Respond to decreased PaO2 (<60 mmHg), increased PaCO2, and decreased pH",
+                clinical: "Only receptors that sense PaO2; COPD patients rely on hypoxic drive (blunted CO2 response)"
+            },
+            "Lung Stretch Receptors": {
+                location: "Smooth muscle of airway walls; vagal afferents to medulla",
+                stimulus: "Hering-Breuer reflex: lung inflation → inhibit further inspiration → prevent overinflation",
+                clinical: "More active in neonates; role in adults mainly at high tidal volumes"
             }
         };
 
@@ -349,7 +354,7 @@
             droppedItem.dataset.entity = draggedEntity;
             droppedItem.dataset.category = draggedCategory;
             droppedItem.dataset.id = draggedElement.dataset.id;
-            if (entityName === draggedEntity && category === draggedCategory) {
+            if (category === draggedCategory && draggedElement.textContent === gameData[entityName][category]) {
                 droppedItem.classList.add('correct'); score++;
             } else {
                 droppedItem.classList.add('incorrect');

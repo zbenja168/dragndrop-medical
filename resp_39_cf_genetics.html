@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lung Anatomy &amp; Pleurae - Drag &amp; Drop Study Game</title>
+    <title>Cystic Fibrosis: Genetics &amp; Pathophysiology - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_03_airway_zones.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_05_sinus_drainage.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_38_bronchiectasis.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_40_cf_management.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>🫁 Lung Anatomy &amp; Pleurae</h1>
-        <p class="subtitle">Match lung structures and pleural features</p>
+        <h1>🧬 Cystic Fibrosis: Genetics &amp; Pathophysiology</h1>
+        <p class="subtitle">Match each CF concept to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,12 +195,12 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('features', this)">Anatomical Features</button>
-                    <button class="tab" onclick="switchTab('function', this)">Function</button>
-                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Pearl</button>
+                    <button class="tab active" onclick="switchTab('genetics', this)">Genetics</button>
+                    <button class="tab" onclick="switchTab('pathophysiology', this)">Pathophysiology</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Manifestation</button>
                 </div>
-                <div id="features-bank" class="word-bank active"></div>
-                <div id="function-bank" class="word-bank"></div>
+                <div id="genetics-bank" class="word-bank active"></div>
+                <div id="pathophysiology-bank" class="word-bank"></div>
                 <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
@@ -216,39 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["features", "function", "clinical"];
-        const categoryLabels = {"features": "Anatomical Features", "function": "Function", "clinical": "Clinical Pearl"};
+        const categoryKeys = ["genetics", "pathophysiology", "clinical"];
+        const categoryLabels = {"genetics": "Genetics", "pathophysiology": "Pathophysiology", "clinical": "Clinical Manifestation"};
 
         const gameData = {
-            "Right Lung": {
-                features: "3 lobes (superior, middle, inferior); horizontal + oblique fissures; wider and shorter",
-                function: "Receives deoxygenated blood via right pulmonary artery for gas exchange",
-                clinical: "Aspiration more common on right (right main bronchus wider, more vertical)"
+            "CFTR Gene & Protein": {
+                genetics: "Chromosome 7; autosomal recessive; CFTR = cAMP-regulated chloride channel on epithelial cells",
+                pathophysiology: "Defective Cl- secretion → Na+ and water follow → dehydrated, thick secretions in all exocrine glands",
+                clinical: "Most common lethal genetic disease in Caucasians; carrier frequency ~1 in 25"
             },
-            "Left Lung": {
-                features: "2 lobes (superior, inferior); oblique fissure only; cardiac notch; lingula",
-                function: "Lingula is anatomical equivalent of right middle lobe",
-                clinical: "Cardiac notch accommodates heart; left lung slightly smaller than right"
+            "Delta-F508 Mutation": {
+                genetics: "Most common CFTR mutation (~70% of alleles); deletion of phenylalanine at position 508",
+                pathophysiology: "Class II mutation: misfolded protein retained in ER → degraded → no CFTR reaches cell surface",
+                clinical: "Homozygous delta-F508 → severe phenotype; target of elexacaftor/tezacaftor/ivacaftor (Trikafta)"
             },
-            "Pulmonary Circulation": {
-                features: "Pulmonary arteries (from RV) → capillary beds → pulmonary veins (to LA)",
-                function: "Gas exchange: delivers deoxygenated blood, returns oxygenated blood",
-                clinical: "Low-pressure system (~25/8 mmHg); entire cardiac output passes through"
+            "Pulmonary Disease": {
+                genetics: "CFTR dysfunction in airway epithelium → dehydrated airway surface liquid",
+                pathophysiology: "Thick mucus → impaired mucociliary clearance → chronic infection (Pseudomonas, S. aureus) → bronchiectasis",
+                clinical: "Leading cause of morbidity/mortality; progressive bronchiectasis → respiratory failure; lung transplant candidate"
             },
-            "Bronchial Circulation": {
-                features: "Bronchial arteries arise from thoracic aorta; drain via azygos system",
-                function: "Supplies oxygenated blood for metabolic needs of lung tissue itself",
-                clinical: "Some bronchial venous blood drains to pulmonary veins → contributes to normal physiologic shunt"
+            "Sweat Gland Dysfunction": {
+                genetics: "CFTR normally reabsorbs Cl- (then Na+) from sweat duct as sweat travels to skin surface",
+                pathophysiology: "Defective CFTR → cannot reabsorb Cl-/Na+ → excessively salty sweat (Cl- >60 mEq/L diagnostic)",
+                clinical: "Pilocarpine iontophoresis sweat chloride test: gold standard for CF diagnosis; >60 mEq/L = positive"
             },
-            "Visceral Pleura": {
-                features: "Directly adherent to lung surface; lines fissures between lobes",
-                function: "Secretes serous fluid into pleural space for frictionless movement",
-                clinical: "No somatic innervation — cannot sense sharp pain"
-            },
-            "Parietal Pleura": {
-                features: "Lines inner thoracic wall; innervated by phrenic (C3-C5) and intercostal nerves",
-                function: "Creates sealed pleural space; negative pressure keeps lungs inflated",
-                clinical: "Irritation → sharp pleuritic pain; can refer to ipsilateral shoulder (C3-C5 shared)"
+            "GI Manifestations": {
+                genetics: "CFTR dysfunction in pancreatic ducts → thick secretions block ductal system",
+                pathophysiology: "Pancreatic enzyme deficiency → fat malabsorption → steatorrhea; meconium ileus in neonates (15-20%)",
+                clinical: "Failure to thrive, fat-soluble vitamin deficiency (A, D, E, K); Tx: pancreatic enzyme replacement"
             }
         };
 
@@ -359,7 +354,7 @@
             droppedItem.dataset.entity = draggedEntity;
             droppedItem.dataset.category = draggedCategory;
             droppedItem.dataset.id = draggedElement.dataset.id;
-            if (entityName === draggedEntity && category === draggedCategory) {
+            if (category === draggedCategory && draggedElement.textContent === gameData[entityName][category]) {
                 droppedItem.classList.add('correct'); score++;
             } else {
                 droppedItem.classList.add('incorrect');

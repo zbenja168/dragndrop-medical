@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muscles of Breathing - Drag &amp; Drop Study Game</title>
+    <title>Airway Resistance - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -172,13 +172,13 @@
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
 <div style="position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:8px;">
-<a href="resp_01_diaphragm_anatomy.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_03_airway_zones.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_24_ventilation_control.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_26_pft_volumes.html" style="background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 </div>
 
     <div class="container">
-        <h1>💪 Muscles of Breathing</h1>
-        <p class="subtitle">Match each muscle to its role in respiration</p>
+        <h1>🌊 Airway Resistance</h1>
+        <p class="subtitle">Match each factor affecting airway resistance</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -195,13 +195,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('action', this)">Mechanical Action</button>
-                    <button class="tab" onclick="switchTab('phase', this)">Phase of Breathing</button>
-                    <button class="tab" onclick="switchTab('innervation', this)">Innervation</button>
+                    <button class="tab active" onclick="switchTab('principle', this)">Principle</button>
+                    <button class="tab" onclick="switchTab('effect_on_resistance', this)">Effect on Resistance</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical Example</button>
                 </div>
-                <div id="action-bank" class="word-bank active"></div>
-                <div id="phase-bank" class="word-bank"></div>
-                <div id="innervation-bank" class="word-bank"></div>
+                <div id="principle-bank" class="word-bank active"></div>
+                <div id="effect_on_resistance-bank" class="word-bank"></div>
+                <div id="clinical-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -216,34 +216,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["action", "phase", "innervation"];
-        const categoryLabels = {"action": "Mechanical Action", "phase": "Phase of Breathing", "innervation": "Innervation"};
+        const categoryKeys = ["principle", "effect_on_resistance", "clinical"];
+        const categoryLabels = {"principle": "Principle", "effect_on_resistance": "Effect on Resistance", "clinical": "Clinical Example"};
 
         const gameData = {
-            "Diaphragm": {
-                action: "Contracts and flattens → increases vertical thoracic dimension; moves 3-5 cm during quiet breathing",
-                phase: "Primary muscle of inspiration (~75% of tidal volume in quiet breathing)",
-                innervation: "Phrenic nerve (C3, C4, C5)"
+            "Airway Radius (Poiseuille's Law)": {
+                principle: "Resistance = 8nL / (pi x r^4); resistance is inversely proportional to the FOURTH power of radius",
+                effect_on_resistance: "Halving the radius → 16-fold increase in resistance; small changes have dramatic effects",
+                clinical: "Infant airways: smaller baseline radius → proportionally greater resistance increase with edema (e.g., croup)"
             },
-            "External Intercostals": {
-                action: "Elevate ribs upward and outward → increase anteroposterior and transverse diameters",
-                phase: "Accessory inspiration (mnemonic: EXternal = INspiration)",
-                innervation: "Intercostal nerves (T1-T11)"
+            "Sympathetic Tone (Beta-2)": {
+                principle: "Beta-2 adrenergic receptors on bronchial smooth muscle → relaxation when stimulated",
+                effect_on_resistance: "Bronchodilation → increased radius → decreased airway resistance",
+                clinical: "Albuterol (SABA): beta-2 agonist → acute bronchodilation in asthma and COPD exacerbations"
             },
-            "Internal Intercostals": {
-                action: "Pull ribs downward and inward → decrease thoracic volume",
-                phase: "Forced expiration only (mnemonic: INternal = EXpiration)",
-                innervation: "Intercostal nerves (T1-T11)"
+            "Parasympathetic Tone (Muscarinic)": {
+                principle: "Vagal M3 muscarinic receptors on bronchial smooth muscle → contraction when stimulated",
+                effect_on_resistance: "Bronchoconstriction → decreased radius → increased airway resistance",
+                clinical: "Ipratropium (anticholinergic): blocks M3 → bronchodilation; used in COPD and acute asthma"
             },
-            "Sternocleidomastoid &amp; Scalenes": {
-                action: "Elevate sternum and first two ribs → expand upper thorax",
-                phase: "Accessory muscles of forced inspiration (tripod position recruits these)",
-                innervation: "SCM: CN XI (spinal accessory); Scalenes: cervical nerves C3-C8"
+            "Lung Volume": {
+                principle: "Radial traction from surrounding alveolar tissue pulls airways open at higher lung volumes",
+                effect_on_resistance: "High lung volumes → airways held open → low resistance; low volumes → airways compressed → high resistance",
+                clinical: "Emphysema patients breathe at high lung volumes (barrel chest) to keep airways open via radial traction"
             },
-            "Abdominal Wall Muscles": {
-                action: "Compress abdomen → push diaphragm upward → decrease thoracic volume",
-                phase: "Forced expiration (rectus abdominis, obliques, transversus abdominis)",
-                innervation: "Intercostal nerves (T7-T12) and subcostal nerve"
+            "Site of Greatest Resistance": {
+                principle: "Medium-sized bronchi (generations 3-5) are the major site of airway resistance in normal lungs",
+                effect_on_resistance: "Small airways (<2 mm) have low total resistance due to enormous cross-sectional area in parallel",
+                clinical: "Small airway disease is \"silent zone\" — significant obstruction occurs before symptoms appear"
             }
         };
 
@@ -354,7 +354,7 @@
             droppedItem.dataset.entity = draggedEntity;
             droppedItem.dataset.category = draggedCategory;
             droppedItem.dataset.id = draggedElement.dataset.id;
-            if (entityName === draggedEntity && category === draggedCategory) {
+            if (category === draggedCategory && draggedElement.textContent === gameData[entityName][category]) {
                 droppedItem.classList.add('correct'); score++;
             } else {
                 droppedItem.classList.add('incorrect');
