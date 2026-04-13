@@ -219,34 +219,34 @@
 
         const gameData = {
             "Antigen Testing": {
-                mechanism: "Immunoassay detects viral surface antigens from nasal swab; no nucleic acid amplification; low sensitivity at low viral loads",
-                indication: "Rapid screening (15 min); identifies high-viral-load contagious patients; guides quarantine decisions",
-                details: "Widely available for home use; high specificity, poor sensitivity; negative result cannot rule out infection"
+                mechanism: "Immunoassay detects viral antigens from nasal swab; no amplification",
+                indication: "Rapid screening (15 min); identifies contagious high-viral-load patients",
+                details: "Home use available; high specificity but poor sensitivity; negative not definitive"
             },
             "PCR / NAAT": {
-                mechanism: "Amplifies viral RNA via reverse transcription PCR from nasal swab; detects even small amounts after amplification",
-                indication: "Diagnostic test of choice for COVID-19; definitive clinical diagnosis; sometimes required for travel/employment",
-                details: "Most sensitive test; IgG serum assays detect prior infection but less useful acutely (antibodies take weeks)"
+                mechanism: "RT-PCR amplifies viral RNA from nasal swab; detects small amounts",
+                indication: "Gold standard COVID dx; definitive clinical diagnosis",
+                details: "Most sensitive test; IgG serology detects prior infection only"
             },
             "Nirmatrelvir-Ritonavir": {
-                mechanism: "Nirmatrelvir inhibits 3CL protease, blocks polyprotein cleavage; ritonavir inhibits CYP3A4 to boost levels",
-                indication: "First-line oral antiviral, non-hospitalized high-risk; start within 5 days of symptoms; reduces hospitalization/mortality",
-                details: "Drug interactions from ritonavir CYP inhibition must be evaluated; oral, convenient for outpatient use"
+                mechanism: "3CL protease inhibitor; ritonavir boosts via CYP3A4 inhibition",
+                indication: "First-line oral antiviral; high-risk outpatient; start within 5 days",
+                details: "Many drug interactions from CYP inhibition; convenient oral dosing"
             },
             "Remdesivir": {
-                mechanism: "IV nucleotide analog; inhibits RNA-dependent RNA polymerase; premature termination of viral RNA synthesis",
-                indication: "Hospitalized patients needing supplemental O2; alternative outpatient antiviral when oral agents unavailable",
-                details: "IV administration required; targets viral replication phase; most effective early in disease course"
+                mechanism: "IV nucleotide analog; inhibits RdRp; terminates viral RNA synthesis",
+                indication: "Hospitalized pts on O2; alt outpatient antiviral if oral unavailable",
+                details: "IV only; targets replication phase; most effective early"
             },
             "Dexamethasone": {
-                mechanism: "Corticosteroid suppressing IL-1, IL-6, TNF-alpha; reduces immune activation and inflammatory lung injury",
-                indication: "Severe disease requiring O2 or mechanical ventilation; NOT for mild disease without hypoxia",
-                details: "Improves survival in hypoxemic patients; early use in mild disease may impair viral clearance"
+                mechanism: "Corticosteroid suppresses IL-1/IL-6/TNF-alpha; reduces inflammatory lung injury",
+                indication: "Severe disease on O2 or ventilator; NOT for mild without hypoxia",
+                details: "Improves survival in hypoxemic pts; may impair viral clearance if used early"
             },
             "COVID-19 Vaccines": {
-                mechanism: "mRNA vaccines produce spike protein antigen in host cells; protein subunit vaccines use recombinant spike + adjuvant",
-                indication: "Recommended age 6+; reduces infection risk, severity, hospitalization; updated for evolving variants",
-                details: "~70% world population vaccinated but only 32% in low-income countries; variable booster uptake"
+                mechanism: "mRNA produces spike in host cells; protein subunit uses recombinant spike",
+                indication: "Age 6+; reduces infection, severity, hospitalization; updated for variants",
+                details: "~70% global coverage; only 32% in low-income countries"
             }
         };
 
