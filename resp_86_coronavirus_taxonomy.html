@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Apnea - Drag &amp; Drop Study Game</title>
+    <title>Coronavirus Taxonomy &amp; Epidemiology - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,12 +171,12 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_55_nrds.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_57_pneumonia_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_85_adenovirus_syndromes.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_87_covid19_pathogenesis.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 
     <div class="container">
-        <h1>😴 Sleep Apnea</h1>
-        <p class="subtitle">Match each type of sleep apnea to its features</p>
+        <h1>&#x1F451; Coronavirus Taxonomy & Epidemiology</h1>
+        <p class="subtitle">Match each coronavirus to its virology, epidemiology, and transmission features</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -193,13 +193,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
-                    <button class="tab" onclick="switchTab('diagnosis', this)">Diagnosis</button>
-                    <button class="tab" onclick="switchTab('treatment', this)">Treatment</button>
+                    <button class="tab active" onclick="switchTab('virology', this)">Virology</button>
+                    <button class="tab" onclick="switchTab('epidemiology', this)">Epidemiology</button>
+                    <button class="tab" onclick="switchTab('transmission', this)">Transmission</button>
                 </div>
-                <div id="mechanism-bank" class="word-bank active"></div>
-                <div id="diagnosis-bank" class="word-bank"></div>
-                <div id="treatment-bank" class="word-bank"></div>
+                <div id="virology-bank" class="word-bank active"></div>
+                <div id="epidemiology-bank" class="word-bank"></div>
+                <div id="transmission-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -214,34 +214,29 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["mechanism", "diagnosis", "treatment"];
-        const categoryLabels = {"mechanism": "Mechanism", "diagnosis": "Diagnosis", "treatment": "Treatment"};
+        const categoryKeys = ["virology", "epidemiology", "transmission"];
+        const categoryLabels = {"virology": "Virology", "epidemiology": "Epidemiology", "transmission": "Transmission"};
 
         const gameData = {
-            "Obstructive Sleep Apnea (OSA)": {
-                mechanism: "Upper airway collapse during sleep due to loss of pharyngeal muscle tone; pharyngeal muscles relax → airway occlusion",
-                diagnosis: "Polysomnography: AHI >=5 with symptoms or AHI >=15 without symptoms; mild (5-15), moderate (15-30), severe (>30)",
-                treatment: "CPAP (first-line): pneumatic splint keeps airway open; weight loss; oral appliance; uvulopalatopharyngoplasty (UPPP) if refractory"
+            "SARS-CoV": {
+                virology: "Enveloped (+)ssRNA virus with helical nucleocapsid and spike glycoproteins; zoonotic origin likely from bats via civets",
+                epidemiology: "2002-2003 outbreak: ~8,096 cases with 774 deaths (9.6% mortality); relatively low case count but disproportionately high fatality rate",
+                transmission: "Spread limited to healthcare workers, close family, and other close contacts; not as easily transmitted as SARS-CoV-2"
             },
-            "Central Sleep Apnea (CSA)": {
-                mechanism: "Decreased central respiratory drive → no respiratory effort during apneic episodes (airway is patent)",
-                diagnosis: "Polysomnography: apneas without thoracic or abdominal respiratory effort; often associated with heart failure",
-                treatment: "Treat underlying cause (optimize HF therapy); adaptive servo-ventilation (ASV) or BiPAP; NOT standard CPAP"
+            "MERS-CoV": {
+                virology: "Enveloped (+)ssRNA coronavirus; zoonotic origin from bats with dromedary camels as intermediate hosts",
+                epidemiology: "Since first case: 2,494 cases with 858 deaths (34.4% mortality); highest case fatality rate among the three novel coronaviruses",
+                transmission: "Spread primarily among healthcare workers and close contacts; limited human-to-human transmission compared to SARS-CoV-2"
             },
-            "Obesity Hypoventilation Syndrome": {
-                mechanism: "BMI >=30 + chronic daytime hypercapnia (PaCO2 >45 mmHg) not explained by other causes; overlap with OSA in 90%",
-                diagnosis: "Daytime ABG showing hypercapnia in obese patient; serum HCO3- elevated (chronic respiratory acidosis compensation)",
-                treatment: "BiPAP (preferred over CPAP); weight loss (bariatric surgery may cure); supplemental O2 alone can worsen hypercapnia"
+            "SARS-CoV-2": {
+                virology: "Enveloped (+)ssRNA with helical capsid; spike protein binds ACE2 receptor on host cells; high mutation rate produces variants (Alpha, Delta, Omicron)",
+                epidemiology: "Emerged late 2019 in Wuhan, China; over 775 million cases and 7 million deaths globally; lower mortality rate but far more transmissible",
+                transmission: "Aggressively spreads via airborne particles and respiratory droplets; asymptomatic patients can transmit; fomite spread possible but rare"
             },
-            "Consequences of Untreated OSA": {
-                mechanism: "Recurrent hypoxemia and sleep fragmentation → sympathetic activation → systemic inflammation → endothelial dysfunction",
-                diagnosis: "Screen with STOP-BANG questionnaire (Snoring, Tired, Observed apnea, Pressure, BMI>35, Age>50, Neck>40cm, Gender male)",
-                treatment: "Untreated OSA increases risk of: HTN (resistant), atrial fibrillation, stroke, MI, type 2 diabetes, motor vehicle accidents"
-            },
-            "Risk Factors for OSA": {
-                mechanism: "Anatomic narrowing (obesity, macroglossia, retrognathia, tonsillar hypertrophy) + decreased muscle tone (sleep, sedatives, alcohol)",
-                diagnosis: "Male sex, obesity (strongest modifiable risk factor), age >50, neck circumference >17 inches (43 cm), family history",
-                treatment: "Weight loss of 10-15% can significantly reduce AHI; positional therapy (avoid supine sleep); avoid alcohol/sedatives before bed"
+            "Common Cold Coronaviruses": {
+                virology: "Multiple strains (e.g., HCoV-229E, HCoV-OC43); enveloped (+)ssRNA viruses; cause mild upper respiratory infections",
+                epidemiology: "Cause ~15-30% of common colds worldwide; very low mortality; most people infected multiple times throughout life",
+                transmission: "Spread via respiratory droplets and direct contact; highly prevalent in the general population year-round with seasonal peaks"
             }
         };
 

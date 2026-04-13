@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Apnea - Drag &amp; Drop Study Game</title>
+    <title>NSCLC Diagnosis &amp; Treatment - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,12 +171,12 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_55_nrds.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_57_pneumonia_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_100_nsclc_subtypes.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_102_ph_who_groups.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 
     <div class="container">
-        <h1>😴 Sleep Apnea</h1>
-        <p class="subtitle">Match each type of sleep apnea to its features</p>
+        <h1>&#x1F489; NSCLC Diagnosis &amp; Treatment</h1>
+        <p class="subtitle">Match each NSCLC treatment approach to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -194,12 +194,12 @@
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
                     <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
-                    <button class="tab" onclick="switchTab('diagnosis', this)">Diagnosis</button>
-                    <button class="tab" onclick="switchTab('treatment', this)">Treatment</button>
+                    <button class="tab" onclick="switchTab('indication', this)">Indication</button>
+                    <button class="tab" onclick="switchTab('adverse', this)">ADRs/Notes</button>
                 </div>
                 <div id="mechanism-bank" class="word-bank active"></div>
-                <div id="diagnosis-bank" class="word-bank"></div>
-                <div id="treatment-bank" class="word-bank"></div>
+                <div id="indication-bank" class="word-bank"></div>
+                <div id="adverse-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -214,34 +214,29 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["mechanism", "diagnosis", "treatment"];
-        const categoryLabels = {"mechanism": "Mechanism", "diagnosis": "Diagnosis", "treatment": "Treatment"};
+        const categoryKeys = ["mechanism", "indication", "adverse"];
+        const categoryLabels = {"mechanism": "Mechanism", "indication": "Indication", "adverse": "ADRs/Notes"};
 
         const gameData = {
-            "Obstructive Sleep Apnea (OSA)": {
-                mechanism: "Upper airway collapse during sleep due to loss of pharyngeal muscle tone; pharyngeal muscles relax → airway occlusion",
-                diagnosis: "Polysomnography: AHI >=5 with symptoms or AHI >=15 without symptoms; mild (5-15), moderate (15-30), severe (>30)",
-                treatment: "CPAP (first-line): pneumatic splint keeps airway open; weight loss; oral appliance; uvulopalatopharyngoplasty (UPPP) if refractory"
+            "Cisplatin": {
+                mechanism: "Platinum-based agent; cell cycle independent; causes direct DNA damage through intrastrand cross-linking of DNA, leading to apoptosis",
+                indication: "Backbone of NSCLC chemotherapy; most commonly used chemo for lung cancers due to affinity for lung cells and good tissue penetration; combined with other agents",
+                adverse: "Ototoxicity and nephrotoxicity are the most common side effects; used as adjuvant therapy before or after surgery or radiation"
             },
-            "Central Sleep Apnea (CSA)": {
-                mechanism: "Decreased central respiratory drive → no respiratory effort during apneic episodes (airway is patent)",
-                diagnosis: "Polysomnography: apneas without thoracic or abdominal respiratory effort; often associated with heart failure",
-                treatment: "Treat underlying cause (optimize HF therapy); adaptive servo-ventilation (ASV) or BiPAP; NOT standard CPAP"
+            "Pembrolizumab (PD-1 Inhibitor)": {
+                mechanism: "Immune checkpoint inhibitor; monoclonal antibody blocking PD-1 receptor on T cells, preventing tumor immune evasion and restoring anti-tumor immunity",
+                indication: "Used regardless of PD-L1 genetic expression if patient meets other criteria (tumor size, lymph node extension); significantly improves overall and progression-free survival",
+                adverse: "Fatigue, nausea, cough, shortness of breath, decreased appetite, and skin rashes; approved for NSCLC in 2016; also used in melanoma and other cancers"
             },
-            "Obesity Hypoventilation Syndrome": {
-                mechanism: "BMI >=30 + chronic daytime hypercapnia (PaCO2 >45 mmHg) not explained by other causes; overlap with OSA in 90%",
-                diagnosis: "Daytime ABG showing hypercapnia in obese patient; serum HCO3- elevated (chronic respiratory acidosis compensation)",
-                treatment: "BiPAP (preferred over CPAP); weight loss (bariatric surgery may cure); supplemental O2 alone can worsen hypercapnia"
+            "Osimertinib (EGFR Inhibitor)": {
+                mechanism: "Tyrosine kinase inhibitor specifically targeting EGFR; terminates cancer cell growth and replication by blocking unregulated receptor activation",
+                indication: "Used in adenocarcinoma patients with confirmed EGFR mutation; molecular/genetic testing required to identify eligible patients; used with cisplatin",
+                adverse: "Skin issues (rash, dryness, nail problems), mouth sores, fatigue, and muscle/joint pain; part of the precision medicine approach to NSCLC"
             },
-            "Consequences of Untreated OSA": {
-                mechanism: "Recurrent hypoxemia and sleep fragmentation → sympathetic activation → systemic inflammation → endothelial dysfunction",
-                diagnosis: "Screen with STOP-BANG questionnaire (Snoring, Tired, Observed apnea, Pressure, BMI>35, Age>50, Neck>40cm, Gender male)",
-                treatment: "Untreated OSA increases risk of: HTN (resistant), atrial fibrillation, stroke, MI, type 2 diabetes, motor vehicle accidents"
-            },
-            "Risk Factors for OSA": {
-                mechanism: "Anatomic narrowing (obesity, macroglossia, retrognathia, tonsillar hypertrophy) + decreased muscle tone (sleep, sedatives, alcohol)",
-                diagnosis: "Male sex, obesity (strongest modifiable risk factor), age >50, neck circumference >17 inches (43 cm), family history",
-                treatment: "Weight loss of 10-15% can significantly reduce AHI; positional therapy (avoid supine sleep); avoid alcohol/sedatives before bed"
+            "Alectinib (ALK Inhibitor)": {
+                mechanism: "Tyrosine kinase inhibitor specifically targeting ALK; blocks the oncogenic ALK fusion protein that drives tumor cell proliferation",
+                indication: "Used in patients positive for ALK rearrangement; these patients are typically younger, light or nonsmokers with adenocarcinoma",
+                adverse: "Fatigue, swelling, constipation, muscle pain, weight gain, vision changes, and photosensitivity; demonstrates the shift toward mutation-guided targeted therapy"
             }
         };
 

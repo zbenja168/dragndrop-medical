@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Apnea - Drag &amp; Drop Study Game</title>
+    <title>SCLC Diagnosis &amp; Treatment - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,12 +171,12 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_55_nrds.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_57_pneumonia_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_98_sclc_overview.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_100_nsclc_subtypes.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 
     <div class="container">
-        <h1>😴 Sleep Apnea</h1>
-        <p class="subtitle">Match each type of sleep apnea to its features</p>
+        <h1>&#x1FAC1; SCLC: Diagnosis &amp; Treatment</h1>
+        <p class="subtitle">Match each SCLC diagnostic and treatment concept to its details</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -193,13 +193,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
-                    <button class="tab" onclick="switchTab('diagnosis', this)">Diagnosis</button>
-                    <button class="tab" onclick="switchTab('treatment', this)">Treatment</button>
+                    <button class="tab active" onclick="switchTab('keyfacts', this)">Key Facts</button>
+                    <button class="tab" onclick="switchTab('details', this)">Details</button>
+                    <button class="tab" onclick="switchTab('management', this)">Management</button>
                 </div>
-                <div id="mechanism-bank" class="word-bank active"></div>
-                <div id="diagnosis-bank" class="word-bank"></div>
-                <div id="treatment-bank" class="word-bank"></div>
+                <div id="keyfacts-bank" class="word-bank active"></div>
+                <div id="details-bank" class="word-bank"></div>
+                <div id="management-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -214,34 +214,29 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["mechanism", "diagnosis", "treatment"];
-        const categoryLabels = {"mechanism": "Mechanism", "diagnosis": "Diagnosis", "treatment": "Treatment"};
+        const categoryKeys = ["keyfacts", "details", "management"];
+        const categoryLabels = {"keyfacts": "Key Facts", "details": "Details", "management": "Management"};
 
         const gameData = {
-            "Obstructive Sleep Apnea (OSA)": {
-                mechanism: "Upper airway collapse during sleep due to loss of pharyngeal muscle tone; pharyngeal muscles relax → airway occlusion",
-                diagnosis: "Polysomnography: AHI >=5 with symptoms or AHI >=15 without symptoms; mild (5-15), moderate (15-30), severe (>30)",
-                treatment: "CPAP (first-line): pneumatic splint keeps airway open; weight loss; oral appliance; uvulopalatopharyngoplasty (UPPP) if refractory"
+            "Imaging Findings": {
+                keyfacts: "CXR and CT show a central (perihilar) mass, similar to squamous cell carcinoma; evaluation begins with chest X-ray",
+                details: "Thoracic CT scan used to detect local extension; metastatic workup includes brain MRI since brain is a common metastatic site",
+                management: "PET scan or bone scan for staging; imaging guides classification into limited-stage vs extensive-stage disease"
             },
-            "Central Sleep Apnea (CSA)": {
-                mechanism: "Decreased central respiratory drive → no respiratory effort during apneic episodes (airway is patent)",
-                diagnosis: "Polysomnography: apneas without thoracic or abdominal respiratory effort; often associated with heart failure",
-                treatment: "Treat underlying cause (optimize HF therapy); adaptive servo-ventilation (ASV) or BiPAP; NOT standard CPAP"
+            "Histopathology": {
+                keyfacts: "Small cells with scant cytoplasm, \"salt-and-pepper\" chromatin, and inconspicuous nucleoli on microscopy",
+                details: "Expresses neuroendocrine markers (chromogranin, synaptophysin); Azzopardi effect shows DNA encrustation of blood vessel walls from tumor necrosis",
+                management: "Bronchoscopy is preferred biopsy method for central tumors; transthoracic needle biopsy risks damaging mediastinal structures"
             },
-            "Obesity Hypoventilation Syndrome": {
-                mechanism: "BMI >=30 + chronic daytime hypercapnia (PaCO2 >45 mmHg) not explained by other causes; overlap with OSA in 90%",
-                diagnosis: "Daytime ABG showing hypercapnia in obese patient; serum HCO3- elevated (chronic respiratory acidosis compensation)",
-                treatment: "BiPAP (preferred over CPAP); weight loss (bariatric surgery may cure); supplemental O2 alone can worsen hypercapnia"
+            "Chemotherapy Regimen": {
+                keyfacts: "Cisplatin + etoposide is the standard first-line chemotherapy regimen for SCLC",
+                details: "Etoposide is a topoisomerase II inhibitor acting in S/early G2 phase; side effects include myelosuppression, nausea, vomiting, and fatigue",
+                management: "Adjuvant immunotherapy (atezolizumab or pembrolizumab) may be added based on genetic testing results"
             },
-            "Consequences of Untreated OSA": {
-                mechanism: "Recurrent hypoxemia and sleep fragmentation → sympathetic activation → systemic inflammation → endothelial dysfunction",
-                diagnosis: "Screen with STOP-BANG questionnaire (Snoring, Tired, Observed apnea, Pressure, BMI>35, Age>50, Neck>40cm, Gender male)",
-                treatment: "Untreated OSA increases risk of: HTN (resistant), atrial fibrillation, stroke, MI, type 2 diabetes, motor vehicle accidents"
-            },
-            "Risk Factors for OSA": {
-                mechanism: "Anatomic narrowing (obesity, macroglossia, retrognathia, tonsillar hypertrophy) + decreased muscle tone (sleep, sedatives, alcohol)",
-                diagnosis: "Male sex, obesity (strongest modifiable risk factor), age >50, neck circumference >17 inches (43 cm), family history",
-                treatment: "Weight loss of 10-15% can significantly reduce AHI; positional therapy (avoid supine sleep); avoid alcohol/sedatives before bed"
+            "Staging & Prognosis": {
+                keyfacts: "Limited-stage: cancer confined to one lung/nearby lymph nodes; extensive-stage: spread to other lung or distant organs",
+                details: "Median survival is 15-20 months for limited disease and 8-13 months for extensive disease; very high mortality rate overall",
+                management: "Limited-stage: chemo + radiation with curative intent; extensive-stage: chemo alone for palliation; surgery only if single mass with no metastases"
             }
         };
 

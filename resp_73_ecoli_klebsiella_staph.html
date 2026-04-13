@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Apnea - Drag &amp; Drop Study Game</title>
+    <title>E. coli, K. pneumoniae &amp; S. aureus Pneumonia - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,12 +171,12 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_55_nrds.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_57_pneumonia_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_72_nocardia.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_74_anthrax.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 
     <div class="container">
-        <h1>😴 Sleep Apnea</h1>
-        <p class="subtitle">Match each type of sleep apnea to its features</p>
+        <h1>&#x1F9AB; E. coli, K. pneumoniae &amp; S. aureus Pneumonia</h1>
+        <p class="subtitle">Match each bacterium to its pneumonia characteristics</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -193,12 +193,12 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
-                    <button class="tab" onclick="switchTab('diagnosis', this)">Diagnosis</button>
+                    <button class="tab active" onclick="switchTab('labid', this)">Lab ID</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical</button>
                     <button class="tab" onclick="switchTab('treatment', this)">Treatment</button>
                 </div>
-                <div id="mechanism-bank" class="word-bank active"></div>
-                <div id="diagnosis-bank" class="word-bank"></div>
+                <div id="labid-bank" class="word-bank active"></div>
+                <div id="clinical-bank" class="word-bank"></div>
                 <div id="treatment-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
@@ -214,34 +214,29 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["mechanism", "diagnosis", "treatment"];
-        const categoryLabels = {"mechanism": "Mechanism", "diagnosis": "Diagnosis", "treatment": "Treatment"};
+        const categoryKeys = ["labid", "clinical", "treatment"];
+        const categoryLabels = {"labid": "Lab Identification", "clinical": "Clinical Features", "treatment": "Treatment"};
 
         const gameData = {
-            "Obstructive Sleep Apnea (OSA)": {
-                mechanism: "Upper airway collapse during sleep due to loss of pharyngeal muscle tone; pharyngeal muscles relax → airway occlusion",
-                diagnosis: "Polysomnography: AHI >=5 with symptoms or AHI >=15 without symptoms; mild (5-15), moderate (15-30), severe (>30)",
-                treatment: "CPAP (first-line): pneumatic splint keeps airway open; weight loss; oral appliance; uvulopalatopharyngoplasty (UPPP) if refractory"
+            "Staphylococcus aureus": {
+                labid: "Gram-positive cocci in clusters; catalase-positive, coagulase-positive; beta-hemolytic on blood agar; ferments mannitol (yellow colonies on MSA)",
+                clinical: "Classic cause of post-viral secondary bacterial pneumonia (especially post-influenza); can cause cavitation and lung abscesses; extra risk in IV drug users",
+                treatment: "MSSA: anti-staphylococcal beta-lactams (nafcillin, cefazolin IV); MRSA: vancomycin or linezolid; empiric MRSA coverage if recent influenza or HAP/VAP"
             },
-            "Central Sleep Apnea (CSA)": {
-                mechanism: "Decreased central respiratory drive → no respiratory effort during apneic episodes (airway is patent)",
-                diagnosis: "Polysomnography: apneas without thoracic or abdominal respiratory effort; often associated with heart failure",
-                treatment: "Treat underlying cause (optimize HF therapy); adaptive servo-ventilation (ASV) or BiPAP; NOT standard CPAP"
+            "Klebsiella pneumoniae": {
+                labid: "Gram-negative bacillus; lactose fermenter (pink on MacConkey); prominent mucoid polysaccharide capsule giving thick, snotty appearance in culture",
+                clinical: "Upper lobe involvement with thick, blood-tinged \"currant jelly\" sputum; strongly associated with aspiration pneumonia in patients with alcohol use disorder",
+                treatment: "3rd-gen cephalosporins (ceftriaxone) for susceptible strains; carbapenems (meropenem, imipenem) for ESBL-producing strains; resistance panels essential"
             },
-            "Obesity Hypoventilation Syndrome": {
-                mechanism: "BMI >=30 + chronic daytime hypercapnia (PaCO2 >45 mmHg) not explained by other causes; overlap with OSA in 90%",
-                diagnosis: "Daytime ABG showing hypercapnia in obese patient; serum HCO3- elevated (chronic respiratory acidosis compensation)",
-                treatment: "BiPAP (preferred over CPAP); weight loss (bariatric surgery may cure); supplemental O2 alone can worsen hypercapnia"
+            "Escherichia coli": {
+                labid: "Gram-negative bacillus; lactose fermenter (pink on MacConkey); motile and indole-positive (Kovac's reagent turns red); green metallic sheen on EMB agar",
+                clinical: "Uncommon cause of CAP but important in HAP/VAP; mainly affects immunocompromised and debilitated patients; MDR strains increasingly prevalent",
+                treatment: "3rd-gen cephalosporins (ceftriaxone) for susceptible strains; carbapenems preferred for ESBL producers; CAP requiring hospitalization: beta-lactam + macrolide"
             },
-            "Consequences of Untreated OSA": {
-                mechanism: "Recurrent hypoxemia and sleep fragmentation → sympathetic activation → systemic inflammation → endothelial dysfunction",
-                diagnosis: "Screen with STOP-BANG questionnaire (Snoring, Tired, Observed apnea, Pressure, BMI>35, Age>50, Neck>40cm, Gender male)",
-                treatment: "Untreated OSA increases risk of: HTN (resistant), atrial fibrillation, stroke, MI, type 2 diabetes, motor vehicle accidents"
-            },
-            "Risk Factors for OSA": {
-                mechanism: "Anatomic narrowing (obesity, macroglossia, retrognathia, tonsillar hypertrophy) + decreased muscle tone (sleep, sedatives, alcohol)",
-                diagnosis: "Male sex, obesity (strongest modifiable risk factor), age >50, neck circumference >17 inches (43 cm), family history",
-                treatment: "Weight loss of 10-15% can significantly reduce AHI; positional therapy (avoid supine sleep); avoid alcohol/sedatives before bed"
+            "Aspiration Pneumonia": {
+                labid: "Often polymicrobial with oral anaerobes (Peptostreptococcus, Prevotella, Fusobacterium, Bacteroides); cultures may also grow K. pneumoniae",
+                clinical: "Dependent lung segment involvement based on body position; supine aspiration affects right upper lobe; upright aspiration affects right lower lobe (wider right bronchus)",
+                treatment: "Empiric anaerobic coverage needed; cavitation and lung abscess formation common; empyema can occur in severe disease; foul-smelling sputum is a key diagnostic clue"
             }
         };
 

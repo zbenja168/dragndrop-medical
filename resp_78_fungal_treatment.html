@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Apnea - Drag &amp; Drop Study Game</title>
+    <title>Invasive Fungal Infections Treatment - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,12 +171,12 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_55_nrds.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_57_pneumonia_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_77_fungal_organisms.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_79_endemic_mycoses_clinical.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 
     <div class="container">
-        <h1>😴 Sleep Apnea</h1>
-        <p class="subtitle">Match each type of sleep apnea to its features</p>
+        <h1>&#x1F48A; Invasive Fungal Infections Treatment</h1>
+        <p class="subtitle">Match each fungal condition to its first-line therapy, alternatives, and key clinical notes</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -193,13 +193,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
-                    <button class="tab" onclick="switchTab('diagnosis', this)">Diagnosis</button>
-                    <button class="tab" onclick="switchTab('treatment', this)">Treatment</button>
+                    <button class="tab active" onclick="switchTab('firstline', this)">First-Line</button>
+                    <button class="tab" onclick="switchTab('alternative', this)">Alternative</button>
+                    <button class="tab" onclick="switchTab('notes', this)">Key Notes</button>
                 </div>
-                <div id="mechanism-bank" class="word-bank active"></div>
-                <div id="diagnosis-bank" class="word-bank"></div>
-                <div id="treatment-bank" class="word-bank"></div>
+                <div id="firstline-bank" class="word-bank active"></div>
+                <div id="alternative-bank" class="word-bank"></div>
+                <div id="notes-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -214,34 +214,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["mechanism", "diagnosis", "treatment"];
-        const categoryLabels = {"mechanism": "Mechanism", "diagnosis": "Diagnosis", "treatment": "Treatment"};
+        const categoryKeys = ["firstline", "alternative", "notes"];
+        const categoryLabels = {"firstline": "First-Line", "alternative": "Alternative", "notes": "Key Notes"};
 
         const gameData = {
-            "Obstructive Sleep Apnea (OSA)": {
-                mechanism: "Upper airway collapse during sleep due to loss of pharyngeal muscle tone; pharyngeal muscles relax → airway occlusion",
-                diagnosis: "Polysomnography: AHI >=5 with symptoms or AHI >=15 without symptoms; mild (5-15), moderate (15-30), severe (>30)",
-                treatment: "CPAP (first-line): pneumatic splint keeps airway open; weight loss; oral appliance; uvulopalatopharyngoplasty (UPPP) if refractory"
+            "Invasive Pulmonary Aspergillosis": {
+                firstline: "Voriconazole - preferred due to strong anti-Aspergillus activity and excellent tissue penetration",
+                alternative: "Amphotericin B or isavuconazole as second-line agents",
+                notes: "Occurs in severely immunosuppressed patients; Aspergillus is catalase-positive, making CGD patients especially susceptible due to defective NADPH oxidase"
             },
-            "Central Sleep Apnea (CSA)": {
-                mechanism: "Decreased central respiratory drive → no respiratory effort during apneic episodes (airway is patent)",
-                diagnosis: "Polysomnography: apneas without thoracic or abdominal respiratory effort; often associated with heart failure",
-                treatment: "Treat underlying cause (optimize HF therapy); adaptive servo-ventilation (ASV) or BiPAP; NOT standard CPAP"
+            "Mucormycosis": {
+                firstline: "Amphotericin B - requires urgent initiation due to rapid tissue invasion and angioinvasion",
+                alternative: "Posaconazole or isavuconazole; note that voriconazole is NOT effective against Mucorales",
+                notes: "Surgical debridement is often essential alongside antifungals; mortality is high (50-80%) for pulmonary mucormycosis; control underlying DKA and correct iron overload"
             },
-            "Obesity Hypoventilation Syndrome": {
-                mechanism: "BMI >=30 + chronic daytime hypercapnia (PaCO2 >45 mmHg) not explained by other causes; overlap with OSA in 90%",
-                diagnosis: "Daytime ABG showing hypercapnia in obese patient; serum HCO3- elevated (chronic respiratory acidosis compensation)",
-                treatment: "BiPAP (preferred over CPAP); weight loss (bariatric surgery may cure); supplemental O2 alone can worsen hypercapnia"
+            "Pneumocystis Pneumonia (PCP)": {
+                firstline: "TMP-SMX (trimethoprim-sulfamethoxazole) - also used as prophylaxis when CD4 <200 cells/uL",
+                alternative: "Pentamidine, atovaquone, or clindamycin + primaquine for TMP-SMX-intolerant patients",
+                notes: "P. jirovecii lacks ergosterol, so azoles and amphotericin B are ineffective; prophylaxis with TMP-SMX dramatically reduced PCP incidence in HIV/AIDS patients"
             },
-            "Consequences of Untreated OSA": {
-                mechanism: "Recurrent hypoxemia and sleep fragmentation → sympathetic activation → systemic inflammation → endothelial dysfunction",
-                diagnosis: "Screen with STOP-BANG questionnaire (Snoring, Tired, Observed apnea, Pressure, BMI>35, Age>50, Neck>40cm, Gender male)",
-                treatment: "Untreated OSA increases risk of: HTN (resistant), atrial fibrillation, stroke, MI, type 2 diabetes, motor vehicle accidents"
+            "ABPA": {
+                firstline: "Systemic corticosteroids - primary goal is to suppress the type I/III hypersensitivity inflammatory response",
+                alternative: "Itraconazole or voriconazole as adjunctive therapy to reduce Aspergillus fungal burden in the airways",
+                notes: "Not an invasive infection but an allergic response to colonizing Aspergillus; occurs almost exclusively in asthma and cystic fibrosis patients"
             },
-            "Risk Factors for OSA": {
-                mechanism: "Anatomic narrowing (obesity, macroglossia, retrognathia, tonsillar hypertrophy) + decreased muscle tone (sleep, sedatives, alcohol)",
-                diagnosis: "Male sex, obesity (strongest modifiable risk factor), age >50, neck circumference >17 inches (43 cm), family history",
-                treatment: "Weight loss of 10-15% can significantly reduce AHI; positional therapy (avoid supine sleep); avoid alcohol/sedatives before bed"
+            "Aspergilloma": {
+                firstline: "Observation if asymptomatic; surgical removal if symptomatic, especially with significant hemoptysis risk",
+                alternative: "Itraconazole in selected cases where surgery is not feasible or as adjunctive therapy",
+                notes: "Requires a pre-existing lung cavity (TB, sarcoidosis, cancer); antifungals alone are generally insufficient due to poor drug penetration into the fungal ball"
             }
         };
 

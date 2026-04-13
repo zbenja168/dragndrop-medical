@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Apnea - Drag &amp; Drop Study Game</title>
+    <title>B. anthracis (Anthrax) - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,12 +171,12 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_55_nrds.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_57_pneumonia_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_73_ecoli_klebsiella_staph.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_75_q_fever.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 
     <div class="container">
-        <h1>😴 Sleep Apnea</h1>
-        <p class="subtitle">Match each type of sleep apnea to its features</p>
+        <h1>&#x1F9A0; Bacillus anthracis (Anthrax)</h1>
+        <p class="subtitle">Match each form of anthrax to its clinical features, virulence factors, and management</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -193,13 +193,13 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
-                    <button class="tab" onclick="switchTab('diagnosis', this)">Diagnosis</button>
-                    <button class="tab" onclick="switchTab('treatment', this)">Treatment</button>
+                    <button class="tab active" onclick="switchTab('presentation', this)">Presentation</button>
+                    <button class="tab" onclick="switchTab('virulence', this)">Virulence</button>
+                    <button class="tab" onclick="switchTab('diagnosis', this)">Dx / Tx</button>
                 </div>
-                <div id="mechanism-bank" class="word-bank active"></div>
+                <div id="presentation-bank" class="word-bank active"></div>
+                <div id="virulence-bank" class="word-bank"></div>
                 <div id="diagnosis-bank" class="word-bank"></div>
-                <div id="treatment-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
         </div>
@@ -214,34 +214,29 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["mechanism", "diagnosis", "treatment"];
-        const categoryLabels = {"mechanism": "Mechanism", "diagnosis": "Diagnosis", "treatment": "Treatment"};
+        const categoryKeys = ["presentation", "virulence", "diagnosis"];
+        const categoryLabels = {"presentation": "Presentation", "virulence": "Virulence Factors", "diagnosis": "Dx / Tx"};
 
         const gameData = {
-            "Obstructive Sleep Apnea (OSA)": {
-                mechanism: "Upper airway collapse during sleep due to loss of pharyngeal muscle tone; pharyngeal muscles relax → airway occlusion",
-                diagnosis: "Polysomnography: AHI >=5 with symptoms or AHI >=15 without symptoms; mild (5-15), moderate (15-30), severe (>30)",
-                treatment: "CPAP (first-line): pneumatic splint keeps airway open; weight loss; oral appliance; uvulopalatopharyngoplasty (UPPP) if refractory"
+            "Cutaneous Anthrax": {
+                presentation: "Most common form (~95% of cases); painless ulcer with black necrotic eschar on exposed skin (face, neck, arms); surrounding edema; lowest mortality (<1% with treatment)",
+                virulence: "Spores enter through cuts or abrasions in skin; poly-D-glutamate protein capsule (pXO2) resists phagocytosis; edema toxin (PA + EF) causes local tissue swelling",
+                diagnosis: "Clinical diagnosis by characteristic eschar; Gram stain shows large GP rods; culture on blood agar shows \"Medusa head\" colonies; PCR confirms pXO1/pXO2 plasmids"
             },
-            "Central Sleep Apnea (CSA)": {
-                mechanism: "Decreased central respiratory drive → no respiratory effort during apneic episodes (airway is patent)",
-                diagnosis: "Polysomnography: apneas without thoracic or abdominal respiratory effort; often associated with heart failure",
-                treatment: "Treat underlying cause (optimize HF therapy); adaptive servo-ventilation (ASV) or BiPAP; NOT standard CPAP"
+            "Inhalation Anthrax": {
+                presentation: "AKA Wool Sorter's disease; spores inhaled and carried to mediastinal lymph nodes; hemorrhagic mediastinitis with widened mediastinum on CXR; >90% mortality untreated",
+                virulence: "Spores germinate in alveolar macrophages; lethal toxin (PA + LF) cleaves MAPK pathway causing rapid cell death; edema factor is an adenylate cyclase raising cAMP",
+                diagnosis: "CXR shows mediastinal widening, pleural effusion; empiric triple therapy: meropenem + fluoroquinolone (ciprofloxacin) + protein synthesis inhibitor (doxycycline) for 2-3 weeks"
             },
-            "Obesity Hypoventilation Syndrome": {
-                mechanism: "BMI >=30 + chronic daytime hypercapnia (PaCO2 >45 mmHg) not explained by other causes; overlap with OSA in 90%",
-                diagnosis: "Daytime ABG showing hypercapnia in obese patient; serum HCO3- elevated (chronic respiratory acidosis compensation)",
-                treatment: "BiPAP (preferred over CPAP); weight loss (bariatric surgery may cure); supplemental O2 alone can worsen hypercapnia"
+            "GI Anthrax": {
+                presentation: "From ingestion of undercooked contaminated meat; oropharyngeal form causes oral/esophageal ulcers with lymphadenopathy; abdominal form causes bloody diarrhea, necrosis, and sepsis",
+                virulence: "Spores germinate in upper or lower GI tract; all three toxin components (PA, LF, EF) encoded on pXO1 plasmid; unlike self-limiting B. cereus GI illness, GI anthrax is fatal if untreated",
+                diagnosis: "Clinical suspicion in endemic areas; antitoxin monoclonal antibodies (raxibacumab, obiltoxaximab) target protective antigen to block toxin entry; always given with antibiotics"
             },
-            "Consequences of Untreated OSA": {
-                mechanism: "Recurrent hypoxemia and sleep fragmentation → sympathetic activation → systemic inflammation → endothelial dysfunction",
-                diagnosis: "Screen with STOP-BANG questionnaire (Snoring, Tired, Observed apnea, Pressure, BMI>35, Age>50, Neck>40cm, Gender male)",
-                treatment: "Untreated OSA increases risk of: HTN (resistant), atrial fibrillation, stroke, MI, type 2 diabetes, motor vehicle accidents"
-            },
-            "Risk Factors for OSA": {
-                mechanism: "Anatomic narrowing (obesity, macroglossia, retrognathia, tonsillar hypertrophy) + decreased muscle tone (sleep, sedatives, alcohol)",
-                diagnosis: "Male sex, obesity (strongest modifiable risk factor), age >50, neck circumference >17 inches (43 cm), family history",
-                treatment: "Weight loss of 10-15% can significantly reduce AHI; positional therapy (avoid supine sleep); avoid alcohol/sedatives before bed"
+            "Anthrax Prevention & Bioterrorism": {
+                presentation: "B. anthracis is a CDC Category A bioterrorism agent; spores easily weaponized and aerosolized; 2001 U.S. mail attacks caused 22 infections (11 inhalational, 5 deaths)",
+                virulence: "Spores persist for decades in soil; extremely low infectious dose via inhalation; nonspecific early symptoms delay diagnosis, enabling rapid fatal progression",
+                diagnosis: "Killed vaccine available for military/at-risk workers but poorly effective with many boosters needed; livestock vaccination is essential; post-exposure prophylaxis with antibiotics + monoclonal antibodies"
             }
         };
 

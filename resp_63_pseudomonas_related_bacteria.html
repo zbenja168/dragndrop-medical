@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Apnea - Drag &amp; Drop Study Game</title>
+    <title>Melioidosis, Acinetobacter &amp; Pseudomonas Treatment - Drag &amp; Drop Study Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -171,12 +171,12 @@
 </head>
 <body>
 <a href="resp_index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:rgba(0,0,0,0.55);color:#94a3b8;border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:5px 13px;font-size:.72rem;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(8px);transition:.15s;letter-spacing:.3px;" onmouseover="this.style.color='#f1f5f9';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.13)'">&#8592; Index</a>
-<a href="resp_55_nrds.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
-<a href="resp_57_pneumonia_types.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
+<a href="resp_62_pseudomonas_aeruginosa.html" style="position:fixed;top:12px;right:100px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">&#8592; Prev</a>
+<a href="resp_64_atypical_bacteria_taxonomy.html" style="position:fixed;top:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.72);color:#e2e8f0;border:1px solid rgba(255,255,255,0.22);border-radius:22px;padding:8px 18px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Segoe UI',sans-serif;backdrop-filter:blur(10px);transition:.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(0,0,0,0.88)'" onmouseout="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(0,0,0,0.72)'">Next &#8594;</a>
 
     <div class="container">
-        <h1>😴 Sleep Apnea</h1>
-        <p class="subtitle">Match each type of sleep apnea to its features</p>
+        <h1>&#x1F9EC; Melioidosis, Acinetobacter & Pseudomonas Treatment</h1>
+        <p class="subtitle">Match each organism to its epidemiology, clinical features, and treatment approach</p>
         <div class="stats-controls">
             <div class="stats">
                 <div class="stat-item"><span class="stat-label">Score:</span><span id="score">0</span>/<span id="total">0</span></div>
@@ -193,12 +193,12 @@
             <div class="word-bank-container">
                 <div class="word-bank-title">&#x1F4DA; Word Bank</div>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('mechanism', this)">Mechanism</button>
-                    <button class="tab" onclick="switchTab('diagnosis', this)">Diagnosis</button>
+                    <button class="tab active" onclick="switchTab('epidemiology', this)">Epidemiology</button>
+                    <button class="tab" onclick="switchTab('clinical', this)">Clinical</button>
                     <button class="tab" onclick="switchTab('treatment', this)">Treatment</button>
                 </div>
-                <div id="mechanism-bank" class="word-bank active"></div>
-                <div id="diagnosis-bank" class="word-bank"></div>
+                <div id="epidemiology-bank" class="word-bank active"></div>
+                <div id="clinical-bank" class="word-bank"></div>
                 <div id="treatment-bank" class="word-bank"></div>
             </div>
             <div class="cards-container" id="cards-container"></div>
@@ -214,34 +214,34 @@
         </div>
     </div>
     <script>
-        const categoryKeys = ["mechanism", "diagnosis", "treatment"];
-        const categoryLabels = {"mechanism": "Mechanism", "diagnosis": "Diagnosis", "treatment": "Treatment"};
+        const categoryKeys = ["epidemiology", "clinical", "treatment"];
+        const categoryLabels = {"epidemiology": "Epidemiology", "clinical": "Clinical", "treatment": "Treatment"};
 
         const gameData = {
-            "Obstructive Sleep Apnea (OSA)": {
-                mechanism: "Upper airway collapse during sleep due to loss of pharyngeal muscle tone; pharyngeal muscles relax → airway occlusion",
-                diagnosis: "Polysomnography: AHI >=5 with symptoms or AHI >=15 without symptoms; mild (5-15), moderate (15-30), severe (>30)",
-                treatment: "CPAP (first-line): pneumatic splint keeps airway open; weight loss; oral appliance; uvulopalatopharyngoplasty (UPPP) if refractory"
+            "B. pseudomallei (Melioidosis)": {
+                epidemiology: "Found in soil and water in South/Southeast Asia and northern Australia; acquired via skin inoculation, inhalation, or ingestion; targets immunocompromised, diabetics, and heavy alcohol users",
+                clinical: "Called \"the great masquerader\" due to variable presentation; most commonly causes pneumonia (fulminant or chronic TB-like); localized/disseminated abscesses and bacteremia possible; 10-40% mortality even with treatment",
+                treatment: "Requires prolonged therapy (at least 14 days) due to relapse risk; ceftazidime is preferred for non-ICU patients; meropenem for ICU patients; ceftriaxone and cefotaxime are NOT appropriate (higher mortality)"
             },
-            "Central Sleep Apnea (CSA)": {
-                mechanism: "Decreased central respiratory drive → no respiratory effort during apneic episodes (airway is patent)",
-                diagnosis: "Polysomnography: apneas without thoracic or abdominal respiratory effort; often associated with heart failure",
-                treatment: "Treat underlying cause (optimize HF therapy); adaptive servo-ventilation (ASV) or BiPAP; NOT standard CPAP"
+            "Acinetobacter baumannii": {
+                epidemiology: "Found in water and soil; highly antibiotic-resistant; common cause of VAP in ICU patients; also associated with wound infections in war zones and natural disaster areas; not notably linked to cystic fibrosis",
+                clinical: "Causes severe VAP in patients with prolonged mechanical ventilation, trauma, or prior antibiotic exposure; also causes wound infections, septicemia, and UTIs; primarily a healthcare-associated pathogen",
+                treatment: "Ampicillin-sulbactam (sulbactam has intrinsic activity against Acinetobacter), carbapenems (except ertapenem), fluoroquinolones, cefepime/ceftazidime; polymyxins and minocycline are second-line; nephrotoxicity in ~36% on polymyxins"
             },
-            "Obesity Hypoventilation Syndrome": {
-                mechanism: "BMI >=30 + chronic daytime hypercapnia (PaCO2 >45 mmHg) not explained by other causes; overlap with OSA in 90%",
-                diagnosis: "Daytime ABG showing hypercapnia in obese patient; serum HCO3- elevated (chronic respiratory acidosis compensation)",
-                treatment: "BiPAP (preferred over CPAP); weight loss (bariatric surgery may cure); supplemental O2 alone can worsen hypercapnia"
+            "P. aeruginosa (HAP/VAP Tx)": {
+                epidemiology: "Most common cause of MDR ventilator-associated pneumonia; intrinsic and acquired resistance to many antibiotics; biofilm formation on endotracheal tubes; ubiquitous in hospital environments",
+                clinical: "Pneumonia with purulent sputum, dyspnea, fever, chills, confusion, and severe systemic toxicity; can progress to septicemia with ecthyma gangrenosum; 7-10 day treatment duration; high mortality risk",
+                treatment: "First-line: antipseudomonal beta-lactams (piperacillin-tazobactam, cefepime, ceftazidime); combination therapy for CAP/HAP: beta-lactam + aminoglycoside or fluoroquinolone; carbapenems reserved for resistant strains; ertapenem does NOT cover Pseudomonas"
             },
-            "Consequences of Untreated OSA": {
-                mechanism: "Recurrent hypoxemia and sleep fragmentation → sympathetic activation → systemic inflammation → endothelial dysfunction",
-                diagnosis: "Screen with STOP-BANG questionnaire (Snoring, Tired, Observed apnea, Pressure, BMI>35, Age>50, Neck>40cm, Gender male)",
-                treatment: "Untreated OSA increases risk of: HTN (resistant), atrial fibrillation, stroke, MI, type 2 diabetes, motor vehicle accidents"
+            "P. aeruginosa in CF (Tx)": {
+                epidemiology: "Chronic colonizer of CF lungs due to thick mucus; alginate-producing mucoid strains are almost exclusively from CF patients; progressive lung destruction is the leading cause of death in CF",
+                clinical: "Chronic biofilm colonization leads to recurrent pulmonary exacerbations; progressive decline in lung function over years; increased risk for community-acquired pneumonia from other pathogens as lung damage worsens",
+                treatment: "Inhaled tobramycin is first-line for chronic Pseudomonas in CF; inhaled aztreonam if tobramycin intolerant; inhaled colistin is second-line; inhaled delivery maximizes airway concentration while minimizing systemic toxicity"
             },
-            "Risk Factors for OSA": {
-                mechanism: "Anatomic narrowing (obesity, macroglossia, retrognathia, tonsillar hypertrophy) + decreased muscle tone (sleep, sedatives, alcohol)",
-                diagnosis: "Male sex, obesity (strongest modifiable risk factor), age >50, neck circumference >17 inches (43 cm), family history",
-                treatment: "Weight loss of 10-15% can significantly reduce AHI; positional therapy (avoid supine sleep); avoid alcohol/sedatives before bed"
+            "Acinetobacter vs Pseudomonas (Lab)": {
+                epidemiology: "Both are gram-negative, non-lactose fermenting aerobes found in soil/water; both cause nosocomial infections especially VAP; both exhibit extensive antibiotic resistance mechanisms including beta-lactamases and efflux pumps",
+                clinical: "Both primarily affect immunocompromised and hospitalized patients; Pseudomonas has a broader range of infections (skin, ear, eye, lung) while Acinetobacter is more focused on VAP and wound infections",
+                treatment: "Lab distinction: Pseudomonas is oxidase-positive with blue-green pigmented colonies and fruity odor; Acinetobacter is oxidase-negative coccobacillus with colorless/creamy colonies; MIC testing needed for both to guide therapy"
             }
         };
 
