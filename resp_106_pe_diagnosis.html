@@ -219,29 +219,29 @@
 
         const gameData = {
             "Wells Score & PERC Rule": {
-                what_it_tests: "Clinical risk stratification for PE probability using criteria like DVT signs, HR >100, recent surgery, prior DVT/PE, hemoptysis, and malignancy",
-                key_findings: "Wells >4 = PE likely, needs further testing; Wells <=4 and all PERC criteria met = PE probability <2%, no further workup needed",
-                limitations: "Subjective component (\"PE most likely diagnosis\" worth 3 points); PERC only applies to low-risk patients; does not confirm or exclude PE alone"
+                what_it_tests: "Clinical risk stratification: DVT signs, HR >100, recent surgery, prior DVT/PE, hemoptysis, malignancy",
+                key_findings: "Wells >4 = PE likely, needs testing; Wells <=4 + all PERC met = <2% probability, no workup needed",
+                limitations: "Subjective component (\"PE most likely diagnosis\" = 3 pts); PERC only for low-risk; does not confirm/exclude PE"
             },
             "D-Dimer Test": {
-                what_it_tests: "Blood test detecting fibrin degradation products (D-dimers) released when thrombi are broken down by the fibrinolytic system",
-                key_findings: "Very high sensitivity: a normal D-dimer effectively rules out PE in low-risk patients; used after Wells score suggests low probability",
-                limitations: "Poor specificity: elevated in many conditions (surgery, cancer, pregnancy, infection); a positive D-dimer does not confirm PE and requires imaging"
+                what_it_tests: "Detects fibrin degradation products released during thrombus breakdown by fibrinolytic system",
+                key_findings: "High sensitivity; normal D-dimer rules out PE in low-risk patients; ordered after low Wells score",
+                limitations: "Poor specificity; elevated in surgery, cancer, pregnancy, infection; positive result requires imaging"
             },
             "CT Angiography (CTA)": {
-                what_it_tests: "Imaging test of choice for PE; IV contrast injected and CT scan visualizes filling defects (clots) within the pulmonary arteries directly",
-                key_findings: "High sensitivity and specificity; directly shows location and extent of emboli; ordered when D-dimer is elevated or clinical suspicion is high",
-                limitations: "Requires iodinated contrast (contraindicated in iodine allergy or severe CKD); radiation exposure; may miss very small subsegmental emboli"
+                what_it_tests: "Gold standard PE imaging; IV contrast CT visualizes filling defects (clots) in pulmonary arteries",
+                key_findings: "High sensitivity/specificity; shows clot location and extent; ordered when D-dimer elevated or high suspicion",
+                limitations: "Requires iodinated contrast (CI in allergy, severe CKD); radiation; may miss small subsegmental emboli"
             },
             "V/Q Scan & Echocardiography": {
-                what_it_tests: "V/Q scan compares ventilation and perfusion images to detect mismatch; echocardiography assesses right heart strain from large PE",
-                key_findings: "V/Q mismatch (normal ventilation + absent perfusion) suggests PE; echo shows RV dilation bowing the septum into the LV in massive PE",
-                limitations: "V/Q scan: most results are indeterminate, limiting usefulness; echo cannot visualize the embolus itself, only indirect signs of RV strain"
+                what_it_tests: "V/Q scan detects ventilation-perfusion mismatch; echo assesses RV strain from large PE",
+                key_findings: "V/Q mismatch (normal ventilation + absent perfusion) suggests PE; echo shows RV dilation bowing septum into LV",
+                limitations: "V/Q scan: most results indeterminate; echo cannot visualize embolus, only indirect RV strain signs"
             },
             "ECG & Chest X-Ray": {
-                what_it_tests: "ECG evaluates cardiac rhythm and ischemia; chest X-ray assesses lung parenchyma; both help exclude alternative diagnoses for chest pain/dyspnea",
-                key_findings: "ECG: sinus tachycardia and nonspecific T-wave changes are most common in PE; CXR: usually normal, rarely shows Westermark sign or Hampton hump",
-                limitations: "Neither is diagnostic for PE; a normal CXR with acute dyspnea and hypoxia should actually increase suspicion for PE by excluding pneumonia and edema"
+                what_it_tests: "ECG evaluates rhythm/ischemia; CXR assesses lung parenchyma; both exclude alternative diagnoses",
+                key_findings: "ECG: sinus tachycardia, nonspecific T-wave changes; CXR: usually normal, rarely Westermark sign or Hampton hump",
+                limitations: "Neither diagnostic for PE; normal CXR with acute dyspnea/hypoxia should increase PE suspicion"
             }
         };
 

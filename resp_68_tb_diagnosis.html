@@ -219,24 +219,24 @@
 
         const gameData = {
             "PPD Skin Test (Tuberculin)": {
-                mechanism: "Purified protein derivative from mycobacterial cell envelope injected subcutaneously; read at 48-72 hours; positive = type IV hypersensitivity (memory T cells cause induration)",
-                advantages: "Inexpensive and widely available; does not require lab work; useful as a first-line screening test in low-prevalence areas",
-                limitations: "False positive after BCG vaccination (especially within 10 years) or prior cleared Mycobacterium infection; requires patient to return for reading; does not distinguish latent from active TB"
+                mechanism: "Purified protein derivative injected subcutaneously; read 48-72 hrs; positive = type IV hypersensitivity (memory T cells cause induration)",
+                advantages: "Inexpensive, widely available; no lab work needed; first-line screening in low-prevalence areas",
+                limitations: "False positive after BCG (especially <10 years) or prior Mycobacterium infection; requires return visit; cannot distinguish latent vs active TB"
             },
             "IGRA (IFN-gamma Release Assay)": {
-                mechanism: "Patient blood collected and mixed with antigens specific to M. tuberculosis; if TB-specific T cells are present, they release IFN-gamma which is measured in the lab",
-                advantages: "No false positives from BCG vaccination or non-TB mycobacterial infections; single visit (no return needed); many labs now prefer IGRA as first-line test",
-                limitations: "More expensive than PPD and requires lab processing; past cleared infections can still trigger false positives; does not distinguish latent from active TB"
+                mechanism: "Blood mixed with MTB-specific antigens; TB-specific T cells release IFN-gamma; measured in lab",
+                advantages: "No false positives from BCG or non-TB mycobacteria; single visit; many labs prefer as first-line",
+                limitations: "More expensive, requires lab processing; past cleared infections may trigger false positives; cannot distinguish latent vs active TB"
             },
             "Sputum AFB Smear & Culture": {
-                mechanism: "Sputum stained with Ziehl-Neelsen (acid-fast) stain to visualize bacilli; cultured on Lowenstein-Jensen agar; culture identifies species and tests drug susceptibility",
-                advantages: "Confirms active TB with organism identification; culture can detect antibiotic resistance patterns; essential for guiding treatment of drug-resistant TB (MDR-TB, XDR-TB)",
-                limitations: "Only useful in active disease (not latent); AFB smear is nonspecific (cannot distinguish MTB from other mycobacteria); culture is very slow (up to 10 days for detection)"
+                mechanism: "Ziehl-Neelsen acid-fast stain on sputum; culture on Lowenstein-Jensen agar; identifies species + drug susceptibility",
+                advantages: "Confirms active TB with organism ID; detects antibiotic resistance; essential for MDR-TB/XDR-TB treatment guidance",
+                limitations: "Active disease only (not latent); AFB smear nonspecific (MTB vs other mycobacteria); culture very slow (up to 10 days)"
             },
             "Chest X-ray & NAAT": {
-                mechanism: "CXR looks for Ghon complex, upper lobe cavitations, and miliary pattern; NAAT (nucleic acid amplification) rapidly detects MTB DNA and some panels screen for rifampicin resistance",
-                advantages: "CXR assesses disease extent rapidly; NAAT provides rapid species-level confirmation; NAAT + sputum stain + radiology together enable fast active TB diagnosis",
-                limitations: "CXR alone is not specific for TB (other diseases mimic findings); NAAT requires active infection with detectable organisms; neither replaces culture for full drug susceptibility testing"
+                mechanism: "CXR: Ghon complex, upper lobe cavitations, miliary pattern; NAAT rapidly detects MTB DNA; some panels screen rifampicin resistance",
+                advantages: "CXR assesses disease extent rapidly; NAAT rapid species confirmation; NAAT + stain + radiology enable fast active TB diagnosis",
+                limitations: "CXR nonspecific (other diseases mimic TB); NAAT requires detectable organisms; neither replaces culture for full drug susceptibility"
             }
         };
 
