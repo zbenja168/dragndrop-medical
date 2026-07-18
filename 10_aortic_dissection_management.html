@@ -16,7 +16,7 @@
         .container { max-width: 1600px; margin: 0 auto; }
         h1 {
             text-align: center;
-            color: #fbbf24;
+            color: #7dd3fc;
             margin-bottom: 10px;
             font-size: 2.2em;
             text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
@@ -32,17 +32,17 @@
             padding: 12px 20px; border-radius: 8px;
             border: 1px solid rgba(251, 191, 36, 0.3);
         }
-        .stat-label { color: #fbbf24; font-weight: bold; margin-right: 8px; }
+        .stat-label { color: #7dd3fc; font-weight: bold; margin-right: 8px; }
         .controls { display: flex; gap: 12px; flex-wrap: wrap; }
         .btn {
             padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer;
             font-size: 0.95em; font-weight: 600; transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        .btn-primary { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: white; }
+        .btn-primary { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: white; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217,119,6,0.4); }
-        .btn-secondary { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; }
-        .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.4); }
+        .btn-secondary { background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%); color: white; }
+        .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(56, 189, 248,0.4); }
         .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
         .btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
         .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: white; }
@@ -55,14 +55,14 @@
             border: 2px solid rgba(251, 191, 36, 0.3);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
-        .word-bank-title { color: #fbbf24; font-size: 1.3em; margin-bottom: 15px; text-align: center; font-weight: bold; }
+        .word-bank-title { color: #7dd3fc; font-size: 1.3em; margin-bottom: 15px; text-align: center; font-weight: bold; }
         .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid rgba(251, 191, 36, 0.3); }
         .tab {
             flex: 1; padding: 10px; background: rgba(255,255,255,0.05); border: none;
             color: #a0a0a0; cursor: pointer; transition: all 0.3s ease;
             font-size: 0.9em; font-weight: 600; border-radius: 8px 8px 0 0;
         }
-        .tab.active { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: white; }
+        .tab.active { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: white; }
         .tab:hover:not(.active) { background: rgba(255,255,255,0.1); color: #e4e4e4; }
         .word-bank {
             min-height: 400px; max-height: 70vh; overflow-y: auto;
@@ -80,7 +80,7 @@
         }
         .draggable-item:hover {
             background: linear-gradient(135deg, #3d2900 0%, #2d1e00 100%);
-            border-color: #fbbf24; transform: translateX(5px);
+            border-color: #7dd3fc; transform: translateX(5px);
             box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
         }
         .draggable-item.dragging { opacity: 0.5; transform: rotate(2deg); }
@@ -90,7 +90,7 @@
             border: 2px solid rgba(251, 191, 36, 0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.5);
         }
         .drug-card-title {
-            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
             color: white; padding: 12px; border-radius: 8px;
             font-size: 1.2em; font-weight: bold; margin-bottom: 15px; text-align: center;
             box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
@@ -99,7 +99,7 @@
         .drop-row { display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: start; }
         .drop-label {
             background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 6px;
-            font-weight: 600; color: #fbbf24; font-size: 0.9em;
+            font-weight: 600; color: #7dd3fc; font-size: 0.9em;
             display: flex; align-items: center; border: 1px solid rgba(251, 191, 36, 0.3);
         }
         .drop-zone {
@@ -109,7 +109,7 @@
             display: flex; flex-direction: column; gap: 8px;
         }
         .drop-zone.drag-over {
-            background: rgba(251, 191, 36, 0.2); border-color: #fbbf24; border-style: solid;
+            background: rgba(251, 191, 36, 0.2); border-color: #7dd3fc; border-style: solid;
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
         }
         .dropped-item {
@@ -118,7 +118,7 @@
             border: 2px solid rgba(251, 191, 36, 0.4); transition: all 0.3s ease;
             font-size: 0.9em; line-height: 1.4;
         }
-        .dropped-item:hover { background: linear-gradient(135deg, #3d2900 0%, #2d1e00 100%); border-color: #fbbf24; }
+        .dropped-item:hover { background: linear-gradient(135deg, #3d2900 0%, #2d1e00 100%); border-color: #7dd3fc; }
         .dropped-item.correct { background: linear-gradient(135deg, #0f9b0f 0%, #0a7c0a 100%); border-color: #00ff00; animation: correctPulse 0.5s ease; }
         .dropped-item.incorrect { background: linear-gradient(135deg, #c41e3a 0%, #9a1829 100%); border-color: #ff4444; animation: incorrectShake 0.5s ease; }
         @keyframes correctPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05);box-shadow:0 0 20px rgba(0,255,0,0.5)} }
@@ -143,14 +143,14 @@
             margin-bottom: 25px; padding-bottom: 15px;
             border-bottom: 2px solid rgba(251, 191, 36, 0.3);
         }
-        .summary-title { color: #fbbf24; font-size: 1.8em; font-weight: bold; }
+        .summary-title { color: #7dd3fc; font-size: 1.8em; font-weight: bold; }
         .close-btn {
             background: rgba(255,68,68,0.2); border: 2px solid #ff4444; color: #ff4444;
             padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;
         }
         .close-btn:hover { background: #ff4444; color: white; }
-        .summary-drug { margin-bottom: 25px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; border-left: 4px solid #fbbf24; }
-        .summary-drug-title { color: #fbbf24; font-size: 1.3em; margin-bottom: 15px; font-weight: bold; }
+        .summary-drug { margin-bottom: 25px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; border-left: 4px solid #7dd3fc; }
+        .summary-drug-title { color: #7dd3fc; font-size: 1.3em; margin-bottom: 15px; font-weight: bold; }
         .summary-category { margin-bottom: 12px; }
         .summary-category-title { color: #f87171; font-weight: 600; margin-bottom: 5px; font-size: 1.05em; }
         .summary-category-content { color: #e4e4e4; padding-left: 15px; line-height: 1.6; }
@@ -417,8 +417,8 @@
             const bank = document.getElementById(cat + '-bank');
             const correct = Array.from(bank.querySelectorAll('.draggable-item')).find(i => i.dataset.entity === entity);
             if (correct) {
-                correct.style.boxShadow = '0 0 15px 3px #fbbf24';
-                correct.style.borderColor = '#fbbf24';
+                correct.style.boxShadow = '0 0 15px 3px #7dd3fc';
+                correct.style.borderColor = '#7dd3fc';
                 setTimeout(() => { correct.style.boxShadow = ''; correct.style.borderColor = ''; }, 2000);
                 const catBtn = document.querySelector(`.tab[onclick*="${cat}"]`);
                 if (catBtn && !catBtn.classList.contains('active')) catBtn.click();
@@ -468,5 +468,20 @@
 
         initGame();
     </script>
+<!-- Active Transport badge (auto-injected; matches the React BrandBadge) -->
+<a id="at-badge-root" href="https://activetransport.app" target="_blank" rel="noopener noreferrer" title="Made by Active Transport — AI NBME questions from your notes" style="position:fixed;left:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;gap:8px;padding:7px 12px 7px 9px;border-radius:999px;background:rgba(15,23,42,.92);border:1px solid #334155;text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 4px 14px rgba(0,0,0,.35);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;transition:transform .15s ease,box-shadow .15s ease;">
+  <span style="position:relative;display:inline-block;width:22px;height:22px;flex-shrink:0;">
+    <span style="position:absolute;left:0;top:calc(50% - 3.9px);transform:translateY(-50%);width:100%;height:1.6px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:1.6px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;left:0;top:calc(50% + 3.9px);transform:translateY(-50%);width:100%;height:1.6px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6.3px;height:11px;background:#0f172a;border-left:1.6px solid #22d3ee;border-right:1.6px solid #22d3ee;border-radius:2px;z-index:1;"></span>
+    <span style="position:absolute;left:50%;transform:translateX(-50%);width:3.9px;height:3.9px;border-radius:50%;background:#22c55e;box-shadow:0 0 4px #22c55e;z-index:2;animation:atBadgeParticle 2s ease-in-out infinite;"></span>
+  </span>
+  <span style="display:flex;flex-direction:column;line-height:1.05;">
+    <span style="font-size:.82rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#38bdf8,#22d3ee 45%,#2dd4bf);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Active Transport</span>
+    <span style="font-size:.62rem;color:#64748b;">AI NBME questions &rarr;</span>
+  </span>
+</a>
+<style>@keyframes atBadgeParticle{0%{top:-2px;opacity:0}15%{opacity:1}50%{top:50%;opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}#at-badge-root:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(34,211,238,.18)}</style>
 </body>
 </html>

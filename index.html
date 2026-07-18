@@ -44,7 +44,25 @@
   .ctitle{font-size:.75rem;line-height:1.45;color:var(--text);}
 </style>
 </head>
-<body>
+<body><!-- Active Transport home card (auto-injected into index pages; matches React BrandCard) -->
+<a id="at-card-root" href="https://activetransport.app" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:16px;max-width:820px;margin:18px auto;padding:16px 18px;border-radius:16px;text-decoration:none;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(45,212,191,.05));border:1px solid #1e3a44;font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;">
+  <span style="position:relative;display:inline-block;width:34px;height:34px;flex-shrink:0;">
+    <span style="position:absolute;left:0;top:calc(50% - 6px);transform:translateY(-50%);width:100%;height:2.4px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:2.4px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;left:0;top:calc(50% + 6px);transform:translateY(-50%);width:100%;height:2.4px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9.7px;height:17px;background:#0f172a;border-left:2.4px solid #22d3ee;border-right:2.4px solid #22d3ee;border-radius:2px;z-index:1;"></span>
+    <span style="position:absolute;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 4px #22c55e;z-index:2;animation:atBadgeParticle 2s ease-in-out infinite;"></span>
+  </span>
+  <span style="flex:1 1 auto;min-width:0;">
+    <span style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;">
+      <span style="font-size:1.05rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#38bdf8,#22d3ee 45%,#2dd4bf);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Active Transport</span>
+      <span style="font-size:.7rem;color:#5eead4;border:1px solid #164e46;border-radius:999px;padding:1px 8px;">the full app</span>
+    </span>
+    <span style="display:block;margin:4px 0 0;font-size:.86rem;color:#94a3b8;line-height:1.45;">This free study game is a Secondary Active Transport tool. Active Transport turns your notes, lectures, and Anki decks into NBME-style practice questions in seconds &mdash; on top of a 12,000-question bank.</span>
+  </span>
+  <span style="flex-shrink:0;align-self:center;white-space:nowrap;padding:9px 16px;border-radius:10px;font-size:.85rem;font-weight:600;color:#0f172a;background:linear-gradient(135deg,#38bdf8,#2dd4bf);">Try Active Transport &rarr;</span>
+</a>
+
 
 <header>
   <h1>CardioStudy</h1>
@@ -95,8 +113,8 @@
   <div class="cards">
     <a class="card" href="49_histology_heart_layers.html" style="--c:#7e22ce"><span class="num">49</span><span class="ctitle">Heart – Layers &amp; Pericardium</span></a>
     <a class="card" href="50_histology_heart_cardiomyocytes.html" style="--c:#7e22ce"><span class="num">50</span><span class="ctitle">Heart – Cardiomyocytes</span></a>
-    <a class="card" href="51_histology_vessels_tunica.html" style="--c:#b45309"><span class="num">51</span><span class="ctitle">Blood Vessels – Tunica Layers</span></a>
-    <a class="card" href="52_histology_vessels_capillaries.html" style="--c:#b45309"><span class="num">52</span><span class="ctitle">Blood Vessels – Capillary Types</span></a>
+    <a class="card" href="51_histology_vessels_tunica.html" style="--c:#0369a1"><span class="num">51</span><span class="ctitle">Blood Vessels – Tunica Layers</span></a>
+    <a class="card" href="52_histology_vessels_capillaries.html" style="--c:#0369a1"><span class="num">52</span><span class="ctitle">Blood Vessels – Capillary Types</span></a>
   </div>
 </section>
 
@@ -142,7 +160,7 @@
     <a class="card" href="41_ecg_sinus_rhythms.html" style="--c:#4f46e5"><span class="num">41</span><span class="ctitle">ECG Sinus Rhythms</span></a>
     <a class="card" href="42_ecg_rate_calculation.html" style="--c:#4f46e5"><span class="num">42</span><span class="ctitle">ECG Rate Calculation</span></a>
     <a class="card" href="87_st_segment_changes_recognition.html" style="--c:#dc2626"><span class="num">87</span><span class="ctitle">ST Changes – Recognition</span></a>
-    <a class="card" href="88_st_segment_changes_localization.html" style="--c:#d97706"><span class="num">88</span><span class="ctitle">ST Changes – Localization</span></a>
+    <a class="card" href="88_st_segment_changes_localization.html" style="--c:#0ea5e9"><span class="num">88</span><span class="ctitle">ST Changes – Localization</span></a>
   </div>
 </section>
 
@@ -198,12 +216,12 @@
     <span class="section-badge">10 games</span>
   </div>
   <div class="cards">
-    <a class="card" href="13_ascvd_components.html" style="--c:#d97706"><span class="num">13</span><span class="ctitle">ASCVD – Risk Components</span></a>
-    <a class="card" href="14_ascvd_risk_categories.html" style="--c:#d97706"><span class="num">14</span><span class="ctitle">ASCVD – Risk Categories</span></a>
-    <a class="card" href="15_atherosclerosis_pathology.html" style="--c:#b45309"><span class="num">15</span><span class="ctitle">Atherosclerosis – Pathology</span></a>
-    <a class="card" href="16_atherosclerosis_management.html" style="--c:#b45309"><span class="num">16</span><span class="ctitle">Atherosclerosis – Management</span></a>
-    <a class="card" href="37_dyslipidemia_types.html" style="--c:#92400e"><span class="num">37</span><span class="ctitle">Dyslipidemia – Types</span></a>
-    <a class="card" href="38_dyslipidemia_labs.html" style="--c:#92400e"><span class="num">38</span><span class="ctitle">Dyslipidemia – Labs &amp; Screening</span></a>
+    <a class="card" href="13_ascvd_components.html" style="--c:#0ea5e9"><span class="num">13</span><span class="ctitle">ASCVD – Risk Components</span></a>
+    <a class="card" href="14_ascvd_risk_categories.html" style="--c:#0ea5e9"><span class="num">14</span><span class="ctitle">ASCVD – Risk Categories</span></a>
+    <a class="card" href="15_atherosclerosis_pathology.html" style="--c:#0369a1"><span class="num">15</span><span class="ctitle">Atherosclerosis – Pathology</span></a>
+    <a class="card" href="16_atherosclerosis_management.html" style="--c:#0369a1"><span class="num">16</span><span class="ctitle">Atherosclerosis – Management</span></a>
+    <a class="card" href="37_dyslipidemia_types.html" style="--c:#075985"><span class="num">37</span><span class="ctitle">Dyslipidemia – Types</span></a>
+    <a class="card" href="38_dyslipidemia_labs.html" style="--c:#075985"><span class="num">38</span><span class="ctitle">Dyslipidemia – Labs &amp; Screening</span></a>
     <a class="card" href="39_dyslipidemia_drugs.html" style="--c:#1d4ed8"><span class="num">39</span><span class="ctitle">Dyslipidemia – Drug Classes</span></a>
     <a class="card" href="40_dyslipidemia_pharmacology.html" style="--c:#1d4ed8"><span class="num">40</span><span class="ctitle">Dyslipidemia – Pharmacology</span></a>
     <a class="card" href="95_treatment_dyslipidemia_agents.html" style="--c:#1d4ed8"><span class="num">95</span><span class="ctitle">Treatment of Dyslipidemia – Agents</span></a>
@@ -225,7 +243,7 @@
     <a class="card" href="75_myocardial_infarction_clinical.html" style="--c:#b91c1c"><span class="num">75</span><span class="ctitle">Myocardial Infarction – Clinical</span></a>
     <a class="card" href="76_myocardial_infarction_histology.html" style="--c:#b91c1c"><span class="num">76</span><span class="ctitle">Myocardial Infarction – Histology</span></a>
     <a class="card" href="87_st_segment_changes_recognition.html" style="--c:#dc2626"><span class="num">87</span><span class="ctitle">ST Changes – Recognition</span></a>
-    <a class="card" href="93_treatment_acs_pharmacology.html" style="--c:#b45309"><span class="num">93</span><span class="ctitle">ACS Treatment – Pharmacology</span></a>
+    <a class="card" href="93_treatment_acs_pharmacology.html" style="--c:#0369a1"><span class="num">93</span><span class="ctitle">ACS Treatment – Pharmacology</span></a>
     <a class="card" href="94_treatment_acs_interventions.html" style="--c:#65a30d"><span class="num">94</span><span class="ctitle">ACS Treatment – Interventions &amp; PCI</span></a>
   </div>
 </section>
@@ -278,8 +296,8 @@
     <span class="section-badge">7 games</span>
   </div>
   <div class="cards">
-    <a class="card" href="63_large_vessel_vasculitis_features.html" style="--c:#b45309"><span class="num">63</span><span class="ctitle">Large-Vessel Vasculitis – Features</span></a>
-    <a class="card" href="64_large_vessel_vasculitis_management.html" style="--c:#b45309"><span class="num">64</span><span class="ctitle">Large-Vessel Vasculitis – Management</span></a>
+    <a class="card" href="63_large_vessel_vasculitis_features.html" style="--c:#0369a1"><span class="num">63</span><span class="ctitle">Large-Vessel Vasculitis – Features</span></a>
+    <a class="card" href="64_large_vessel_vasculitis_management.html" style="--c:#0369a1"><span class="num">64</span><span class="ctitle">Large-Vessel Vasculitis – Management</span></a>
     <a class="card" href="73_medium_vessel_vasculitis_features.html" style="--c:#0e7490"><span class="num">73</span><span class="ctitle">Medium-Vessel Vasculitis – Features</span></a>
     <a class="card" href="74_medium_vessel_vasculitis_management.html" style="--c:#0e7490"><span class="num">74</span><span class="ctitle">Medium-Vessel Vasculitis – Management</span></a>
     <a class="card" href="85_small_vessel_vasculitis_anca.html" style="--c:#7c3aed"><span class="num">85</span><span class="ctitle">Small-Vessel Vasculitis – ANCA</span></a>
@@ -308,8 +326,8 @@
     <a class="card" href="112_afib_treatment.html" style="--c:#7e22ce"><span class="num">112</span><span class="ctitle">AF &ndash; Treatment</span></a>
     <a class="card" href="113_supraventricular_arrhythmia_types.html" style="--c:#0d9488"><span class="num">113</span><span class="ctitle">SVT &ndash; Arrhythmia Types</span></a>
     <a class="card" href="114_svt_ecg_and_treatment.html" style="--c:#0f766e"><span class="num">114</span><span class="ctitle">SVT &ndash; ECG &amp; Treatment</span></a>
-    <a class="card" href="115_heart_block_types.html" style="--c:#d97706"><span class="num">115</span><span class="ctitle">Heart Block &ndash; Types &amp; Pathophysiology</span></a>
-    <a class="card" href="116_heart_block_ecg_treatment.html" style="--c:#b45309"><span class="num">116</span><span class="ctitle">Heart Block &ndash; ECG &amp; Treatment</span></a>
+    <a class="card" href="115_heart_block_types.html" style="--c:#0ea5e9"><span class="num">115</span><span class="ctitle">Heart Block &ndash; Types &amp; Pathophysiology</span></a>
+    <a class="card" href="116_heart_block_ecg_treatment.html" style="--c:#0369a1"><span class="num">116</span><span class="ctitle">Heart Block &ndash; ECG &amp; Treatment</span></a>
     <a class="card" href="117_ventricular_arrhythmia_types.html" style="--c:#059669"><span class="num">117</span><span class="ctitle">Ventricular Arrhythmias &ndash; Types</span></a>
     <a class="card" href="118_ventricular_arrhythmia_treatment.html" style="--c:#047857"><span class="num">118</span><span class="ctitle">Ventricular Arrhythmias &ndash; Dx &amp; Tx</span></a>
   </div>
@@ -329,8 +347,8 @@
     <a class="card" href="122_hf_diagnosis_tests_nyha.html" style="--c:#dc2626"><span class="num">122</span><span class="ctitle">HF Diagnosis &ndash; Tests &amp; NYHA</span></a>
     <a class="card" href="123_edema_pathophysiology_causes.html" style="--c:#0891b2"><span class="num">123</span><span class="ctitle">Edema &ndash; Pathophysiology &amp; Causes</span></a>
     <a class="card" href="124_edema_types_management.html" style="--c:#0891b2"><span class="num">124</span><span class="ctitle">Edema &ndash; Types &amp; Management</span></a>
-    <a class="card" href="125_chf_management_gdmt.html" style="--c:#ea580c"><span class="num">125</span><span class="ctitle">CHF Management &ndash; GDMT Drug Classes</span></a>
-    <a class="card" href="126_chf_management_additional.html" style="--c:#ea580c"><span class="num">126</span><span class="ctitle">CHF Management &ndash; Additional Therapies</span></a>
+    <a class="card" href="125_chf_management_gdmt.html" style="--c:#0ea5e9"><span class="num">125</span><span class="ctitle">CHF Management &ndash; GDMT Drug Classes</span></a>
+    <a class="card" href="126_chf_management_additional.html" style="--c:#0ea5e9"><span class="num">126</span><span class="ctitle">CHF Management &ndash; Additional Therapies</span></a>
   </div>
 </section>
 
@@ -348,7 +366,7 @@
     <a class="card" href="130_lvh_hcm_diagnosis_management.html" style="--c:#6d28d9"><span class="num">130</span><span class="ctitle">LVH &amp; HCM &ndash; Diagnosis &amp; Management</span></a>
     <a class="card" href="131_arvc_pathophysiology.html" style="--c:#0891b2"><span class="num">131</span><span class="ctitle">ARVC &ndash; Pathophysiology &amp; Presentation</span></a>
     <a class="card" href="132_arvc_diagnosis_management.html" style="--c:#0e7490"><span class="num">132</span><span class="ctitle">ARVC &ndash; Diagnosis &amp; Management</span></a>
-    <a class="card" href="133_rcm_causes_pathophysiology.html" style="--c:#ea580c"><span class="num">133</span><span class="ctitle">RCM &ndash; Causes &amp; Pathophysiology</span></a>
+    <a class="card" href="133_rcm_causes_pathophysiology.html" style="--c:#0ea5e9"><span class="num">133</span><span class="ctitle">RCM &ndash; Causes &amp; Pathophysiology</span></a>
     <a class="card" href="134_rcm_diagnosis_management.html" style="--c:#c2410c"><span class="num">134</span><span class="ctitle">RCM &ndash; Diagnosis &amp; Management</span></a>
     <a class="card" href="135_cardiac_tumors_myxoma.html" style="--c:#9333ea"><span class="num">135</span><span class="ctitle">Cardiac Tumors &ndash; Myxoma</span></a>
     <a class="card" href="136_cardiac_tumors_rhabdomyoma.html" style="--c:#7e22ce"><span class="num">136</span><span class="ctitle">Cardiac Tumors &ndash; Rhabdomyoma &amp; Overview</span></a>
@@ -407,7 +425,7 @@
   </div>
   <div class="cards">
     <a class="card" href="146_shock_types.html" style="--c:#dc2626"><span class="num">146</span><span class="ctitle">Types of Shock</span></a>
-    <a class="card" href="147_shock_management.html" style="--c:#ea580c"><span class="num">147</span><span class="ctitle">Shock Management</span></a>
+    <a class="card" href="147_shock_management.html" style="--c:#0ea5e9"><span class="num">147</span><span class="ctitle">Shock Management</span></a>
   </div>
 </section>
 
@@ -422,7 +440,7 @@
     <a class="card" href="149_chd_classification_risk_factors.html" style="--c:#6366f1"><span class="num">149</span><span class="ctitle">CHD &ndash; Classification &amp; Risk Factors</span></a>
     <a class="card" href="150_acyanotic_chd_shunts.html" style="--c:#0ea5e9"><span class="num">150</span><span class="ctitle">Acyanotic CHD &ndash; Left-to-Right Shunts</span></a>
     <a class="card" href="151_cyanotic_chd_shunts.html" style="--c:#8b5cf6"><span class="num">151</span><span class="ctitle">Cyanotic CHD &ndash; Right-to-Left Shunts</span></a>
-    <a class="card" href="152_obstructive_chd.html" style="--c:#f59e0b"><span class="num">152</span><span class="ctitle">Obstructive CHD</span></a>
+    <a class="card" href="152_obstructive_chd.html" style="--c:#38bdf8"><span class="num">152</span><span class="ctitle">Obstructive CHD</span></a>
     <a class="card" href="153_aortic_arch_derivatives.html" style="--c:#14b8a6"><span class="num">153</span><span class="ctitle">Aortic Arch Development &amp; Derivatives</span></a>
     <a class="card" href="154_chd_murmurs_imaging_features.html" style="--c:#ec4899"><span class="num">154</span><span class="ctitle">CHD &ndash; Murmurs, Imaging &amp; Key Findings</span></a>
     <a class="card" href="155_chd_management_prognosis.html" style="--c:#10b981"><span class="num">155</span><span class="ctitle">CHD &ndash; Management &amp; Prognosis</span></a>
@@ -466,5 +484,20 @@ search.addEventListener('input', () => {
   noResults.style.display = (!anyVisible && q) ? 'block' : 'none';
 });
 </script>
+<!-- Active Transport badge (auto-injected; matches the React BrandBadge) -->
+<a id="at-badge-root" href="https://activetransport.app" target="_blank" rel="noopener noreferrer" title="Made by Active Transport — AI NBME questions from your notes" style="position:fixed;left:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;gap:8px;padding:7px 12px 7px 9px;border-radius:999px;background:rgba(15,23,42,.92);border:1px solid #334155;text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 4px 14px rgba(0,0,0,.35);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;transition:transform .15s ease,box-shadow .15s ease;">
+  <span style="position:relative;display:inline-block;width:22px;height:22px;flex-shrink:0;">
+    <span style="position:absolute;left:0;top:calc(50% - 3.9px);transform:translateY(-50%);width:100%;height:1.6px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:1.6px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;left:0;top:calc(50% + 3.9px);transform:translateY(-50%);width:100%;height:1.6px;background:#475569;border-radius:1px;"></span>
+    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6.3px;height:11px;background:#0f172a;border-left:1.6px solid #22d3ee;border-right:1.6px solid #22d3ee;border-radius:2px;z-index:1;"></span>
+    <span style="position:absolute;left:50%;transform:translateX(-50%);width:3.9px;height:3.9px;border-radius:50%;background:#22c55e;box-shadow:0 0 4px #22c55e;z-index:2;animation:atBadgeParticle 2s ease-in-out infinite;"></span>
+  </span>
+  <span style="display:flex;flex-direction:column;line-height:1.05;">
+    <span style="font-size:.82rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#38bdf8,#22d3ee 45%,#2dd4bf);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Active Transport</span>
+    <span style="font-size:.62rem;color:#64748b;">AI NBME questions &rarr;</span>
+  </span>
+</a>
+<style>@keyframes atBadgeParticle{0%{top:-2px;opacity:0}15%{opacity:1}50%{top:50%;opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}#at-badge-root:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(34,211,238,.18)}</style>
 </body>
 </html>
